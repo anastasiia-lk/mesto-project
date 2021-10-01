@@ -1,0 +1,9 @@
+.form__button-submit {
+  margin: 48px auto 37px;
+}
+
+@media screen and (max-width: 320px) {
+  .button-submit {
+    margin: 45px auto 25px;
+  }
+}

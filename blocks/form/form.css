@@ -1,0 +1,16 @@
+.form {
+  max-width: 430px;
+  border-radius: 10px;
+  color: #000;
+  background-color: #fff;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+}
+
+@media screen and (max-width: 528px) {
+  .form {
+    max-width: 282px;
+    align-items: center;
+  }
+}

@@ -1,0 +1,18 @@
+.profile-edit__person {
+  display: flex;
+  align-items: baseline;
+}
+
+@media screen and (max-width: 730px) {
+  .profile-edit__person {
+    padding-left: 42px;
+  }
+}
+
+@media screen and (max-width: 382px) {
+  .profile-edit__person {
+    display: flex;
+    margin: 0 auto;
+    padding-left: 28px;
+  }
+}

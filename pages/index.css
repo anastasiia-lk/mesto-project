@@ -1,0 +1,50 @@
+@import url(../vendor/normalize.css);
+@import url(../fonts/fonts.css);
+@import url(../blocks/page/page.css);
+
+/*page*/
+@import url(../blocks/page/__header/page__header.css);
+@import url(../blocks/page/__profile/page__profile.css);
+@import url(../blocks/page/__elements/page__elements.css);
+@import url(../blocks/page/__footer/page__footer.css);
+
+/*popup*/
+@import url(../blocks/page/__popup/page__popup.css);
+@import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/__form/popup__form.css);
+@import url(../blocks/button-close/button-close.css);
+@import url(../blocks/form/form.css);
+@import url(../blocks/popup/__container/popup__container.css);
+
+/*header*/
+@import url(../blocks/header/header.css);
+@import url(../blocks/logo/logo.css);
+@import url(../blocks/logo/_place/logo_place_header.css);
+
+/*profile*/
+@import url(../blocks/profile/profile.css);
+@import url(../blocks/avatar/avatar.css);
+@import url(../blocks/profile-edit/profile-edit.css);
+@import url(../blocks/profile-edit/__title/profile-edit__title.css);
+@import url(../blocks/profile-edit/__subtitle/profile-edit__subtitle.css);
+@import url(../blocks/button-add/button-add.css);
+@import url(../blocks/button-edit/button-edit.css);
+@import url(../blocks/profile/__info/profile__info.css);
+@import url(../blocks/form/__heading/form__heading.css);
+@import url(../blocks/form/__input-container/form__input-container.css);
+@import url(../blocks/form/__item/form__item.css);
+@import url(../blocks/button-submit/button-submit.css);
+@import url(../blocks/form/__button-submit/form__button-submit.css);
+@import url(../blocks/profile-edit/__person/profile-edit__person.css);
+
+/*elements*/
+@import url(../blocks/elements/elements.css);
+@import url(../blocks/card/card.css);
+@import url(../blocks/card/__image/card__image.css);
+@import url(../blocks/card/__caption/card__caption.css);
+@import url(../blocks/card/__caption/_name/card__caption_name.css);
+@import url(../blocks/button-like/button-like.css);
+
+/*footer*/
+@import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__copyright/footer__copyright.css); ;;

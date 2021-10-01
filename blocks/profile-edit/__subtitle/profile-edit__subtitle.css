@@ -1,0 +1,17 @@
+.profile-edit__subtitle {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  margin: 0;
+  text-align: center;
+}
+
+@media screen and (max-width: 382px) {
+  .profile-edit__subtitle {
+    font-size: 14px;
+    line-height: 17px;
+    margin: 0 auto;
+  }
+}

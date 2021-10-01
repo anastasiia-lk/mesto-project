@@ -1,0 +1,10 @@
+.logo_place_header {
+  padding-bottom: 41px;
+}
+
+@media screen and (max-width: 320px) {
+  .logo_place_header {
+    padding-left: 27px;
+    padding-bottom: 31.6px;
+  }
+}
