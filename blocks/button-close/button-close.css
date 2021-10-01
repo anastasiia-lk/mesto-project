@@ -9,6 +9,11 @@
   right: -40px;
   top: -40px;
   padding: 0;
+  cursor: pointer;
+}
+
+.button-close:hover {
+  opacity: 0.6;
 }
 
 @media screen and (max-width: 528px) {

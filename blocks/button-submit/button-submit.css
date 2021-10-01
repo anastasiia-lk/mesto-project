@@ -14,6 +14,11 @@
   padding: 14px 125px;
   width: 84%;
   height: 11%;
+  cursor: pointer;
+}
+
+.button-submit:hover {
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 @media screen and (max-width: 528px) {

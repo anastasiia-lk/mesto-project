@@ -10,6 +10,7 @@
   background-size: 22px 22px;
   background-position: center;
   padding: 0;
+  cursor: pointer;
 }
 
 .button-add:hover {
