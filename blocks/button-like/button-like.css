@@ -1,5 +1,5 @@
 .button-like {
-  width: 22px;
+  min-width: 22px;
   height: 19px;
   background-image: url(../../images/like.png);
   background-position: center;
