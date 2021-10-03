@@ -13,26 +13,8 @@
 </head>
 
 <body class="page">
-  <section class="popup">
-    <div class="popup__container">
-      <button class="button-close"></button>
-      <form name="Profile-form" class="popup__form form">
-        <h2 class="form__heading">Редактировать профиль</h2>
-        <fieldset class="form__input-container">
-          <label for="person" class="form__label"></label>
-          <input type="text" class="form__item" id="person" name="person" placeholder="Жак-Ив Кусто" required>
-          <label for="profession" class="form__label"></label>
-          <input type="text" class="form__item" id="profession" name="profession" placeholder="Исследователь океана"
-            required>
-        </fieldset>
-        <button class="button-submit form__button-submit">Сохранить</button>
-      </form>
-    </div>
-  </section>
   <header class="header page__header">
-    <div class="border">
-      <img class="logo logo_place_header" src="./images/logo.svg" alt="Логотип Mesto Russia" />
-    </div>
+    <img class="logo logo_place_header" src="./images/logo.svg" alt="Логотип Mesto Russia" />
   </header>
   <main class="content">
     <section class="profile page__profile">
@@ -49,53 +31,70 @@
       <button class="button-add"></button>
     </section>
     <section class="elements page__elements" aria-label="elements-label">
-      <div class="card">
+      <article class="card">
         <img class="card__image" alt="Карачаевск" src="images/karachaevsk.png" />
         <div class="card__caption">
-          <p class="card__caption-name">Карачаевск</p>
+          <h2 class="card__caption-name">Карачаевск</h2>
           <button class="button-like"></button>
         </div>
-      </div>
-      <div class="card">
+      </article>
+      <article class="card">
         <img class="card__image" alt="Гора Эльбрус" src="images/elbrus.png" />
         <div class="card__caption">
-          <p class="card__caption-name">Гора Эльбрус</p>
+          <h2 class="card__caption-name">Гора Эльбрус</h2>
           <button class="button-like"></button>
         </div>
-      </div>
-      <div class="card">
+      </article>
+      <article class="card">
         <img class="card__image" alt="Домбай" src="images/dombay.png" />
         <div class="card__caption">
-          <p class="card__caption-name">Домбай</p>
+          <h2 class="card__caption-name">Домбай</h2>
           <button class="button-like"></button>
         </div>
-      </div>
-      <div class="card">
+      </article>
+      <article class="card">
         <img class="card__image" alt="Гора Эльбрус" src="images/elbrus.png" />
         <div class="card__caption">
-          <p class="card__caption-name">Гора Эльбрус</p>
+          <h2 class="card__caption-name">Гора Эльбрус</h2>
           <button class="button-like"></button>
         </div>
-      </div>
-      <div class="card">
+      </article>
+      <article class="card">
         <img class="card__image" alt="Домбай" src="images/dombay.png" />
         <div class="card__caption">
-          <p class="card__caption-name">Домбай</p>
+          <h2 class="card__caption-name">Домбай</h2>
           <button class="button-like"></button>
         </div>
-      </div>
-      <div class="card">
+      </article>
+      <article class="card">
         <img class="card__image" alt="Карачаево-Черкессия" src="images/karachaevsk.png" />
         <div class="card__caption">
-          <p class="card__caption-name">Карачаево-Черкессия</p>
+          <h2 class="card__caption-name">Карачаево-Черкессия</h2>
           <button class="button-like"></button>
         </div>
-      </div>
+      </article>
     </section>
   </main>
   <footer class="footer page__footer">
     <p class="footer__copyright">© 2020 Mesto Russia</p>
   </footer>
+  <div class="popup popup_opened">
+    <div class="popup__container">
+      <button class="button-close"></button>
+      <form name="profile-form" class="popup__form form">
+        <h2 class="form__heading">Редактировать профиль</h2>
+        <fieldset class="form__input-container">
+          <label for="person" class="form__label"></label>
+          <input type="text" class="form__item" id="person" name="person" placeholder="person-name" value="Жак-Ив Кусто"
+            required>
+          <label for="profession" class="form__label"></label>
+          <input type="text" class="form__item" id="profession" name="profession" placeholder="profession-name"
+            value="Исследователь океана" required>
+        </fieldset>
+        <button class="button-submit form__button-submit">Сохранить</button>
+      </form>
+    </div>
+  </div>
 </body>
 
 </html>

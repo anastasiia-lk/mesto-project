@@ -9,11 +9,6 @@
 
 @media screen and (max-width: 528px) {
   .form__input-container {
-    max-width: 358px;
     margin: 0 auto;
-    border: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
   }
 }
