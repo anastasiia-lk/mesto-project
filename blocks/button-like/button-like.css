@@ -1,7 +1,7 @@
 .button-like {
   min-width: 22px;
   height: 19px;
-  background-image: url(../../images/like.png);
+  background-image: url(../../images/like.svg);
   background-position: center;
   border: none;
   background-color: #fff;
@@ -14,5 +14,5 @@
 }
 
 .button-like:active {
-  background-image: url(../../images/like-active.png);
+  background-image: url(../../images/like-active.svg);
 }
