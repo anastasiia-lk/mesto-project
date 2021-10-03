@@ -19,58 +19,58 @@
   <main class="content">
     <section class="profile page__profile">
       <div class="profile__info">
-        <img class="avatar" alt="Аватар" src="./images/avatar.png">
+        <img class="profile__avatar" alt="Аватар" src="./images/avatar.png">
         <div class="profile-edit">
           <div class="profile-edit__person">
             <h1 class="profile-edit__title">Жак-Ив Кусто</h1>
-            <button class="button-edit"></button>
+            <button class="profile__button-edit" type="button"></button>
           </div>
           <p class="profile-edit__subtitle">Исследователь океана</p>
         </div>
       </div>
-      <button class="button-add"></button>
+      <button class="profile__button-add" type="button"></button>
     </section>
     <section class="elements page__elements" aria-label="elements-label">
       <article class="card">
         <img class="card__image" alt="Карачаевск" src="images/karachaevsk.png" />
         <div class="card__caption">
           <h2 class="card__caption-name">Карачаевск</h2>
-          <button class="button-like"></button>
+          <button class="card__button-like" type="button"></button>
         </div>
       </article>
       <article class="card">
         <img class="card__image" alt="Гора Эльбрус" src="images/elbrus.png" />
         <div class="card__caption">
           <h2 class="card__caption-name">Гора Эльбрус</h2>
-          <button class="button-like"></button>
+          <button class="card__button-like" type="button"></button>
         </div>
       </article>
       <article class="card">
         <img class="card__image" alt="Домбай" src="images/dombay.png" />
         <div class="card__caption">
           <h2 class="card__caption-name">Домбай</h2>
-          <button class="button-like"></button>
+          <button class="card__button-like" type="button"></button>
         </div>
       </article>
       <article class="card">
         <img class="card__image" alt="Гора Эльбрус" src="images/elbrus.png" />
         <div class="card__caption">
           <h2 class="card__caption-name">Гора Эльбрус</h2>
-          <button class="button-like"></button>
+          <button class="card__button-like" type="button"></button>
         </div>
       </article>
       <article class="card">
         <img class="card__image" alt="Домбай" src="images/dombay.png" />
         <div class="card__caption">
           <h2 class="card__caption-name">Домбай</h2>
-          <button class="button-like"></button>
+          <button class="card__button-like" type="button"></button>
         </div>
       </article>
       <article class="card">
         <img class="card__image" alt="Карачаево-Черкессия" src="images/karachaevsk.png" />
         <div class="card__caption">
           <h2 class="card__caption-name">Карачаево-Черкессия</h2>
-          <button class="button-like"></button>
+          <button class="card__button-like" type="button"></button>
         </div>
       </article>
     </section>
@@ -80,7 +80,7 @@
   </footer>
   <div class="popup popup_opened">
     <div class="popup__container">
-      <button class="button-close"></button>
+      <button class="popup__button-close" type="button"></button>
       <form name="profile-form" class="form">
         <h2 class="form__heading">Редактировать профиль</h2>
         <fieldset class="form__input-container">
@@ -91,7 +91,7 @@
           <input type="text" class="form__item" id="profession" name="profession" placeholder="profession-name"
             value="Исследователь океана" required>
         </fieldset>
-        <button class="button-submit form__button-submit">Сохранить</button>
+        <button class="form__button-submit" type="submit">Сохранить</button>
       </form>
     </div>
   </div>
