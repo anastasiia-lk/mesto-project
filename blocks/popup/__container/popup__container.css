@@ -16,9 +16,3 @@
     align-items: center;
   }
 }
-
-@media screen and (max-width: 320px) {
-  .popup__container {
-    margin: 123px auto 0;
-  }
-}

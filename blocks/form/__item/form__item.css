@@ -11,6 +11,11 @@
   overflow: hidden;
   white-space: nowrap;
   max-width: 358px;
+  font-family: 'Inter', Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
 }
 
 .form__item:last-child {

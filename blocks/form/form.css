@@ -2,7 +2,7 @@
   width: 430px;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 528px) {
   .form {
     width: 238px;
   }
