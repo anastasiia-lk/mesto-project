@@ -1,4 +1,4 @@
-@keyframes animateHide {
+/* @keyframes animateHide {
   from {
     opacity: 1;
   }
@@ -10,5 +10,4 @@
   animation-name: animateHide;
   animation-duration: 0.5s;
   animation-timing-function: ease-out;
-  visibility: hidden;
-}
+} */

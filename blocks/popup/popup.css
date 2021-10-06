@@ -5,5 +5,16 @@
   position: fixed;
   top: 0;
   left: 0;
-  display: none;
+  /* display: none; */
+  display: flex;
+  align-items: center;
+  z-index: 10;
+  transition: all 0.3s ease;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.open {
+  visibility: visible;
+  opacity: 1;
 }

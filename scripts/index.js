@@ -1,14 +1,15 @@
 let profile = document.querySelector('.profile');
 let popup = document.querySelector('.popup');
+let popupContainer = document.querySelector('.popup__container');
 let editButton = profile.querySelector('.profile__button-edit');
 let closeButton = popup.querySelector('.popup__button-close');
 function openPopup (){
-  popup.classList.remove('popup_is_closed');
-  popup.classList.add('popup_is_opened');
+  popup.classList.add('open');
+  popupContainer.classList.add('open');
 }
 function closePopup (){
-  popup.classList.remove('popup_is_opened');
-  popup.classList.add('popup_is_closed');
+  popup.classList.remove('open');
+  popupContainer.classList.remove('open');
 }
 
 editButton.addEventListener('click', openPopup);
