@@ -4,12 +4,12 @@ let popupContainer = document.querySelector('.popup__container');
 let editButton = profile.querySelector('.profile__button-edit');
 let closeButton = popup.querySelector('.popup__button-close');
 function openPopup (){
-  popup.classList.add('open');
-  popupContainer.classList.add('open');
+  popup.classList.add('popup_opened');
+  popupContainer.classList.add('popup_opened');
 }
 function closePopup (){
-  popup.classList.remove('open');
-  popupContainer.classList.remove('open');
+  popup.classList.remove('popup_opened');
+  popupContainer.classList.remove('popup_opened');
 }
 
 editButton.addEventListener('click', openPopup);
