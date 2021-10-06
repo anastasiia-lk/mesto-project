@@ -1,0 +1,14 @@
+@keyframes animateHide {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+.popup_is_closed {
+  animation-name: animateHide;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-out;
+  visibility: hidden;
+}
