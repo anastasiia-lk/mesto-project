@@ -1,4 +1,32 @@
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+  ];
+
 let profile = document.querySelector('.profile');
+let elements = document.querySelector('.elements');
 let popup = document.querySelector('.popup');
 let popupPlace = document.querySelector('.popup.new-place');
 /*find button-add, popup new-place, button-close new-place*/
@@ -11,8 +39,42 @@ let popupContainer = popup.querySelector('.popup__container');
 let closeButton = popup.querySelector('.popup__button-close');
 /*find button-like*/
 let likeButtons = document.querySelectorAll('.card__button-like');
+/*get/change popup-name*/
+let profileTitle = profile.querySelector('.profile-edit__title');
+let person = popup.querySelector('#person');
+person.value = profileTitle.textContent; 
+/*get/change popup-profession*/
+let profileSubtitle = profile.querySelector('.profile-edit__subtitle');
+let profession = popup.querySelector('#profession');
+profession.value = profileSubtitle.textContent;
+/*find button-submit*/
+let submitButton = popup.querySelector('.form__button-submit');
+/*find card-image*/
+let cardImages = elements.querySelectorAll('.card__image');
+let cardCaptionNames = elements.querySelectorAll('.card__caption-name');
+
+/*form-submit*/
+
+function formSubmitHandler (evt) {
+  evt.preventDefault();
+  profileTitle.textContent = person.value;
+  profileSubtitle.textContent = profession.value;
+  popup.classList.toggle('popup_opened');
+  popupContainer.classList.toggle('popup_opened');
+}
+popup.addEventListener('submit', formSubmitHandler);
+
+/*load images*/
+
+for (let i = 0; i < cardImages.length; i++) {
+  cardImages[i].setAttribute('src', initialCards[i].link);
+  cardImages[i].setAttribute('alt', initialCards[i].name);
+  cardCaptionNames[i].textContent = initialCards[i].name;
+}
+
 
 /*button-like click*/
+
 for (let i = 0; i < likeButtons.length; i++) {
   likeButtons[i].addEventListener("click", function() {
     likeButtons[i].classList.toggle('active')
@@ -58,5 +120,6 @@ function togglePopupPlace (){
 
 editButton.addEventListener('click', togglePopup);
 closeButton.addEventListener('click', togglePopup);
+submitButton.addEventListener('click', formSubmitHandler);
 addButton.addEventListener('click', togglePopupPlace);
 closeButtonPlace.addEventListener('click', togglePopupPlace);
