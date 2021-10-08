@@ -25,6 +25,22 @@ const initialCards = [
   }
   ];
 
+  let cardImages = document.querySelectorAll('.card__image');
+  for (let i = 0; i < cardImages.length; i++) {
+    let likeButtons = document.querySelectorAll('.card__button-like');
+    let cardCaptionNames = document.querySelectorAll('.card__caption-name');
+    cardImages[i].setAttribute('src', initialCards[i].link);
+    cardImages[i].setAttribute('alt', initialCards[i].name);
+    cardCaptionNames[i].textContent = initialCards[i].name;
+    likeButtons[i].addEventListener("click", function() {
+      likeButtons[i].classList.toggle('active')
+    });
+  }
+
+
+
+
+
 let profile = document.querySelector('.profile');
 let elements = document.querySelector('.elements');
 let popup = document.querySelector('.popup');
@@ -38,7 +54,7 @@ let editButton = profile.querySelector('.profile__button-edit');
 let popupContainer = popup.querySelector('.popup__container');
 let closeButton = popup.querySelector('.popup__button-close');
 /*find button-like*/
-let likeButtons = document.querySelectorAll('.card__button-like');
+// let likeButtons = document.querySelectorAll('.card__button-like');
 /*get/change popup-name*/
 let profileTitle = profile.querySelector('.profile-edit__title');
 let person = popup.querySelector('#person');
@@ -50,7 +66,6 @@ profession.value = profileSubtitle.textContent;
 /*find button-submit*/
 let submitButton = popup.querySelector('.form__button-submit');
 /*find card-image*/
-let cardImages = elements.querySelectorAll('.card__image');
 let cardCaptionNames = elements.querySelectorAll('.card__caption-name');
 /*find button-submit new-place*/
 let submitButtonPlace = popupPlace.querySelector('.form__button-submit.new-place');
@@ -75,9 +90,9 @@ function formPlaceSubmitHandler (evt) {
   // popup.classList.toggle('popup_opened');
   // popupContainer.classList.toggle('popup_opened');
   elements.insertAdjacentHTML('afterbegin', '<article class="card"><img class="card__image" alt="Карачаевск" src="images/karachaevsk.png" /><button class="card__button-trash" type="button"></button><div class="card__caption"><h2 class="card__caption-name"></h2><button class="card__button-like" type="button"></button></div></article>');
-  let cards = elements.querySelectorAll('.card');
   let cardAddedImages = elements.querySelectorAll('.card__image'); 
   let cardAddedCaptions = elements.querySelectorAll('.card__caption-name');
+  let cardLikeButton = elements.querySelectorAll('.card__button-like');
   let place = popupPlace.querySelector('#place');
   let imageLink = popupPlace.querySelector('#image-link');
   cardAddedImages[0].setAttribute('src', imageLink.value);
@@ -85,6 +100,9 @@ function formPlaceSubmitHandler (evt) {
   cardAddedCaptions[0].textContent = place.value;
   // cardCaptionNames[i].textContent = initialCards[i].name;
   // console.log(cardAddedCaptions);
+    cardLikeButton[0].addEventListener("click", function() {
+      cardLikeButton[0].classList.toggle('active')
+    });
   popupPlace.classList.toggle('popup_opened');
   popupContainerPlace.classList.toggle('popup_opened');
 }
@@ -92,26 +110,17 @@ function formPlaceSubmitHandler (evt) {
 popup.addEventListener('submit', formPlaceSubmitHandler);
 
 
-/*load images*/
-
-for (let i = 0; i < cardImages.length; i++) {
-  cardImages[i].setAttribute('src', initialCards[i].link);
-  cardImages[i].setAttribute('alt', initialCards[i].name);
-  cardCaptionNames[i].textContent = initialCards[i].name;
-}
-
-
 /*button-like click*/
-
-for (let i = 0; i < likeButtons.length; i++) {
-  likeButtons[i].addEventListener("click", function() {
-    likeButtons[i].classList.toggle('active')
-    // if (this.classList.contains('active')) {
-    //   this.classList.remove('active');
-    // }
-    // else this.classList.add('active');
-  });
-}
+// likeButtons = document.querySelectorAll('.card__button-like');
+// for (let i = 0; i < likeButtons.length; i++) {
+//   likeButtons[i].addEventListener("click", function() {
+//     likeButtons[i].classList.toggle('active')
+//     // if (this.classList.contains('active')) {
+//     //   this.classList.remove('active');
+//     // }
+//     // else this.classList.add('active');
+//   });
+// }
 /*button-edit click*/
 // function openPopup (){
 //   popup.classList.add('popup_opened');
