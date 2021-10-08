@@ -52,6 +52,8 @@ let submitButton = popup.querySelector('.form__button-submit');
 /*find card-image*/
 let cardImages = elements.querySelectorAll('.card__image');
 let cardCaptionNames = elements.querySelectorAll('.card__caption-name');
+/*find button-submit new-place*/
+let submitButtonPlace = popupPlace.querySelector('.form__button-submit.new-place');
 
 /*form-submit*/
 
@@ -63,6 +65,24 @@ function formSubmitHandler (evt) {
   popupContainer.classList.toggle('popup_opened');
 }
 popup.addEventListener('submit', formSubmitHandler);
+
+/*insert card*/
+
+function formPlaceSubmitHandler (evt) {
+  evt.preventDefault();
+  // profileTitle.textContent = person.value;
+  // profileSubtitle.textContent = profession.value;
+  // popup.classList.toggle('popup_opened');
+  // popupContainer.classList.toggle('popup_opened');
+  elements.insertAdjacentHTML('afterbegin', '<article class="card"><img class="card__image" alt="Карачаевск" src="images/karachaevsk.png" /><button class="card__button-trash" type="button"></button><div class="card__caption"><h2 class="card__caption-name"></h2><button class="card__button-like" type="button"></button></div></article>');
+  popupPlace.classList.toggle('popup_opened');
+  popupContainerPlace.classList.toggle('popup_opened');
+  let cards = elements.querySelectorAll('.card');
+  console.log(cards);
+}
+
+popup.addEventListener('submit', formPlaceSubmitHandler);
+
 
 /*load images*/
 
@@ -114,12 +134,13 @@ function togglePopup (){
 
 /*button-add&close click*/
 function togglePopupPlace (){
-  popup.classList.toggle('popup_opened');
-  popupContainer.classList.toggle('popup_opened');
+  popupPlace.classList.toggle('popup_opened');
+  popupContainerPlace.classList.toggle('popup_opened');
 }
 
 editButton.addEventListener('click', togglePopup);
 closeButton.addEventListener('click', togglePopup);
 submitButton.addEventListener('click', formSubmitHandler);
+submitButtonPlace.addEventListener('click', formPlaceSubmitHandler);
 addButton.addEventListener('click', togglePopupPlace);
 closeButtonPlace.addEventListener('click', togglePopupPlace);
