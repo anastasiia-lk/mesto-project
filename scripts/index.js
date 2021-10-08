@@ -75,10 +75,18 @@ function formPlaceSubmitHandler (evt) {
   // popup.classList.toggle('popup_opened');
   // popupContainer.classList.toggle('popup_opened');
   elements.insertAdjacentHTML('afterbegin', '<article class="card"><img class="card__image" alt="Карачаевск" src="images/karachaevsk.png" /><button class="card__button-trash" type="button"></button><div class="card__caption"><h2 class="card__caption-name"></h2><button class="card__button-like" type="button"></button></div></article>');
+  let cards = elements.querySelectorAll('.card');
+  let cardAddedImages = elements.querySelectorAll('.card__image'); 
+  let cardAddedCaptions = elements.querySelectorAll('.card__caption-name');
+  let place = popupPlace.querySelector('#place');
+  let imageLink = popupPlace.querySelector('#image-link');
+  cardAddedImages[0].setAttribute('src', imageLink.value);
+  cardAddedImages[0].setAttribute('alt', place.value);
+  cardAddedCaptions[0].textContent = place.value;
+  // cardCaptionNames[i].textContent = initialCards[i].name;
+  // console.log(cardAddedCaptions);
   popupPlace.classList.toggle('popup_opened');
   popupContainerPlace.classList.toggle('popup_opened');
-  let cards = elements.querySelectorAll('.card');
-  console.log(cards);
 }
 
 popup.addEventListener('submit', formPlaceSubmitHandler);
