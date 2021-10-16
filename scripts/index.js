@@ -70,7 +70,7 @@ function togglePopup(item){
 }
 
 editButton.addEventListener('click', function(event){
-  togglePopup(editPopupContainer)
+  togglePopup(editPopupContainer);
 });
 
 //нажимаем кнопку добавить место
@@ -78,7 +78,7 @@ let addButton = document.querySelector('.profile__button-add');
 let addPopupContainer = document.querySelector('.popup__container_type_add');
 
 addButton.addEventListener('click', function(event){
-  togglePopup(addPopupContainer)
+  togglePopup(addPopupContainer);
 });
 
 //нажимаем кнопку закрыть
