@@ -117,7 +117,17 @@
       </form>
     </div>
   </div>
-  <script src="./scripts/index.js"></script>
+  <template id="place-template">
+    <article class="card">
+      <img class="card__image" alt="" src="" />
+      <button class="card__button-trash" type="button"></button>
+      <div class="card__caption">
+        <h2 class="card__caption-name"></h2>
+        <button class="card__button-like" type="button"></button>
+      </div>
+    </article>
+  </template>
+  <script defer src="./scripts/index.js"></script>
 </body>
 
 </html>

@@ -25,7 +25,6 @@ const initialCards = [
   }
   ];
 
-  let cardImages = document.querySelectorAll('.card__image');
   for (let i = 0; i < cardImages.length; i++) {
     let likeButtons = document.querySelectorAll('.card__button-like');
     let cardCaptionNames = document.querySelectorAll('.card__caption-name');
@@ -36,7 +35,6 @@ const initialCards = [
       likeButtons[i].classList.toggle('active')
     });
   }
-
 
 
 
@@ -157,7 +155,43 @@ function togglePopupPlace (){
 
 editButton.addEventListener('click', togglePopup);
 closeButton.addEventListener('click', togglePopup);
+
 submitButton.addEventListener('click', formSubmitHandler);
-submitButtonPlace.addEventListener('click', formPlaceSubmitHandler);
+// submitButtonPlace.addEventListener('click', formPlaceSubmitHandler);
 addButton.addEventListener('click', togglePopupPlace);
 closeButtonPlace.addEventListener('click', togglePopupPlace);
+
+//add new place
+function addPlace(placeValue, imageLinkValue) {
+
+  const placeTemplate = document.querySelector('#place-template').content;
+  const placeElement = placeTemplate.querySelector('.card').cloneNode(true);
+
+  placeElement.querySelector('.card__image').setAttribute('src', imageLinkValue);
+  placeElement.querySelector('.card__image').setAttribute('alt', placeValue);
+  placeElement.querySelector('.card__caption-name').textContent = placeValue;
+
+  placeElement.querySelector('.card__button-like').addEventListener('click', function (evt) {
+  const eventTarget = evt.target;
+  eventTarget.classList.toggle('active');
+});
+
+  elements.prepend(placeElement); 
+}
+
+function togglePopupPlace (){
+  popupPlace.classList.toggle('popup_opened');
+  popupContainerPlace.classList.toggle('popup_opened');
+}
+
+submitButtonPlace.addEventListener('click', function(){
+  const place = document.querySelector('#place');
+  const imageLink = document.querySelector('#image-link');
+
+  addPlace(place.value, imageLink.value);
+  togglePopupPlace();
+
+  place.value = '';
+  imageLink.value = '';
+});
+
