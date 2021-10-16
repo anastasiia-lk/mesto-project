@@ -201,3 +201,9 @@ submitButtonPlace.addEventListener('click', function(){
   imageLink.value = '';
 });
 
+//init places
+initialCards.forEach(function(item){
+  addPlace(item.name, item.link);
+})
+
+
