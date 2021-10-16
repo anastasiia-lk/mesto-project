@@ -25,16 +25,16 @@ const initialCards = [
   }
   ];
 
-  for (let i = 0; i < cardImages.length; i++) {
-    let likeButtons = document.querySelectorAll('.card__button-like');
-    let cardCaptionNames = document.querySelectorAll('.card__caption-name');
-    cardImages[i].setAttribute('src', initialCards[i].link);
-    cardImages[i].setAttribute('alt', initialCards[i].name);
-    cardCaptionNames[i].textContent = initialCards[i].name;
-    likeButtons[i].addEventListener("click", function() {
-      likeButtons[i].classList.toggle('active')
-    });
-  }
+  // for (let i = 0; i < cardImages.length; i++) {
+  //   let likeButtons = document.querySelectorAll('.card__button-like');
+  //   let cardCaptionNames = document.querySelectorAll('.card__caption-name');
+  //   cardImages[i].setAttribute('src', initialCards[i].link);
+  //   cardImages[i].setAttribute('alt', initialCards[i].name);
+  //   cardCaptionNames[i].textContent = initialCards[i].name;
+  //   likeButtons[i].addEventListener("click", function() {
+  //     likeButtons[i].classList.toggle('active')
+  //   });
+  // }
 
 
 
@@ -174,6 +174,12 @@ function addPlace(placeValue, imageLinkValue) {
   placeElement.querySelector('.card__button-like').addEventListener('click', function (evt) {
   const eventTarget = evt.target;
   eventTarget.classList.toggle('active');
+});
+
+placeElement.querySelector('.card__button-trash').addEventListener('click', function (evt) {
+  const eventTarget = evt.target;
+  const deleteCard = eventTarget.closest('.card');
+  deleteCard.remove();
 });
 
   elements.prepend(placeElement); 
