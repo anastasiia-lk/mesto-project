@@ -61,27 +61,33 @@ placeElement.querySelector('.card__image').addEventListener('click', function (e
 
 //нажимаем кнопку редактировать профиль
 let editButton = document.querySelector('.profile__button-edit');
-let editPopup = document.querySelector('.popup__container_type_edit');
+let editPopupContainer = document.querySelector('.popup__container_type_edit');
 
 function togglePopup(item){
   item.classList.toggle('popup_opened');
-  const closestPopup = item.closest('.popup')
+  const closestPopup = item.closest('.popup');
   closestPopup.classList.toggle('popup_opened');
 }
 
 editButton.addEventListener('click', function(event){
-  togglePopup(editPopup)
+  togglePopup(editPopupContainer)
 });
 
 //нажимаем кнопку добавить место
 let addButton = document.querySelector('.profile__button-add');
-let addPopup = document.querySelector('.popup__container_type_add');
+let addPopupContainer = document.querySelector('.popup__container_type_add');
 
 addButton.addEventListener('click', function(event){
-  togglePopup(addPopup)
+  togglePopup(addPopupContainer)
 });
 
-
+//нажимаем кнопку закрыть
+closeButtons.forEach(function(item){
+  item.addEventListener('click', function(event){
+    const findPopupContainer = item.closest('.popup__container');
+    togglePopup(findPopupContainer);
+  })
+})
 
 
 
