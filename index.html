@@ -31,61 +31,13 @@
       <button class="profile__button-add" type="button"></button>
     </section>
     <section class="elements page__elements" aria-label="elements-label">
-      <article class="card">
-        <img class="card__image" alt="Карачаевск" src="images/karachaevsk.png" />
-        <button class="card__button-trash" type="button"></button>
-        <div class="card__caption">
-          <h2 class="card__caption-name">Карачаевск</h2>
-          <button class="card__button-like" type="button"></button>
-        </div>
-      </article>
-      <article class="card">
-        <img class="card__image" alt="Гора Эльбрус" src="images/elbrus.png" />
-        <button class="card__button-trash" type="button"></button>
-        <div class="card__caption">
-          <h2 class="card__caption-name">Гора Эльбрус</h2>
-          <button class="card__button-like" type="button"></button>
-        </div>
-      </article>
-      <article class="card">
-        <img class="card__image" alt="Домбай" src="images/dombay.png" />
-        <button class="card__button-trash" type="button"></button>
-        <div class="card__caption">
-          <h2 class="card__caption-name">Домбай</h2>
-          <button class="card__button-like" type="button"></button>
-        </div>
-      </article>
-      <article class="card">
-        <img class="card__image" alt="Гора Эльбрус" src="images/elbrus.png" />
-        <button class="card__button-trash" type="button"></button>
-        <div class="card__caption">
-          <h2 class="card__caption-name">Гора Эльбрус</h2>
-          <button class="card__button-like" type="button"></button>
-        </div>
-      </article>
-      <article class="card">
-        <img class="card__image" alt="Домбай" src="images/dombay.png" />
-        <button class="card__button-trash" type="button"></button>
-        <div class="card__caption">
-          <h2 class="card__caption-name">Домбай</h2>
-          <button class="card__button-like" type="button"></button>
-        </div>
-      </article>
-      <article class="card">
-        <img class="card__image" alt="Карачаево-Черкессия" src="images/karachaevsk.png" />
-        <button class="card__button-trash" type="button"></button>
-        <div class="card__caption">
-          <h2 class="card__caption-name">Карачаево-Черкессия</h2>
-          <button class="card__button-like" type="button"></button>
-        </div>
-      </article>
     </section>
   </main>
   <footer class="footer page__footer">
     <p class="footer__copyright">© 2020 Mesto Russia</p>
   </footer>
-  <div class="popup">
-    <div class="popup__container">
+  <div class="popup new-place">
+    <div class="popup__container popup__container_type_edit">
       <button class="popup__button-close" type="button"></button>
       <form name="profile-form" class="form">
         <h2 class="form__heading">Редактировать профиль</h2>
@@ -96,12 +48,12 @@
           <input type="text" class="form__item" id="profession" name="profession" placeholder="Род деятельности"
             value="Исследователь океана" required>
         </fieldset>
-        <button class="form__button-submit" type="submit">Сохранить</button>
+        <button class="form__button-submit new-place" type="submit">Сохранить</button>
       </form>
     </div>
   </div>
-  <div class="popup new-place">
-    <div class="popup__container new-place">
+  <div class="popup">
+    <div class="popup__container new-place popup__container_type_edit">
       <button class="popup__button-close new-place" type="button"></button>
       <form name="place-form" class="form">
         <h2 class="form__heading">Новое место</h2>
@@ -115,6 +67,16 @@
         </fieldset>
         <button class="form__button-submit new-place" type="submit">Сохранить</button>
       </form>
+    </div>
+  </div>
+  <div class="popup">
+    <div class="popup__container type-image">
+      <button class="popup__button-close image" type="button"></button>
+      <figure class="view-image">
+        <img class="view-image__item"
+          src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg" alt="" />
+        <figcaption class="view-image__caption"></figcaption>
+      </figure>
     </div>
   </div>
   <template id="place-template">
