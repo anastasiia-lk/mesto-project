@@ -1,8 +1,11 @@
 .view-image__item {
-  width: 816px;
+  /* width: 816px;
   height: 540px;
   background-color: inherit;
   background-position: center center;
   background-size: contain;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat; */
+  width: 100%; /* Ширина изображений */
+  height: 100%; /* Высота изображении */
+  object-fit: cover; /* Вписываем фотографию в область */
 }

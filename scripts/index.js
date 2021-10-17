@@ -62,9 +62,9 @@ placeElement.querySelector('.card__image').addEventListener('click', function (e
 
 //показать картинку в popup
 function showPopupImage(imageLinkValue, placeValue){
-  // imagePopupContainer.querySelector('.view-image__item').setAttribute('src', imageLinkValue);
-  // imagePopupContainer.querySelector('.view-image__item').setAttribute('alt', placeValue);
-  imagePopupContainer.querySelector('.view-image__item').style.backgroundImage = `url('${imageLinkValue}')`;
+  imagePopupContainer.querySelector('.view-image__item').setAttribute('src', imageLinkValue);
+  imagePopupContainer.querySelector('.view-image__item').setAttribute('alt', placeValue);
+  // imagePopupContainer.querySelector('.view-image__item').style.backgroundImage = `url('${imageLinkValue}')`;
   imagePopupContainer.querySelector('.view-image__caption').textContent = placeValue;
 }
 
