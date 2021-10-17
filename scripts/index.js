@@ -31,6 +31,7 @@ initialCards.forEach(function(item){
   addPlace(item.name, item.link);
 })
 
+let imagePopupContainer = document.querySelector('.popup__container_type_image');
 function addPlace(placeValue, imageLinkValue) {
 
   const placeTemplate = document.querySelector('#place-template').content;
@@ -52,11 +53,17 @@ placeElement.querySelector('.card__button-trash').addEventListener('click', func
 });
 
 placeElement.querySelector('.card__image').addEventListener('click', function (evt) {
-  document.querySelector('.popup.image').classList.toggle('popup_opened');
-  document.querySelector('.popup__container.type-image').classList.toggle('popup_opened');
+  togglePopup(imagePopupContainer);
+  showPopupImage(imageLinkValue, placeValue);
 });
 
   elements.prepend(placeElement); 
+}
+
+//показать картинку в popup
+function showPopupImage(imageLinkValue, placeValue){
+  imagePopupContainer.querySelector('.view-image__item').setAttribute('src', imageLinkValue);
+  imagePopupContainer.querySelector('.view-image__item').setAttribute('alt', placeValue);
 }
 
 //нажимаем кнопку редактировать профиль
