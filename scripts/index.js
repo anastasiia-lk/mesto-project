@@ -44,8 +44,8 @@ function togglePopup(item){
   closestPopup.classList.toggle('popup_opened');
 }
 
-//добавить карточку
-function addPlace(placeValue, imageLinkValue) {
+//создать карточку
+function newPlace(placeValue, imageLinkValue) {
 
   const placeTemplate = document.querySelector('#place-template').content;
   const placeElement = placeTemplate.querySelector('.card').cloneNode(true);
@@ -71,12 +71,19 @@ newViewImage.addEventListener('click', function (evt) {
   showPopupImage(imageLinkValue, placeValue);
 });
 
-  elements.prepend(placeElement); 
+  // elements.prepend(placeElement); 
+  return placeElement;
+}
+
+//добавить карточку
+function addPlace(element){
+  elements.prepend(element); 
 }
 
 //инициализация страницы
 initialCards.forEach(function(item){
-  addPlace(item.name, item.link);
+  const card = newPlace(item.name, item.link);
+  addPlace(card);
 })
 
 
@@ -155,7 +162,8 @@ function formSubmitPlaceHandler (evt) {
   evt.preventDefault();
   const placeInput = addPopupContainer.querySelector('#place').value;
   const imageLinkInput = addPopupContainer.querySelector('#image-link').value;
-  addPlace(placeInput, imageLinkInput);
+  const card = newPlace(placeInput, imageLinkInput);
+  addPlace(card);
 }
 
 // Прикрепляем обработчик к форме:
