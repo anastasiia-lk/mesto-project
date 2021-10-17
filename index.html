@@ -53,19 +53,19 @@
     </div>
   </div>
   <div class="popup">
-    <div class="popup__container new-place popup__container_type_add">
+    <div class="popup__container popup__container_type_add">
       <button class="popup__button-close new-place" type="button"></button>
       <form name="place-form" class="form">
         <h2 class="form__heading">Новое место</h2>
         <fieldset class="form__input-container">
-          <label for="title" class="form__label"></label>
+          <label for="place" class="form__label"></label>
           <input type="text" class="form__item" id="place" name="place" placeholder="Название" value="Название"
             required>
           <label for="image-link" class="form__label"></label>
           <input type="text" class="form__item" id="image-link" name="image-link" placeholder="Ссылка на картинку"
             value="Ссылка на картинку" required>
         </fieldset>
-        <button class="form__button-submit" type="submit">Сохранить</ш>
+        <button class="form__button-submit" type="submit">Сохранить</button>
       </form>
     </div>
   </div>
@@ -73,7 +73,7 @@
     <div class="popup__container popup__container_type_image">
       <button class="popup__button-close" type="button"></button>
       <figure class="view-image">
-        <img class="view-image__item" src="" alt="" />
+        <img class="view-image__item" src="image-link" alt="image-caption" />
         <figcaption class="view-image__caption"></figcaption>
       </figure>
     </div>
