@@ -32,6 +32,7 @@ initialCards.forEach(function(item){
 })
 
 let imagePopupContainer = document.querySelector('.popup__container_type_image');
+
 function addPlace(placeValue, imageLinkValue) {
 
   const placeTemplate = document.querySelector('#place-template').content;
@@ -130,6 +131,24 @@ function formSubmitHandler (evt) {
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
 formElement.addEventListener('submit', formSubmitHandler);
+
+//добавляем новое место
+
+// Обработчик «отправки» формы, хотя пока
+// она никуда отправляться не будет
+
+const formPlaceElement = addPopupContainer.querySelector('.form');
+let submitPlaceButton = addPopupContainer.querySelector('.form__button-submit');
+function formSubmitPlaceHandler (evt) {
+  evt.preventDefault();
+  const placeInput = addPopupContainer.querySelector('#place').value;
+  const imageLinkInput = addPopupContainer.querySelector('#image-link').value;
+  addPlace(placeInput, imageLinkInput);
+}
+
+// Прикрепляем обработчик к форме:
+// он будет следить за событием “submit” - «отправка»
+formPlaceElement.addEventListener('submit', formSubmitPlaceHandler);
 
   
 
