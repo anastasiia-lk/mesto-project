@@ -71,6 +71,11 @@ function showPopupImage(imageLinkValue, placeValue){
 //нажимаем кнопку редактировать профиль
 let editButton = document.querySelector('.profile__button-edit');
 let editPopupContainer = document.querySelector('.popup__container_type_edit');
+const nameInput = editPopupContainer.querySelector('#person');
+const jobInput = editPopupContainer.querySelector('#profession');
+let profile = document.querySelector('.profile');
+let profileName = profile.querySelector('.profile-edit__title');
+let profileJob = profile.querySelector('.profile-edit__subtitle');
 
 function togglePopup(item){
   item.classList.toggle('popup_opened');
@@ -80,6 +85,8 @@ function togglePopup(item){
 
 editButton.addEventListener('click', function(event){
   togglePopup(editPopupContainer);
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileJob.textContent;
 });
 
 //нажимаем кнопку добавить место
@@ -97,6 +104,35 @@ closeButtons.forEach(function(item){
     togglePopup(findPopupContainer);
   })
 })
+
+//нажимаем кнопку сохранить
+let submitButtons = document.querySelectorAll('.form__button-submit');
+submitButtons.forEach(function(item){
+  item.addEventListener('click', function(event){
+    const findPopupContainer = item.closest('.popup__container');
+    togglePopup(findPopupContainer);
+  })
+}) 
+
+//редактирование информации в профиле
+
+// Обработчик «отправки» формы, хотя пока
+// она никуда отправляться не будет
+
+const formElement = editPopupContainer.querySelector('.form');
+let submitProfileButton = editPopupContainer.querySelector('.form__button-submit');
+function formSubmitHandler (evt) {
+  evt.preventDefault(); 
+  profileName.textContent = nameInput.value;
+  profileJob.textContent = jobInput.value;
+}
+
+// Прикрепляем обработчик к форме:
+// он будет следить за событием “submit” - «отправка»
+formElement.addEventListener('submit', formSubmitHandler);
+
+  
+
 
 
 

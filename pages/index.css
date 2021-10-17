@@ -20,6 +20,7 @@
 /*view-image*/
 @import url(../blocks/view-image/view-image.css);
 @import url(../blocks/view-image/__item/view-image__item.css);
+@import url(../blocks/view-image/__caption/view-image__caption.css);
 
 /*header*/
 @import url(../blocks/header/header.css);
