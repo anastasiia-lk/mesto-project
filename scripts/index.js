@@ -27,6 +27,7 @@ const initialCards = [
 
 const elements = document.querySelector('.elements');
 const imagePopupContainer = document.querySelector('.popup__container_type_image');
+const imagePopup = imagePopupContainer.closest('.popup');
 
 //показать картинку в popup
 function showPopupImage(imageLinkValue, placeValue){
@@ -38,10 +39,24 @@ function showPopupImage(imageLinkValue, placeValue){
 }
 
 //открыть-закрыть модальное окно
-function togglePopup(item){
-  item.classList.toggle('popup_opened');
-  const closestPopup = item.closest('.popup');
-  closestPopup.classList.toggle('popup_opened');
+// function togglePopup(item){
+//   item.classList.toggle('popup_opened');
+//   const closestPopup = item.closest('.popup');
+//   closestPopup.classList.toggle('popup_opened');
+// }
+
+//открыть модальное окно
+function openPopup(item){
+  item.classList.add('popup_opened');
+  const findPopupItem = item.querySelector('.popup__container');
+  findPopupItem.classList.add('popup_opened');
+}
+
+//закрыть модальное окно
+function closePopup(item){
+  item.classList.remove('popup_opened');
+  const findPopupItem = item.querySelector('.popup__container');
+  findPopupItem.classList.remove('popup_opened');
 }
 
 //создать карточку
@@ -67,7 +82,7 @@ placeElement.querySelector('.card__button-trash').addEventListener('click', func
 });
 
 newViewImage.addEventListener('click', function (evt) {
-  togglePopup(imagePopupContainer);
+  openPopup(imagePopup);
   showPopupImage(imageLinkValue, placeValue);
 });
 
@@ -90,6 +105,7 @@ initialCards.forEach(function(item){
 //нажимаем кнопку редактировать профиль
 const editButton = document.querySelector('.profile__button-edit');
 const editPopupContainer = document.querySelector('.popup__container_type_edit');
+const editPopup= editPopupContainer.closest('.popup');
 const nameInput = editPopupContainer.querySelector('#person');
 const jobInput = editPopupContainer.querySelector('#profession');
 const profile = document.querySelector('.profile');
@@ -98,7 +114,7 @@ const profileJob = profile.querySelector('.profile-edit__subtitle');
 
 
 editButton.addEventListener('click', function(event){
-  togglePopup(editPopupContainer);
+  openPopup(editPopup);
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
 });
@@ -106,40 +122,52 @@ editButton.addEventListener('click', function(event){
 //нажимаем кнопку добавить место
 const addButton = document.querySelector('.profile__button-add');
 const addPopupContainer = document.querySelector('.popup__container_type_add');
+const addPopup= addPopupContainer.closest('.popup');
 
 addButton.addEventListener('click', function(event){
-  togglePopup(addPopupContainer);
+  openPopup(addPopup);
 });
 
 //найти контейнер модального окна
-function findContainer (item){
-  const findPopupContainer = item.closest('.popup__container');
-  togglePopup(findPopupContainer);
-}
+// function findContainer (item){
+//   const findPopupContainer = item.closest('.popup__container');
+//   togglePopup(findPopupContainer);
+// }
 
-//добавить элементам слушатель открытия-закрытия модального окна 
-function addPopupToggleListener (element){
+//добавить элементам слушатель открытия модального окна 
+function addPopupOpenListener (element){
   element.forEach(function(item){
     item.addEventListener('click', function(event){
-      findContainer(item);
+      const findPopup = item.closest('.popup');
+      openPopup(findPopup);
+    })
+  })
+}
+
+//добавить элементам слушатель закрытия модального окна 
+function addPopupCloseListener (element){
+  element.forEach(function(item){
+    item.addEventListener('click', function(event){
+      const findPopup = item.closest('.popup');
+      closePopup(findPopup);
     })
   })
 }
 
 //нажимаем кнопку закрыть
 const closeButtons = document.querySelectorAll('.popup__button-close');
-addPopupToggleListener(closeButtons);
+addPopupCloseListener(closeButtons);
 
 //нажимаем кнопку сохранить
 const submitButtons = document.querySelectorAll('.form__button-submit');
-addPopupToggleListener(submitButtons);
+addPopupCloseListener(submitButtons);
 
 //редактирование информации в профиле
 
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
 
-const formElement = editPopupContainer.querySelector('.form');
+const formProfileElement = editPopupContainer.querySelector('.form');
 const submitProfileButton = editPopupContainer.querySelector('.form__button-submit');
 function formSubmitHandler (evt) {
   evt.preventDefault(); 
@@ -149,7 +177,7 @@ function formSubmitHandler (evt) {
 
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
-formElement.addEventListener('submit', formSubmitHandler);
+formProfileElement.addEventListener('submit', formSubmitHandler);
 
 //добавляем новое место
 
@@ -157,14 +185,16 @@ formElement.addEventListener('submit', formSubmitHandler);
 // она никуда отправляться не будет
 
 const formPlaceElement = addPopupContainer.querySelector('.form');
- submitPlaceButton = addPopupContainer.querySelector('.form__button-submit');
+const submitPlaceButton = addPopupContainer.querySelector('.form__button-submit');
 function formSubmitPlaceHandler (evt) {
   evt.preventDefault();
   const placeInput = addPopupContainer.querySelector('#place').value;
   const imageLinkInput = addPopupContainer.querySelector('#image-link').value;
   const card = newPlace(placeInput, imageLinkInput);
   addPlace(card);
+  formPlaceElement.reset();
 }
+
 
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
