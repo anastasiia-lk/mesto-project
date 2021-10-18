@@ -6,6 +6,8 @@
 @media screen and (max-width: 730px) {
   .profile-edit__person {
     padding-left: 42px;
+    width: 100%;
+    justify-content: center;
   }
 }
 

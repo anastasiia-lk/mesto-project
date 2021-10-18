@@ -8,14 +8,16 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  max-width: 336px;
+  /* max-width: 336px; */
+  width: 100%;
 }
 
-@media screen and (max-width: 382px) {
+@media screen and (max-width: 730px) {
   .profile-edit__subtitle {
     font-size: 14px;
     line-height: 17px;
     margin: 0 auto;
-    max-width: 282px;
+    width: 282px;
+    text-align: center;
   }
 }
