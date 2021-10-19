@@ -2,3 +2,8 @@
   visibility: visible;
   opacity: 1;
 }
+
+.popup_opened > .popup__container {
+  visibility: visible;
+  opacity: 1;
+}

@@ -62,17 +62,13 @@ function showPopupImage(imageLinkValue, placeValue){
 }
 
 //открыть модальное окно
-function openPopup(item){
-  item.classList.add('popup_opened');
-  const findPopupItem = item.querySelector('.popup__container');
-  findPopupItem.classList.add('popup_opened');
+function openPopup(popup){
+  popup.classList.add('popup_opened');
 }
 
 //закрыть модальное окно
-function closePopup(item){
-  item.classList.remove('popup_opened');
-  const findPopupItem = item.querySelector('.popup__container');
-  findPopupItem.classList.remove('popup_opened');
+function closePopup(popup){
+  popup.classList.remove('popup_opened');
 }
 
 //создать карточку
