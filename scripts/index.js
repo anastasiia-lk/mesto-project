@@ -127,6 +127,43 @@ function addPopupCloseListener (element){
   })
 }
 
+// Обработчик ошибок при заполнении
+// полей формы
+
+const formError = formProfileElement.querySelector(`.${nameInput.id}-error`);
+
+// Показать ошибку
+
+function showError (input, errorMessage) {
+  console.log('hy');
+  input.classList.add('form__item_type_error');
+  formError.textContent = errorMessage;
+  formError.classList.add('form__item-error_active');
+}
+
+// Скрыть ошибку
+
+function hideError (input) {
+  input.classList.remove('form__item_type_error');
+  formError.classList.remove('form__item-error_active');
+  formError.textContent = "";
+}
+
+// Проверка формы на корректность
+// введенных данных
+
+const checkInputValidity = () => {
+  if (!nameInput.validity.valid) {
+    showError(nameInput, nameInput.validationMessage)
+  } else {
+    hideError(nameInput);
+  }
+}
+
+nameInput.addEventListener('input', function () {
+  checkInputValidity();
+});
+
 //редактирование информации в профиле
 
 // Обработчик «отправки» формы, хотя пока
