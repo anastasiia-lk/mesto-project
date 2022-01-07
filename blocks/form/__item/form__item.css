@@ -16,6 +16,7 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
+  color: #000000;
 }
 
 .form__item:last-child {
@@ -23,10 +24,5 @@
 }
 
 .form__item::placeholder {
-  font-family: 'Inter', Arial, sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 17px;
-  color: #000000;
+  color: #c4c4c4;
 }
