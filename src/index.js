@@ -1,7 +1,7 @@
 import './pages/index.css';
 import { newPlace, addPlace } from './components/card.js';
 import { addPopupCloseListener, closePopupByEscClick, popupValidation, openPopup } from './components/modal.js';
-import { enableValidation, formSubmitHandler, formSubmitPlaceHandler } from './components/validate.js';
+import { enableFormValidation, formSubmitHandler, formSubmitPlaceHandler } from './components/validate.js';
 
 const initialCards = [
   {
@@ -63,10 +63,16 @@ const formProfileElement = editPopupContainer.querySelector('.form');
 
 const formPlaceElement = addPopupContainer.querySelector('.form');
 
-// Проверка формы на корректность
-// введенных данных
+// передача настроек
 
-enableValidation();
+enableFormValidation({
+  formSelector: '.form',
+  inputSelector: '.form__item',
+  submitButtonSelector: '.form__button-submit',
+  inactiveButtonClass: 'form__button-submit_inactive',
+  inputErrorClass: 'form__item_type_error',
+  errorClass: 'form__item-error_active'
+});
 
 // закрыть popup кликом на оверлей
 
@@ -113,4 +119,4 @@ formPlaceElement.addEventListener('submit', formSubmitPlaceHandler);
 initialCards.forEach(function(item){
   const card = newPlace(item.name, item.link);
   addPlace(card);
-})
+});
