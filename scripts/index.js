@@ -214,6 +214,15 @@ const popupValidation = () => {
 
 popupValidation();
 
+function closePopupByEscClick (evt) {
+  const popupElementOpen = document.querySelector('.popup_opened');
+  if (evt.code === 'Escape') {
+    popupElementOpen.classList.remove('popup_opened');
+  }
+}
+
+document.addEventListener('keyup', closePopupByEscClick);
+
 //редактирование информации в профиле
 
 // Обработчик «отправки» формы, хотя пока
