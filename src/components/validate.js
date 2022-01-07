@@ -1,4 +1,4 @@
-import { newPlace, addPlace } from '../components/card.js';
+import { newPlace, addPlace } from './card.js';
 
 const editPopupContainer = document.querySelector('.popup__container_type_edit');
 const nameInput = editPopupContainer.querySelector('#person');

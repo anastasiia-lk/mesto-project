@@ -1,7 +1,7 @@
-import './pages/index.css';
-import { newPlace, addPlace } from './components/card.js';
-import { addPopupCloseListener, closePopupByEscClick, popupValidation, openPopup } from './components/modal.js';
-import { enableFormValidation, formSubmitHandler, formSubmitPlaceHandler } from './components/validate.js';
+import '../pages/index.css';
+import { newPlace, addPlace } from './card.js';
+import { addPopupCloseListener, closePopupByEscClick, popupValidation, openPopup } from './modal.js';
+import { enableFormValidation, formSubmitHandler, formSubmitPlaceHandler } from './validate.js';
 
 const initialCards = [
   {
