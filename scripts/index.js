@@ -214,6 +214,8 @@ const popupValidation = () => {
 
 popupValidation();
 
+// закрыть popup нажатием клавиши Esc
+
 function closePopupByEscClick (evt) {
   const popupElementOpen = document.querySelector('.popup_opened');
   if (evt.code === 'Escape') {
