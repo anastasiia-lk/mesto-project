@@ -199,6 +199,21 @@ const toggleButtonState = (inputList, buttonElement) => {
 
 enableValidation();
 
+// закрыть popup кликом на оверлей
+
+const popupValidation = () => {
+  const popupList = Array.from(document.querySelectorAll('.popup'));
+  popupList.forEach((popupElement) => {
+    popupElement.addEventListener('click', (evt) => {
+      if (evt.target === evt.currentTarget) {
+        closePopup(popupElement);
+      }
+    })
+  })
+}
+
+popupValidation();
+
 //редактирование информации в профиле
 
 // Обработчик «отправки» формы, хотя пока
