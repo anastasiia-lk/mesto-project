@@ -134,35 +134,53 @@ const formError = formProfileElement.querySelector(`.${nameInput.id}-error`);
 
 // Показать ошибку
 
-function showError (input, errorMessage) {
-  console.log('hy');
-  input.classList.add('form__item_type_error');
-  formError.textContent = errorMessage;
-  formError.classList.add('form__item-error_active');
+function showError (formElement, inputElement, errorMessage) {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.add('form__item_type_error');
+  errorElement.textContent = errorMessage;
+  errorElement.classList.add('form__item-error_active');
 }
 
 // Скрыть ошибку
 
-function hideError (input) {
-  input.classList.remove('form__item_type_error');
-  formError.classList.remove('form__item-error_active');
-  formError.textContent = "";
+function hideError (formElement, inputElement) {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.remove('form__item_type_error');
+  errorElement.classList.remove('form__item-error_active');
+  errorElement.textContent = "";
 }
 
 // Проверка формы на корректность
 // введенных данных
 
-const checkInputValidity = () => {
-  if (!nameInput.validity.valid) {
-    showError(nameInput, nameInput.validationMessage)
+const checkInputValidity = (formElement, inputElement) => {
+  if (!inputElement.validity.valid) {
+    showError(formElement, inputElement, inputElement.validationMessage)
   } else {
-    hideError(nameInput);
+    hideError(formElement, inputElement);
   }
 }
 
-nameInput.addEventListener('input', function () {
-  checkInputValidity();
-});
+const setEventListener = (formElement) => {
+  const inputList = Array.from(formElement.querySelectorAll('.form__item'));
+  inputList.forEach((inputElement) => {
+    inputElement.addEventListener('input', function () {
+      checkInputValidity(formElement, inputElement);
+    });
+  })
+}
+
+const enableValidation = () => {
+  const formList = Array.from(document.querySelectorAll('.form'));
+  formList.forEach((formElement) => {
+    formElement.addEventListener('submit', (evt) => {
+      evt.preventDefault();
+    });
+    setEventListener(formElement);
+  });
+}
+
+enableValidation();
 
 //редактирование информации в профиле
 

@@ -8,3 +8,7 @@
   line-height: 15px;
   color: #ff0000;
 }
+
+.form__item-error_active:last-child {
+  margin-bottom: -13px;
+}

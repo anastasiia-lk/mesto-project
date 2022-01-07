@@ -48,7 +48,7 @@
           <span class="form__item-error person-error"></span>
           <label for="profession" class="form__label"></label>
           <input type="text" class="form__item" id="profession" name="profession" placeholder="Род деятельности"
-            required>
+            required minlength="2" maxlength="200">
           <span class="form__item-error profession-error"></span>
         </fieldset>
         <button class="form__button-submit" type="submit">Сохранить</button>
@@ -58,14 +58,17 @@
   <div class="popup">
     <div class="popup__container popup__container_type_add">
       <button class="popup__button-close new-place" type="button"></button>
-      <form name="place-form" class="form">
+      <form name="place-form" class="form" novalidate>
         <h2 class="form__heading">Новое место</h2>
         <fieldset class="form__input-container">
           <label for="place" class="form__label"></label>
-          <input type="text" class="form__item" id="place" name="place" placeholder="Название" required>
+          <input type="text" class="form__item" id="place" name="place" placeholder="Название" required minlength="2"
+            maxlength="30">
+          <span class="form__item-error place-error"></span>
           <label for="image-link" class="form__label"></label>
-          <input type="text" class="form__item" id="image-link" name="image-link" placeholder="Ссылка на картинку"
+          <input type="url" class="form__item" id="image-link" name="image-link" placeholder="Ссылка на картинку"
             required>
+          <span class="form__item-error image-link-error"></span>
         </fieldset>
         <button class="form__button-submit" type="submit">Сохранить</button>
       </form>
