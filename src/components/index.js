@@ -29,13 +29,12 @@ const closeButtons = document.querySelectorAll('.popup__button-close');
 
 // редактирование информации в профиле
 
-const profilePopup = editPopupContainer.querySelector('.form');
-const profileSubmitButton = profilePopup.querySelector('.form__button-submit');
+const profileForm = editPopupContainer.querySelector('.form');
 
 // добавляем новое место
 
-const placePopup = addPopupContainer.querySelector('.form');
-const placeSubmitButton = placePopup.querySelector('.form__button-submit');
+const addCardForm = addPopupContainer.querySelector('.form');
+const placeSubmitButton = addCardForm.querySelector('.form__button-submit');
 
 // Обработчики форм
 
@@ -51,9 +50,6 @@ function handleProfileFormSubmit (evt) {
 
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
-  profilePopup.reset();
-  profileSubmitButton.disabled = true;
-  profileSubmitButton.classList.add('form__button-submit_inactive');
   closePopup(editPopup);
 }
 
@@ -66,7 +62,7 @@ function handlePlaceFormSubmit (evt) {
   const card = newPlace(placeInput.value, imageLinkInput.value);
   
   addPlace(card);
-  placePopup.reset();
+  addCardForm.reset();
   placeSubmitButton.disabled = true;
   placeSubmitButton.classList.add('form__button-submit_inactive');
   closePopup(addPopup);
@@ -104,12 +100,12 @@ addButton.addEventListener('click', function(event){
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
 
-profilePopup.addEventListener('submit', handleProfileFormSubmit);
+profileForm.addEventListener('submit', handleProfileFormSubmit);
 
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
 
-placePopup.addEventListener('submit', handlePlaceFormSubmit);
+addCardForm.addEventListener('submit', handlePlaceFormSubmit);
 
 //инициализация страницы
 
