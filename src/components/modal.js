@@ -1,13 +1,13 @@
 const imagePopupContainer = document.querySelector('.popup__container_type_image');
+const newImage = imagePopupContainer.querySelector('.view-image__item');
+const newImageCaption = imagePopupContainer.querySelector('.view-image__caption');
 
 //показать картинку в popup
 
 function showPopupImage(imageLinkValue, placeValue){
-  const newImage = imagePopupContainer.querySelector('.view-image__item');
   newImage.setAttribute('src', imageLinkValue);
   newImage.setAttribute('alt', placeValue);
-  // imagePopupContainer.querySelector('.view-image__item').style.backgroundImage = `url('${imageLinkValue}')`;
-  imagePopupContainer.querySelector('.view-image__caption').textContent = placeValue;
+  newImageCaption.textContent = placeValue;
 }
 
 //открыть модальное окно
