@@ -24,21 +24,10 @@ function closePopup(popup){
   document.removeEventListener('keyup', closePopupByEscClick);
 }
 
-//добавить элементам слушатель открытия модального окна 
-
-function addPopupOpenListener (element){
-  element.forEach(function(item){
-    item.addEventListener('click', function(event){
-      const findPopup = item.closest('.popup');
-      openPopup(findPopup);
-    })
-  })
-}
-
 //добавить элементам слушатель закрытия модального окна 
 
-function addPopupCloseListener (element){
-  element.forEach(function(item){
+function addPopupCloseListener (elements){
+  elements.forEach(function(item){
     item.addEventListener('click', function(event){
       const findPopup = item.closest('.popup');
       closePopup(findPopup);
@@ -48,7 +37,7 @@ function addPopupCloseListener (element){
 
 // закрыть popup кликом на оверлей
 
-function popupValidation () {
+function setOverlayHandlers () {
   const popupList = Array.from(document.querySelectorAll('.popup'));
   popupList.forEach((popupElement) => {
     popupElement.addEventListener('click', (evt) => {
@@ -68,4 +57,4 @@ function closePopupByEscClick (evt) {
   }
 }
 
-export { showPopupImage, openPopup, closePopup, addPopupOpenListener, addPopupCloseListener, popupValidation, closePopupByEscClick }; 
+export { showPopupImage, openPopup, closePopup, addPopupCloseListener, setOverlayHandlers, closePopupByEscClick }; 

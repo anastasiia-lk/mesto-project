@@ -1,7 +1,7 @@
-import { openPopup, showPopupImage } from './modal.js';
+import { openPopup, showPopupImage } from './modal.js'; 
 
-const elements = document.querySelector('.elements');
-const imagePopupContainer = document.querySelector('.popup__container_type_image');
+const elements = document.querySelector('.elements'); 
+const imagePopupContainer = document.querySelector('.popup__container_type_image'); 
 const imagePopup = imagePopupContainer.closest('.popup');
 
 //создать карточку
@@ -40,5 +40,4 @@ function addPlace(element){
   elements.prepend(element); 
 }
 
-export { newPlace, addPlace }; 
-
+export { newPlace, addPlace }

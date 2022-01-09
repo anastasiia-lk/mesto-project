@@ -1,13 +1,17 @@
-import { newPlace, addPlace } from './card.js';
-import { closePopup } from './modal.js';
-
 const editPopupContainer = document.querySelector('.popup__container_type_edit');
-const nameInput = editPopupContainer.querySelector('#person');
-const profile = document.querySelector('.profile');
-const profileName = profile.querySelector('.profile-edit__title');
-const profileJob = profile.querySelector('.profile-edit__subtitle');
-const jobInput = editPopupContainer.querySelector('#profession');
-const addPopupContainer = document.querySelector('.popup__container_type_add');
+
+//открыть модальное окно
+function openPopup(popup){
+  popup.classList.add('popup_opened');
+  document.addEventListener('keyup', closePopupByEscClick);
+}
+
+//закрыть модальное окно
+
+function closePopup(popup){
+  popup.classList.remove('popup_opened');
+  document.removeEventListener('keyup', closePopupByEscClick);
+}
 
 // Обработчик ошибок при заполнении
 // полей формы
@@ -71,43 +75,13 @@ function hasInvalidInput (inputList) {
 
 function toggleButtonState (inputList, buttonElement, validationObject) {
   if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add(validationObject.inactiveButtonClass)
+    buttonElement.classList.add(validationObject.inactiveButtonClass);
+    buttonElement.disabled = true;
   } else {
     buttonElement.classList.remove(validationObject.inactiveButtonClass);
+    buttonElement.disabled = false;
   }
 }
 
-// Обработчик «отправки» формы, хотя пока
-// она никуда отправляться не будет
-
-function formSubmitHandler (evt) {
-  evt.preventDefault();
-
-  const formElement = evt.currentTarget.closest('.form');
-  const findPopup = evt.currentTarget.closest('.popup');
-
-  profileName.textContent = nameInput.value;
-  profileJob.textContent = jobInput.value;
-  formElement.reset();
-  closePopup(findPopup);
-}
-
-// Обработчик «отправки» формы, хотя пока
-// она никуда отправляться не будет
-
-function formSubmitPlaceHandler (evt) {
-  evt.preventDefault();
-
-  const formElement = evt.currentTarget.closest('.form');
-  const findPopup = evt.currentTarget.closest('.popup');
-  const placeInput = addPopupContainer.querySelector('#place').value;
-  const imageLinkInput = addPopupContainer.querySelector('#image-link').value;
-  const card = newPlace(placeInput, imageLinkInput);
-
-  addPlace(card);
-  formElement.reset();
-  closePopup(findPopup);
-}
-
-export { showError, hideError, checkInputValidity, setEventListener, enableFormValidation, hasInvalidInput, toggleButtonState, formSubmitHandler, formSubmitPlaceHandler }; 
+export { showError, hideError, checkInputValidity, setEventListener, enableFormValidation, hasInvalidInput, toggleButtonState }; 
 

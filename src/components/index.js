@@ -1,7 +1,7 @@
 import '../pages/index.css';
+import { addPopupCloseListener, setOverlayHandlers, openPopup } from './modal.js';
+import { enableFormValidation } from './validate.js';
 import { newPlace, addPlace } from './card.js';
-import { addPopupCloseListener, closePopupByEscClick, popupValidation, openPopup } from './modal.js';
-import { enableFormValidation, formSubmitHandler, formSubmitPlaceHandler } from './validate.js';
 
 const initialCards = [
   {
@@ -30,7 +30,7 @@ const initialCards = [
   }
   ];
 
-//нажимаем кнопку редактировать профиль
+// нажимаем кнопку редактировать профиль
 
 const editButton = document.querySelector('.profile__button-edit');
 const editPopupContainer = document.querySelector('.popup__container_type_edit');
@@ -41,23 +41,61 @@ const profile = document.querySelector('.profile');
 const profileName = profile.querySelector('.profile-edit__title');
 const profileJob = profile.querySelector('.profile-edit__subtitle');
 
-//нажимаем кнопку добавить место
+// нажимаем кнопку добавить место
 
 const addButton = document.querySelector('.profile__button-add');
 const addPopupContainer = document.querySelector('.popup__container_type_add');
 const addPopup= addPopupContainer.closest('.popup');
 
-//нажимаем кнопку закрыть
+// нажимаем кнопку закрыть
 
 const closeButtons = document.querySelectorAll('.popup__button-close');
 
-//редактирование информации в профиле
+// редактирование информации в профиле
 
 const formProfileElement = editPopupContainer.querySelector('.form');
 
-//добавляем новое место
+// добавляем новое место
 
 const formPlaceElement = addPopupContainer.querySelector('.form');
+
+// Обработчики форм
+
+const elements = document.querySelector('.elements');
+const imagePopupContainer = document.querySelector('.popup__container_type_image');
+const imagePopup = imagePopupContainer.closest('.popup');
+
+// Обработчик «отправки» формы, хотя пока
+// она никуда отправляться не будет
+
+function formSubmitHandler (evt) {
+  evt.preventDefault();
+
+  const formElement = evt.currentTarget.closest('.form');
+  const findPopup = evt.currentTarget.closest('.popup');
+
+  profileName.textContent = nameInput.value;
+  profileJob.textContent = jobInput.value;
+  formElement.reset();
+  closePopup(findPopup);
+}
+
+// Обработчик «отправки» формы, хотя пока
+// она никуда отправляться не будет
+
+function formSubmitPlaceHandler (evt) {
+  evt.preventDefault();
+
+  const formElement = evt.currentTarget.closest('.form');
+  const findPopup = evt.currentTarget.closest('.popup');
+  const placeInput = addPopupContainer.querySelector('#place').value;
+  const imageLinkInput = addPopupContainer.querySelector('#image-link').value;
+  const card = newPlace(placeInput, imageLinkInput);
+
+  addPlace(card);
+  formElement.reset();
+  closePopup(findPopup);
+}
 
 // передача настроек
 
@@ -72,7 +110,7 @@ enableFormValidation({
 
 // закрыть popup кликом на оверлей
 
-popupValidation();
+setOverlayHandlers();
 
 //нажимаем кнопку редактировать профиль
 
