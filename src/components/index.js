@@ -1,6 +1,6 @@
 import '../pages/index.css';
 import { initialCards } from "./constants.js";
-import { addPopupCloseListener, setOverlayHandlers, openPopup, closePopup } from './modal.js';
+import { addPopupListener, openPopup, closePopup } from './modal.js';
 import { enableFormValidation } from './validate.js';
 import { newPlace, addPlace } from './card.js';
 
@@ -46,11 +46,14 @@ function handleProfileFormSubmit (evt) {
   evt.preventDefault();
 
   const formElement = evt.currentTarget.closest('.form');
+  const buttonElement = formElement.querySelector('.form__button-submit');
   const findPopup = evt.currentTarget.closest('.popup');
 
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
   formElement.reset();
+  buttonElement.disabled = true;
+  buttonElement.classList.add('form__button-submit_inactive');
   closePopup(findPopup);
 }
 
@@ -59,16 +62,18 @@ function handleProfileFormSubmit (evt) {
 
 function handlePlaceFormSubmit (evt) {
   evt.preventDefault();
-  
+
   const formElement = evt.currentTarget.closest('.form');
+  const buttonElement = formElement.querySelector('.form__button-submit');
   const findPopup = evt.currentTarget.closest('.popup');
   const placeInput = addPopupContainer.querySelector('#place').value;
   const imageLinkInput = addPopupContainer.querySelector('#image-link').value;
   const card = newPlace(placeInput, imageLinkInput);
-
+  
   addPlace(card);
   formElement.reset();
-  evt.target.disabled = true;
+  buttonElement.disabled = true;
+  buttonElement.classList.add('form__button-submit_inactive');
   closePopup(findPopup);
 }
 
@@ -83,9 +88,9 @@ enableFormValidation({
   errorClass: 'form__item-error_active'
 });
 
-// закрыть popup кликом на оверлей
+// закрыть popup кликои на оверлей или на крестик
 
-setOverlayHandlers();
+addPopupListener();
 
 //нажимаем кнопку редактировать профиль
 
@@ -100,10 +105,6 @@ editButton.addEventListener('click', function(event){
 addButton.addEventListener('click', function(event){
   openPopup(addPopup);
 });
-
-//нажимаем кнопку закрыть
-
-addPopupCloseListener(closeButtons);
 
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»

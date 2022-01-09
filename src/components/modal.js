@@ -1,6 +1,7 @@
 const imagePopupContainer = document.querySelector('.popup__container_type_image');
 const newImage = imagePopupContainer.querySelector('.view-image__item');
 const newImageCaption = imagePopupContainer.querySelector('.view-image__caption');
+const popups = document.querySelectorAll('.popup');
 
 //показать картинку в popup
 
@@ -24,25 +25,16 @@ function closePopup(popup){
   document.removeEventListener('keyup', closePopupByEscClick);
 }
 
-//добавить элементам слушатель закрытия модального окна 
+// обработчик для popup
+// закрыть popup кликом на оверлей 
+// закрыть popup кликом на крестик
 
-function addPopupCloseListener (elements){
-  elements.forEach(function(item){
-    item.addEventListener('click', function(event){
-      const findPopup = item.closest('.popup');
-      closePopup(findPopup);
-    })
-  })
-}
-
-// закрыть popup кликом на оверлей
-
-function setOverlayHandlers () {
+function addPopupListener () {
   const popupList = Array.from(document.querySelectorAll('.popup'));
-  popupList.forEach((popupElement) => {
-    popupElement.addEventListener('click', (evt) => {
-      if (evt.target === evt.currentTarget) {
-        closePopup(popupElement);
+  popupList.forEach((popup) => {
+    popup.addEventListener ('click', (evt) => {
+      if (evt.target.classList.contains('popup_opened') || evt.target.classList.contains('popup__button-close')){
+        closePopup(popup);
       }
     })
   })
@@ -57,4 +49,4 @@ function closePopupByEscClick (evt) {
   }
 }
 
-export { showPopupImage, openPopup, closePopup, addPopupCloseListener, setOverlayHandlers, closePopupByEscClick }; 
+export { showPopupImage, openPopup, closePopup, addPopupListener, closePopupByEscClick }; 
