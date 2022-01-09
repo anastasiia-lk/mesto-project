@@ -1,5 +1,5 @@
 import '../pages/index.css';
-import { addPopupCloseListener, setOverlayHandlers, openPopup } from './modal.js';
+import { addPopupCloseListener, setOverlayHandlers, openPopup, closePopup } from './modal.js';
 import { enableFormValidation } from './validate.js';
 import { newPlace, addPlace } from './card.js';
 
@@ -68,7 +68,7 @@ const imagePopup = imagePopupContainer.closest('.popup');
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
 
-function formSubmitHandler (evt) {
+function handleProfileFormSubmit (evt) {
   evt.preventDefault();
 
   const formElement = evt.currentTarget.closest('.form');
@@ -83,9 +83,9 @@ function formSubmitHandler (evt) {
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
 
-function formSubmitPlaceHandler (evt) {
+function handlePlaceFormSubmit (evt) {
   evt.preventDefault();
-
+  
   const formElement = evt.currentTarget.closest('.form');
   const findPopup = evt.currentTarget.closest('.popup');
   const placeInput = addPopupContainer.querySelector('#place').value;
@@ -94,6 +94,7 @@ function formSubmitPlaceHandler (evt) {
 
   addPlace(card);
   formElement.reset();
+  evt.target.disabled = true;
   closePopup(findPopup);
 }
 
@@ -133,12 +134,12 @@ addPopupCloseListener(closeButtons);
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
 
-formProfileElement.addEventListener('submit', formSubmitHandler);
+formProfileElement.addEventListener('submit', handleProfileFormSubmit);
 
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
 
-formPlaceElement.addEventListener('submit', formSubmitPlaceHandler);
+formPlaceElement.addEventListener('submit', handlePlaceFormSubmit);
 
 //инициализация страницы
 
