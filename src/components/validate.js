@@ -1,18 +1,3 @@
-const editPopupContainer = document.querySelector('.popup__container_type_edit');
-
-//открыть модальное окно
-function openPopup(popup){
-  popup.classList.add('popup_opened');
-  document.addEventListener('keyup', closePopupByEscClick);
-}
-
-//закрыть модальное окно
-
-function closePopup(popup){
-  popup.classList.remove('popup_opened');
-  document.removeEventListener('keyup', closePopupByEscClick);
-}
-
 // Обработчик ошибок при заполнении
 // полей формы
 

@@ -2,7 +2,7 @@ import '../pages/index.css';
 import { initialCards } from "./constants.js";
 import { addPopupListener, openPopup, closePopup } from './modal.js';
 import { enableFormValidation } from './validate.js';
-import { newPlace, addPlace } from './card.js';
+import { addPlace, newPlace } from './card.js';
 
 // нажимаем кнопку редактировать профиль
 
@@ -20,6 +20,8 @@ const profileJob = profile.querySelector('.profile-edit__subtitle');
 const addButton = document.querySelector('.profile__button-add');
 const addPopupContainer = document.querySelector('.popup__container_type_add');
 const addPopup= addPopupContainer.closest('.popup');
+const placeInput = addPopupContainer.querySelector('#place');
+const imageLinkInput = addPopupContainer.querySelector('#image-link');
 
 // нажимаем кнопку закрыть
 
@@ -27,11 +29,13 @@ const closeButtons = document.querySelectorAll('.popup__button-close');
 
 // редактирование информации в профиле
 
-const formProfileElement = editPopupContainer.querySelector('.form');
+const profilePopup = editPopupContainer.querySelector('.form');
+const profileSubmitButton = profilePopup.querySelector('.form__button-submit');
 
 // добавляем новое место
 
-const formPlaceElement = addPopupContainer.querySelector('.form');
+const placePopup = addPopupContainer.querySelector('.form');
+const placeSubmitButton = placePopup.querySelector('.form__button-submit');
 
 // Обработчики форм
 
@@ -45,16 +49,12 @@ const imagePopup = imagePopupContainer.closest('.popup');
 function handleProfileFormSubmit (evt) {
   evt.preventDefault();
 
-  const formElement = evt.currentTarget.closest('.form');
-  const buttonElement = formElement.querySelector('.form__button-submit');
-  const findPopup = evt.currentTarget.closest('.popup');
-
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
-  formElement.reset();
-  buttonElement.disabled = true;
-  buttonElement.classList.add('form__button-submit_inactive');
-  closePopup(findPopup);
+  profilePopup.reset();
+  profileSubmitButton.disabled = true;
+  profileSubmitButton.classList.add('form__button-submit_inactive');
+  closePopup(editPopup);
 }
 
 // Обработчик «отправки» формы, хотя пока
@@ -63,18 +63,13 @@ function handleProfileFormSubmit (evt) {
 function handlePlaceFormSubmit (evt) {
   evt.preventDefault();
 
-  const formElement = evt.currentTarget.closest('.form');
-  const buttonElement = formElement.querySelector('.form__button-submit');
-  const findPopup = evt.currentTarget.closest('.popup');
-  const placeInput = addPopupContainer.querySelector('#place').value;
-  const imageLinkInput = addPopupContainer.querySelector('#image-link').value;
-  const card = newPlace(placeInput, imageLinkInput);
+  const card = newPlace(placeInput.value, imageLinkInput.value);
   
   addPlace(card);
-  formElement.reset();
-  buttonElement.disabled = true;
-  buttonElement.classList.add('form__button-submit_inactive');
-  closePopup(findPopup);
+  placePopup.reset();
+  placeSubmitButton.disabled = true;
+  placeSubmitButton.classList.add('form__button-submit_inactive');
+  closePopup(addPopup);
 }
 
 // передача настроек
@@ -109,12 +104,12 @@ addButton.addEventListener('click', function(event){
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
 
-formProfileElement.addEventListener('submit', handleProfileFormSubmit);
+profilePopup.addEventListener('submit', handleProfileFormSubmit);
 
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
 
-formPlaceElement.addEventListener('submit', handlePlaceFormSubmit);
+placePopup.addEventListener('submit', handlePlaceFormSubmit);
 
 //инициализация страницы
 
