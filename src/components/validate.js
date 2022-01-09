@@ -1,4 +1,5 @@
 import { newPlace, addPlace } from './card.js';
+import { closePopup } from './modal.js';
 
 const editPopupContainer = document.querySelector('.popup__container_type_edit');
 const nameInput = editPopupContainer.querySelector('#person');
@@ -80,9 +81,15 @@ function toggleButtonState (inputList, buttonElement, validationObject) {
 // она никуда отправляться не будет
 
 function formSubmitHandler (evt) {
-  evt.preventDefault(); 
+  evt.preventDefault();
+
+  const formElement = evt.currentTarget.closest('.form');
+  const findPopup = evt.currentTarget.closest('.popup');
+
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
+  formElement.reset();
+  closePopup(findPopup);
 }
 
 // Обработчик «отправки» формы, хотя пока
@@ -90,11 +97,16 @@ function formSubmitHandler (evt) {
 
 function formSubmitPlaceHandler (evt) {
   evt.preventDefault();
+
+  const formElement = evt.currentTarget.closest('.form');
+  const findPopup = evt.currentTarget.closest('.popup');
   const placeInput = addPopupContainer.querySelector('#place').value;
   const imageLinkInput = addPopupContainer.querySelector('#image-link').value;
   const card = newPlace(placeInput, imageLinkInput);
+
   addPlace(card);
-  formPlaceElement.reset();
+  formElement.reset();
+  closePopup(findPopup);
 }
 
 export { showError, hideError, checkInputValidity, setEventListener, enableFormValidation, hasInvalidInput, toggleButtonState, formSubmitHandler, formSubmitPlaceHandler }; 

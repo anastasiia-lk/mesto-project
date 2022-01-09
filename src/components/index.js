@@ -51,10 +51,6 @@ const addPopup= addPopupContainer.closest('.popup');
 
 const closeButtons = document.querySelectorAll('.popup__button-close');
 
-//нажимаем кнопку сохранить
-
-const submitButtons = document.querySelectorAll('.form__button-submit');
-
 //редактирование информации в профиле
 
 const formProfileElement = editPopupContainer.querySelector('.form');
@@ -78,10 +74,6 @@ enableFormValidation({
 
 popupValidation();
 
-// закрыть popup нажатием клавиши Esc
-
-document.addEventListener('keyup', closePopupByEscClick);
-
 //нажимаем кнопку редактировать профиль
 
 editButton.addEventListener('click', function(event){
@@ -99,10 +91,6 @@ addButton.addEventListener('click', function(event){
 //нажимаем кнопку закрыть
 
 addPopupCloseListener(closeButtons);
-
-//нажимаем кнопку сохранить
-
-addPopupCloseListener(submitButtons);
 
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
