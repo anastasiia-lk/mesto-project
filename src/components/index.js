@@ -93,9 +93,21 @@ function getCards() {
 
 function handleProfileFormSubmit (evt) {
   evt.preventDefault();
-
-  profileName.textContent = nameInput.value;
-  profileJob.textContent = jobInput.value;
+  
+  fetch('https://nomoreparties.co/v1/plus-cohort-5/users/me', {
+    method: 'PATCH',
+    headers: {
+      authorization: '31d8c365-d1c0-426e-b228-1cdaf2cce2be',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      name: nameInput.value,
+      about: jobInput.value
+    })
+  });
+  getUser(); 
+  // profileName.textContent = nameInput.value;
+  // profileJob.textContent = jobInput.value;
   closePopup(editPopup);
 }
 
