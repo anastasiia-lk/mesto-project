@@ -88,8 +88,7 @@ function getCards() {
     console.log(result)
   });
 
-// Обработчик «отправки» формы, хотя пока
-// она никуда отправляться не будет
+// Обработчик «отправки» формы
 
 function handleProfileFormSubmit (evt) {
   evt.preventDefault();
@@ -106,8 +105,6 @@ function handleProfileFormSubmit (evt) {
     })
   });
   getUser(); 
-  // profileName.textContent = nameInput.value;
-  // profileJob.textContent = jobInput.value;
   closePopup(editPopup);
 }
 
@@ -117,9 +114,25 @@ function handleProfileFormSubmit (evt) {
 function handlePlaceFormSubmit (evt) {
   evt.preventDefault();
 
-  const card = newPlace(placeInput.value, imageLinkInput.value);
+  // const card = newPlace(placeInput.value, imageLinkInput.value);
   
-  addPlace(card);
+  // addPlace(card);
+  fetch('https://nomoreparties.co/v1/plus-cohort-5/cards', {
+    method: 'POST',
+    headers: {
+      authorization: '31d8c365-d1c0-426e-b228-1cdaf2cce2be',
+      'Content-Type': 'application/json; charset=UTF-8'
+    },
+    body: JSON.stringify({
+      name: placeInput.value,
+      link: imageLinkInput.value
+    }),
+  })
+    .then(res=>res.json())
+    .then((result)=>{
+      const card = newPlace(result.name, result.link);
+      addPlace(card);
+    });
   addCardForm.reset();
   placeSubmitButton.disabled = true;
   placeSubmitButton.classList.add('form__button-submit_inactive');
