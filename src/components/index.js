@@ -70,7 +70,7 @@ function getCards() {
     .then(res=>res.json())
     .then((result)=>{
       result.forEach(function(item){
-      const card = newPlace(item.name, item.link);
+      const card = newPlace(item.name, item.link, item._id);
       addPlace(card);
       });
     });

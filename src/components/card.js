@@ -5,7 +5,7 @@ const imagePopupContainer = document.querySelector('.popup__container_type_image
 const imagePopup = imagePopupContainer.closest('.popup');
 
 //создать карточку
-function newPlace(placeValue, imageLinkValue) {
+function newPlace(placeValue, imageLinkValue, cardId) {
 
   const placeTemplate = document.querySelector('#place-template').content;
   const placeElement = placeTemplate.querySelector('.card').cloneNode(true);
@@ -24,6 +24,12 @@ placeElement.querySelector('.card__button-trash').addEventListener('click', func
   const eventTarget = evt.target;
   const deleteCard = eventTarget.closest('.card');
   deleteCard.remove();
+  fetch(`https://nomoreparties.co/v1/plus-cohort-5/cards/${cardId}`, {
+    method: 'DELETE',
+    headers: {
+      authorization: '31d8c365-d1c0-426e-b228-1cdaf2cce2be',
+    },
+  })
 });
 
 newViewImage.addEventListener('click', function (evt) {
