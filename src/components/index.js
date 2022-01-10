@@ -113,3 +113,15 @@ initialCards.forEach(function(item){
   const card = newPlace(item.name, item.link);
   addPlace(card);
 });
+
+//тест доступа к серверу проекта
+
+fetch('https://nomoreparties.co/v1/plus-cohort-5/cards', {
+  headers: {
+    authorization: '31d8c365-d1c0-426e-b228-1cdaf2cce2be'
+  }
+})
+  .then(res => res.json())
+  .then((result) => {
+    console.log(result);
+  }); 
