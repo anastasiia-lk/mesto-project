@@ -12,6 +12,7 @@ const editPopup= editPopupContainer.closest('.popup');
 const nameInput = editPopupContainer.querySelector('#person');
 const jobInput = editPopupContainer.querySelector('#profession');
 const profile = document.querySelector('.profile');
+const profileAvatar = profile.querySelector('.profile__avatar');
 const profileName = profile.querySelector('.profile-edit__title');
 const profileJob = profile.querySelector('.profile-edit__subtitle');
 
@@ -42,6 +43,22 @@ const elements = document.querySelector('.elements');
 const imagePopupContainer = document.querySelector('.popup__container_type_image');
 const imagePopup = imagePopupContainer.closest('.popup');
 
+// получить данные о пользователе
+
+function getUser() {
+ fetch('https://nomoreparties.co/v1/plus-cohort-5/users/me', {
+  headers: {
+    authorization: '31d8c365-d1c0-426e-b228-1cdaf2cce2be'
+  }
+})
+  .then(res=>res.json())
+  .then((result)=>{
+    profileAvatar.setAttribute('src', result.avatar);
+    profileName.textContent = result.name;
+    profileJob.textContent = result.about;
+  });
+}
+
 // получить карточки
 
 function getCards() {
@@ -58,6 +75,18 @@ function getCards() {
       });
     });
 }
+
+ // получить данные о пользователе
+ 
+ fetch('https://nomoreparties.co/v1/plus-cohort-5/users/me', {
+  headers: {
+    authorization: '31d8c365-d1c0-426e-b228-1cdaf2cce2be'
+  }
+})
+  .then(res=>res.json())
+  .then((result)=>{
+    console.log(result)
+  });
 
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
@@ -126,18 +155,5 @@ addCardForm.addEventListener('submit', handlePlaceFormSubmit);
 
 //инициализация страницы
 
+getUser();
 getCards();
-
-// тест доступа к серверу проекта
-
- // получить данные о пользователе
- 
- fetch('https://nomoreparties.co/v1/plus-cohort-5/users/me', {
-  headers: {
-    authorization: '31d8c365-d1c0-426e-b228-1cdaf2cce2be'
-  }
-})
-  .then(res=>res.json())
-  .then((result)=>{
-    console.log(result)
-  });
