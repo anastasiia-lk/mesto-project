@@ -1,5 +1,5 @@
 import '../pages/index.css';
-import { initialCards } from "./constants.js";
+// import { initialCards } from "./constants.js";
 import { addPopupListener, openPopup, closePopup } from './modal.js';
 import { enableFormValidation } from './validate.js';
 import { addPlace, newPlace } from './card.js';
@@ -41,6 +41,23 @@ const placeSubmitButton = addCardForm.querySelector('.form__button-submit');
 const elements = document.querySelector('.elements');
 const imagePopupContainer = document.querySelector('.popup__container_type_image');
 const imagePopup = imagePopupContainer.closest('.popup');
+
+// получить карточки
+
+function getCards() {
+  fetch('https://nomoreparties.co/v1/plus-cohort-5/cards', {
+    headers: {
+      authorization: '31d8c365-d1c0-426e-b228-1cdaf2cce2be'
+    }
+  })
+    .then(res=>res.json())
+    .then((result)=>{
+      result.forEach(function(item){
+      const card = newPlace(item.name, item.link);
+      addPlace(card);
+      });
+    });
+}
 
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
@@ -109,19 +126,18 @@ addCardForm.addEventListener('submit', handlePlaceFormSubmit);
 
 //инициализация страницы
 
-initialCards.forEach(function(item){
-  const card = newPlace(item.name, item.link);
-  addPlace(card);
-});
+getCards();
 
-//тест доступа к серверу проекта
+// тест доступа к серверу проекта
 
-fetch('https://nomoreparties.co/v1/plus-cohort-5/cards', {
+ // получить данные о пользователе
+ 
+ fetch('https://nomoreparties.co/v1/plus-cohort-5/users/me', {
   headers: {
     authorization: '31d8c365-d1c0-426e-b228-1cdaf2cce2be'
   }
 })
-  .then(res => res.json())
-  .then((result) => {
-    console.log(result);
-  }); 
+  .then(res=>res.json())
+  .then((result)=>{
+    console.log(result)
+  });
