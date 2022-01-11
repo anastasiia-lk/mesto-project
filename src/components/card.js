@@ -23,6 +23,7 @@ function newPlace(item, userId) {
   
   const newViewImage = placeElement.querySelector('.card__image');
   const trashBtn = placeElement.querySelector('.card__button-trash');
+  const likesCounter = placeElement.querySelector('.like-block__caption');
   
   newViewImage.setAttribute('src', item.link);
   newViewImage.setAttribute('alt', item.name);
@@ -30,6 +31,7 @@ function newPlace(item, userId) {
   if (item.owner._id === userId) {
     trashBtn.classList.add('card__button-trash_created');
   }
+  likesCounter.textContent = item.likes.length;
   placeElement.querySelector('.card__button-like').addEventListener('click', function (evt) {
   const eventTarget = evt.target;
   eventTarget.classList.toggle('active');
