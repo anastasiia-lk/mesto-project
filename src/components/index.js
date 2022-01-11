@@ -43,50 +43,81 @@ const elements = document.querySelector('.elements');
 const imagePopupContainer = document.querySelector('.popup__container_type_image');
 const imagePopup = imagePopupContainer.closest('.popup');
 
-// получить данные о пользователе
+// данные о пользователе
+
+let currentUser = '';
 
 function getUser() {
- fetch('https://nomoreparties.co/v1/plus-cohort-5/users/me', {
-  headers: {
-    authorization: '31d8c365-d1c0-426e-b228-1cdaf2cce2be'
-  }
-})
-  .then(res=>res.json())
-  .then((result)=>{
-    profileAvatar.setAttribute('src', result.avatar);
-    profileName.textContent = result.name;
-    profileJob.textContent = result.about;
-  });
-}
-
-// получить карточки
-
-function getCards() {
-  fetch('https://nomoreparties.co/v1/plus-cohort-5/cards', {
+  return fetch('https://nomoreparties.co/v1/plus-cohort-5/users/me', {
     headers: {
       authorization: '31d8c365-d1c0-426e-b228-1cdaf2cce2be'
     }
   })
+}
+
+function showUser () {
+  getUser()
+    .then(res=>res.json())
+    .then((result)=>{
+      profileAvatar.setAttribute('src', result.avatar);
+      profileName.textContent = result.name;
+      profileJob.textContent = result.about;
+      currentUser = result._id;
+  });  
+}
+
+// карточки
+
+function getCards() {
+  return fetch('https://nomoreparties.co/v1/plus-cohort-5/cards', {
+    headers: {
+      authorization: '31d8c365-d1c0-426e-b228-1cdaf2cce2be'
+    }
+  })
+}
+
+function showCards () {
+  getCards()
     .then(res=>res.json())
     .then((result)=>{
       result.forEach(function(item){
-      const card = newPlace(item.name, item.link, item._id);
+      const card = newPlace(item, currentUser);
       addPlace(card);
-      });
     });
+  }); 
 }
 
- // получить данные о пользователе
- 
- fetch('https://nomoreparties.co/v1/plus-cohort-5/users/me', {
-  headers: {
-    authorization: '31d8c365-d1c0-426e-b228-1cdaf2cce2be'
-  }
-})
-  .then(res=>res.json())
-  .then((result)=>{
-    console.log(result)
-  });
+// добавить карточку
+
+function postCard () {
+  return fetch('https://nomoreparties.co/v1/plus-cohort-5/cards', {
+    method: 'POST',
+    headers: {
+      authorization: '31d8c365-d1c0-426e-b228-1cdaf2cce2be',
+      'Content-Type': 'application/json; charset=UTF-8'
+    },
+    body: JSON.stringify({
+      name: placeInput.value,
+      link: imageLinkInput.value
+    })
+  })
+}
+
+function showNewCard () {
+  postCard ()
+    .then(res=>res.json())
+    .then((result)=>{
+      const card = newPlace(result, currentUser);
+      addPlace(card);
+    });  
+}
+
+// Инициализировать страницу
+
+function initPage() {
+  showUser();
+  showCards();
+}
 
 // Обработчик «отправки» формы
 
@@ -113,26 +144,7 @@ function handleProfileFormSubmit (evt) {
 
 function handlePlaceFormSubmit (evt) {
   evt.preventDefault();
-
-  // const card = newPlace(placeInput.value, imageLinkInput.value);
-  
-  // addPlace(card);
-  fetch('https://nomoreparties.co/v1/plus-cohort-5/cards', {
-    method: 'POST',
-    headers: {
-      authorization: '31d8c365-d1c0-426e-b228-1cdaf2cce2be',
-      'Content-Type': 'application/json; charset=UTF-8'
-    },
-    body: JSON.stringify({
-      name: placeInput.value,
-      link: imageLinkInput.value
-    }),
-  })
-    .then(res=>res.json())
-    .then((result)=>{
-      const card = newPlace(result.name, result.link);
-      addPlace(card);
-    });
+  showNewCard ();
   addCardForm.reset();
   placeSubmitButton.disabled = true;
   placeSubmitButton.classList.add('form__button-submit_inactive');
@@ -180,5 +192,4 @@ addCardForm.addEventListener('submit', handlePlaceFormSubmit);
 
 //инициализация страницы
 
-getUser();
-getCards();
+initPage();

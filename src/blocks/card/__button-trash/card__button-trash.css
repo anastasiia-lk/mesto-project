@@ -11,6 +11,8 @@
   top: 18px;
   right: 15px;
   filter: drop-shadow(0 0 0.75rem rgb(173, 173, 173));
+  opacity: 0;
+  visibility: hidden;
 }
 
 .card__button-trash:hover {
