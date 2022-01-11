@@ -15,6 +15,28 @@ function deleteCard (id) {
   })
 }
 
+// поставить лайк
+
+function addLike (id) {
+  return fetch(`https://nomoreparties.co/v1/plus-cohort-5/cards/likes/${id}`, {
+    method: 'PUT',
+    headers: {
+      authorization: '31d8c365-d1c0-426e-b228-1cdaf2cce2be',
+    },
+  })
+}
+
+// удалить лайк
+
+function deleteLike (id) {
+  return fetch(`https://nomoreparties.co/v1/plus-cohort-5/cards/likes/${id}`, {
+    method: 'DELETE',
+    headers: {
+      authorization: '31d8c365-d1c0-426e-b228-1cdaf2cce2be',
+    },
+  })
+}
+
 //создать карточку
 function newPlace(item, userId) {
 
@@ -23,18 +45,42 @@ function newPlace(item, userId) {
   
   const newViewImage = placeElement.querySelector('.card__image');
   const trashBtn = placeElement.querySelector('.card__button-trash');
+  const likeBtn = placeElement.querySelector('.card__button-like');
   const likesCounter = placeElement.querySelector('.like-block__caption');
+
+  const userLike = item.likes.some(function (el) { return el._id === userId; });
   
   newViewImage.setAttribute('src', item.link);
   newViewImage.setAttribute('alt', item.name);
   placeElement.querySelector('.card__caption-name').textContent =item.name;
+  
   if (item.owner._id === userId) {
     trashBtn.classList.add('card__button-trash_created');
   }
+
+  if (userLike) {
+    likeBtn.classList.add('active')  
+  }
+
   likesCounter.textContent = item.likes.length;
+
   placeElement.querySelector('.card__button-like').addEventListener('click', function (evt) {
   const eventTarget = evt.target;
-  eventTarget.classList.toggle('active');
+  if (eventTarget.getAttribute('class') === "card__button-like") {
+    addLike (item._id)
+      .then(res=>res.json())
+      .then((result)=>{
+        likesCounter.textContent = result.likes.length;
+        eventTarget.classList.add('active')
+      })
+  } else {
+    deleteLike (item._id)
+      .then(res=>res.json())
+      .then((result)=>{
+        likesCounter.textContent = result.likes.length;
+        eventTarget.classList.remove('active')
+      })
+  }
 });
 
 placeElement.querySelector('.card__button-trash').addEventListener('click', function (evt) {
