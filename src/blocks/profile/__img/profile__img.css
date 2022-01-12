@@ -1,10 +1,10 @@
-.avatar__img {
+.profile__img {
   border-radius: 50%;
   width: 120px;
   height: 120px;
 }
 
-.avatar__img:hover {
+.profile__img:hover {
   opacity: 0.3;
   cursor: pointer;
 }

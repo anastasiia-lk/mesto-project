@@ -1,4 +1,4 @@
-.avatar__edit {
+.profile__edit-label {
   position: relative;
   width: 26px;
   height: 26px;
@@ -8,14 +8,6 @@
   left: 47px;
 }
 
-.avatar__edit:hover {
-  cursor: pointer;
-}
-
-.avatar__edit_show {
-  visibility: visible;
-}
-
-.avatar__edit_show:hover {
+.profile__edit-label:hover {
   cursor: pointer;
 }

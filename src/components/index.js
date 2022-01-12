@@ -12,10 +12,17 @@ const editPopup= editPopupContainer.closest('.popup');
 const nameInput = editPopupContainer.querySelector('#person');
 const jobInput = editPopupContainer.querySelector('#profession');
 const profile = document.querySelector('.profile');
-const profileAvatar = profile.querySelector('.avatar__img');
+const profileAvatar = profile.querySelector('.profile__img');
 const profileName = profile.querySelector('.profile-edit__title');
 const profileJob = profile.querySelector('.profile-edit__subtitle');
-const profileEdit = document.querySelector('.avatar__edit');
+const profileEdit = document.querySelector('.profile__edit-label');
+
+// изменить аватар
+
+const avatarPopupContainer = document.querySelector('.popup__container_type_avatar');
+const avatarPopup = avatarPopupContainer.closest('.popup');
+const avatarLink = avatarPopupContainer.querySelector('#avatar-link');
+const avatarForm = avatarPopupContainer .querySelector('.form');
 
 // нажимаем кнопку добавить место
 
@@ -116,14 +123,22 @@ function showNewCard () {
 // обновить аватар
 
 function showEdit (evt) {
-  profileEdit.classList.add('avatar__edit_show');
+  profileEdit.classList.add('profile__edit-label_show');
 }
 
 function hideEdit (evt) {
-  profileEdit.classList.remove('avatar__edit_show');
+  profileEdit.classList.remove('profile__edit-label_show');
 }
 
-function updateAvatar() {
+function addHoverAvatar (evt) {
+  profileAvatar.classList.add('profile__img:hover')
+}
+
+function hideHoverAvatar (evt) {
+  profileAvatar.classList.remove('profile__img:hover')
+}
+
+function updateAvatar(link) {
   return fetch('https://nomoreparties.co/v1/plus-cohort-5/users/me/avatar', {
     method: 'PATCH',
     headers: {
@@ -131,9 +146,18 @@ function updateAvatar() {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      avatar: `https://cdn.ananasposter.ru/image/cache/catalog/poster/film/82/13153-1000x830.jpg`,
+      avatar: `${link}`,
     })
   });
+}
+
+function showUpdatedAvatar(link) {
+  updateAvatar(link)
+  .then(res=>res.json())
+  .then((result)=>{
+    profileAvatar.setAttribute('src', avatarLink.value);
+    avatarLink.value = "";
+  }); 
 }
 
 // Инициализировать страницу
@@ -176,6 +200,12 @@ function handlePlaceFormSubmit (evt) {
   closePopup(addPopup);
 }
 
+function handleAvatarFormSubmit (evt) {
+  evt.preventDefault();
+  showUpdatedAvatar(avatarLink.value);
+  closePopup(avatarPopup);
+}
+
 // передача настроек
 
 enableFormValidation({
@@ -195,6 +225,13 @@ addPopupListener();
 
 profileAvatar.addEventListener('mouseover', showEdit);
 profileAvatar.addEventListener('mouseout', hideEdit);
+
+profileAvatar.addEventListener('click', function(event){
+  openPopup(avatarPopup);
+});
+
+profileEdit.addEventListener('mouseover', addHoverAvatar);
+profileEdit.addEventListener('mouseout', hideHoverAvatar);
 
 //нажимаем кнопку редактировать профиль
 
@@ -219,6 +256,8 @@ profileForm.addEventListener('submit', handleProfileFormSubmit);
 // он будет следить за событием “submit” - «отправка»
 
 addCardForm.addEventListener('submit', handlePlaceFormSubmit);
+
+avatarForm.addEventListener('submit', handleAvatarFormSubmit);
 
 //инициализация страницы
 

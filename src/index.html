@@ -16,13 +16,10 @@
   </header>
   <main class="content">
     <section class="profile page__profile">
-      <img class="avatar__edit" alt="Редактирование" src="<%=require('./images/edit.svg')%>">
+      <img class="profile__edit-label" alt="Редактирование" src="<%=require('./images/edit.svg')%>">
       <div class="profile__wrapper">
         <div class="profile__info">
-          <!-- <div class="avatar"> -->
-          <!-- <img class="avatar__edit" alt="Редактирование" src="<%=require('./images/edit.svg')%>"> -->
-          <img class="avatar__img" alt="Аватар" src="<%=require('./images/avatar.png')%>">
-          <!-- </div> -->
+          <img class="profile__img" alt="Аватар" src="<%=require('./images/avatar.png')%>">
           <div class="profile-edit">
             <div class="profile-edit__person">
               <h1 class="profile-edit__title">Жак-Ив Кусто</h1>
@@ -73,6 +70,21 @@
           <input type="url" class="form__item" id="image-link" name="image-link" placeholder="Ссылка на картинку"
             required>
           <span class="form__item-error image-link-error"></span>
+        </fieldset>
+        <button class="form__button-submit" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </div>
+  <div class="popup">
+    <div class="popup__container popup__container_type_avatar">
+      <button class="popup__button-close new-place" type="button"></button>
+      <form name="avatar-form" class="form" novalidate>
+        <h2 class="form__heading">Обновить аватар</h2>
+        <fieldset class="form__input-container">
+          <label for="avatar-link" class="form__label"></label>
+          <input type="url" class="form__item" id="avatar-link" name="avatar-link" placeholder="Ссылка на картинку"
+            required>
+          <span class="form__item-error avatar-link-error"></span>
         </fieldset>
         <button class="form__button-submit" type="submit">Сохранить</button>
       </form>
