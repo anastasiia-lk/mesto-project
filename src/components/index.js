@@ -184,7 +184,7 @@ function handleProfileFormSubmit (evt) {
       about: jobInput.value
     })
   });
-  getUser(); 
+  showUser(); 
   closePopup(editPopup);
 }
 
