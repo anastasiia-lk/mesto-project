@@ -1,0 +1,7 @@
+.avatar__edit {
+  position: relative;
+  top: 47px;
+  width: 26px;
+  height: 26px;
+  z-index: 1;
+}

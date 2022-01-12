@@ -12,7 +12,7 @@ const editPopup= editPopupContainer.closest('.popup');
 const nameInput = editPopupContainer.querySelector('#person');
 const jobInput = editPopupContainer.querySelector('#profession');
 const profile = document.querySelector('.profile');
-const profileAvatar = profile.querySelector('.profile__avatar');
+const profileAvatar = profile.querySelector('.avatar__img');
 const profileName = profile.querySelector('.profile-edit__title');
 const profileJob = profile.querySelector('.profile-edit__subtitle');
 
@@ -110,6 +110,21 @@ function showNewCard () {
       const card = newPlace(result, currentUser);
       addPlace(card);
     });  
+}
+
+// обновить аватар
+
+function updateAvatar() {
+  return fetch('https://nomoreparties.co/v1/plus-cohort-5/users/me/avatar', {
+    method: 'PATCH',
+    headers: {
+      authorization: '31d8c365-d1c0-426e-b228-1cdaf2cce2be',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      avatar: `https://phonoteka.org/uploads/posts/2021-05/1621348026_32-phonoteka_org-p-nyusha-fon-smeshariki-34.jpg`,
+    })
+  });
 }
 
 // Инициализировать страницу
