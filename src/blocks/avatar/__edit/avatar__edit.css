@@ -4,4 +4,13 @@
   width: 26px;
   height: 26px;
   z-index: 1;
+  visibility: hidden;
+}
+
+.avatar__edit:hover {
+  cursor: pointer;
+}
+
+.avatar__edit_show {
+  visibility: visible;
 }

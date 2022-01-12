@@ -15,6 +15,7 @@ const profile = document.querySelector('.profile');
 const profileAvatar = profile.querySelector('.avatar__img');
 const profileName = profile.querySelector('.profile-edit__title');
 const profileJob = profile.querySelector('.profile-edit__subtitle');
+const profileEdit = document.querySelector('.avatar__edit');
 
 // нажимаем кнопку добавить место
 
@@ -114,6 +115,14 @@ function showNewCard () {
 
 // обновить аватар
 
+function showEdit (evt) {
+  profileEdit.classList.add('avatar__edit_show');
+}
+
+function hideEdit (evt) {
+  profileEdit.classList.remove('avatar__edit_show');
+}
+
 function updateAvatar() {
   return fetch('https://nomoreparties.co/v1/plus-cohort-5/users/me/avatar', {
     method: 'PATCH',
@@ -181,6 +190,11 @@ enableFormValidation({
 
 addPopupListener();
 
+// показать значок редактирования аватара
+
+profileAvatar.addEventListener('mouseover', showEdit);
+profileAvatar.addEventListener('mouseout', hideEdit);
+
 //нажимаем кнопку редактировать профиль
 
 editButton.addEventListener('click', function(event){
@@ -208,3 +222,4 @@ addCardForm.addEventListener('submit', handlePlaceFormSubmit);
 //инициализация страницы
 
 initPage();
+

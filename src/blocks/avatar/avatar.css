@@ -6,3 +6,7 @@
   height: 120px;
   z-index: 10;
 }
+
+.avatar:hover {
+  cursor: pointer;
+}
