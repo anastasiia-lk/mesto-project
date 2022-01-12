@@ -16,20 +16,23 @@
   </header>
   <main class="content">
     <section class="profile page__profile">
-      <div class="profile__info">
-        <div class="avatar">
-          <img class="avatar__edit" alt="Редактирование" src="<%=require('./images/edit.svg')%>">
+      <img class="avatar__edit" alt="Редактирование" src="<%=require('./images/edit.svg')%>">
+      <div class="profile__wrapper">
+        <div class="profile__info">
+          <!-- <div class="avatar"> -->
+          <!-- <img class="avatar__edit" alt="Редактирование" src="<%=require('./images/edit.svg')%>"> -->
           <img class="avatar__img" alt="Аватар" src="<%=require('./images/avatar.png')%>">
-        </div>
-        <div class="profile-edit">
-          <div class="profile-edit__person">
-            <h1 class="profile-edit__title">Жак-Ив Кусто</h1>
-            <button class="profile__button-edit" type="button"></button>
+          <!-- </div> -->
+          <div class="profile-edit">
+            <div class="profile-edit__person">
+              <h1 class="profile-edit__title">Жак-Ив Кусто</h1>
+              <button class="profile__button-edit" type="button"></button>
+            </div>
+            <p class="profile-edit__subtitle">Исследователь океана</p>
           </div>
-          <p class="profile-edit__subtitle">Исследователь океана</p>
         </div>
+        <button class="profile__button-add" type="button"></button>
       </div>
-      <button class="profile__button-add" type="button"></button>
     </section>
     <section class="elements page__elements" aria-label="elements-label">
     </section>

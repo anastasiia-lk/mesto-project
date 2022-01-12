@@ -1,10 +1,11 @@
 .avatar__edit {
   position: relative;
-  top: 47px;
   width: 26px;
   height: 26px;
   z-index: 1;
   visibility: hidden;
+  top: 47px;
+  left: 47px;
 }
 
 .avatar__edit:hover {
@@ -13,4 +14,8 @@
 
 .avatar__edit_show {
   visibility: visible;
+}
+
+.avatar__edit_show:hover {
+  cursor: pointer;
 }

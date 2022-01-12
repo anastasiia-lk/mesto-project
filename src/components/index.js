@@ -131,7 +131,7 @@ function updateAvatar() {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      avatar: `https://phonoteka.org/uploads/posts/2021-05/1621348026_32-phonoteka_org-p-nyusha-fon-smeshariki-34.jpg`,
+      avatar: `https://cdn.ananasposter.ru/image/cache/catalog/poster/film/82/13153-1000x830.jpg`,
     })
   });
 }
@@ -139,6 +139,7 @@ function updateAvatar() {
 // Инициализировать страницу
 
 function initPage() {
+  // updateAvatar();
   showUser();
   showCards();
 }
