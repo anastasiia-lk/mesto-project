@@ -4,6 +4,9 @@ import { addPopupListener, openPopup, closePopup } from './modal.js';
 import { enableFormValidation } from './validate.js';
 import { addPlace, newPlace } from './card.js';
 
+const savingStatus = "Сохранение...";
+const saveStatus = "Сохранить";
+
 // нажимаем кнопку редактировать профиль
 
 const editButton = document.querySelector('.profile__button-edit');
@@ -23,6 +26,7 @@ const avatarPopupContainer = document.querySelector('.popup__container_type_avat
 const avatarPopup = avatarPopupContainer.closest('.popup');
 const avatarLink = avatarPopupContainer.querySelector('#avatar-link');
 const avatarForm = avatarPopupContainer .querySelector('.form');
+const avatarSubmitButton = avatarForm.querySelector('.form__button-submit');
 
 // нажимаем кнопку добавить место
 
@@ -39,6 +43,7 @@ const closeButtons = document.querySelectorAll('.popup__button-close');
 // редактирование информации в профиле
 
 const profileForm = editPopupContainer.querySelector('.form');
+const profileSubmitButton = editPopupContainer.querySelector('.form__button-submit');
 
 // добавляем новое место
 
@@ -71,7 +76,7 @@ function showUser () {
       profileName.textContent = result.name;
       profileJob.textContent = result.about;
       currentUser = result._id;
-  });  
+    })
 }
 
 // карточки
@@ -151,6 +156,20 @@ function updateAvatar(link) {
   });
 }
 
+function updateUser() {
+  return fetch('https://nomoreparties.co/v1/plus-cohort-5/users/me', {
+    method: 'PATCH',
+    headers: {
+      authorization: '31d8c365-d1c0-426e-b228-1cdaf2cce2be',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      name: nameInput.value,
+      about: jobInput.value
+    })
+  });  
+}
+
 function showUpdatedAvatar(link) {
   updateAvatar(link)
   .then(res=>res.json())
@@ -172,20 +191,17 @@ function initPage() {
 
 function handleProfileFormSubmit (evt) {
   evt.preventDefault();
-  
-  fetch('https://nomoreparties.co/v1/plus-cohort-5/users/me', {
-    method: 'PATCH',
-    headers: {
-      authorization: '31d8c365-d1c0-426e-b228-1cdaf2cce2be',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      name: nameInput.value,
-      about: jobInput.value
+  profileSubmitButton.textContent = savingStatus;
+  updateUser()
+    .then(res=>res.json())
+    .then((result)=>{
+      profileName.textContent = result.name;
+      profileJob.textContent = result.about;
     })
-  });
-  showUser(); 
-  closePopup(editPopup);
+    .finally((res) => {
+      profileSubmitButton.textContent = saveStatus;
+      closePopup(editPopup);
+    })
 }
 
 // Обработчик «отправки» формы, хотя пока
@@ -193,17 +209,35 @@ function handleProfileFormSubmit (evt) {
 
 function handlePlaceFormSubmit (evt) {
   evt.preventDefault();
-  showNewCard ();
-  addCardForm.reset();
-  placeSubmitButton.disabled = true;
-  placeSubmitButton.classList.add('form__button-submit_inactive');
-  closePopup(addPopup);
+  placeSubmitButton.textContent = savingStatus;
+  postCard ()
+    .then(res=>res.json())
+    .then((result)=>{
+      const card = newPlace(result, currentUser);
+      addPlace(card);
+    })
+    .finally((res) => {
+      addCardForm.reset();
+      placeSubmitButton.disabled = true;
+      placeSubmitButton.classList.add('form__button-submit_inactive');
+      placeSubmitButton.textContent = saveStatus;
+      closePopup(addPopup);
+    })
 }
 
 function handleAvatarFormSubmit (evt) {
   evt.preventDefault();
-  showUpdatedAvatar(avatarLink.value);
-  closePopup(avatarPopup);
+  avatarSubmitButton.textContent = savingStatus;
+  updateAvatar(avatarLink.value)
+    .then(res=>res.json())
+    .then((result)=>{
+      profileAvatar.setAttribute('src', avatarLink.value);
+      avatarLink.value = "";
+    })
+    .finally((res) => {
+      avatarSubmitButton.textContent = saveStatus;
+      closePopup(avatarPopup);
+    })
 }
 
 // передача настроек
@@ -262,4 +296,3 @@ avatarForm.addEventListener('submit', handleAvatarFormSubmit);
 //инициализация страницы
 
 initPage();
-
