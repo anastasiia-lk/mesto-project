@@ -1,24 +1,24 @@
-// get user
-
-const configGetUser = {
-  baseUrl: 'https://nomoreparties.co/v1/plus-cohort-5/users/me',
+const config = {
+  baseUrl: 'https://nomoreparties.co/v1/plus-cohort-5',
   headers: {
-    authorization: '31d8c365-d1c0-426e-b228-1cdaf2cce2be'
+    authorization: '31d8c365-d1c0-426e-b228-1cdaf2cce2be',
   }
 }
+// get user
 
 export const getUser = () => {
-  return fetch(configGetUser.baseUrl, configGetUser)
+  return fetch(`${config.baseUrl}/users/me`, {
+    headers: config.headers
+  })
 }
 
 // update user
 
 const configUpdateUser = (name, job) => {
   return {
-    baseUrl: 'https://nomoreparties.co/v1/plus-cohort-5/users/me',
     method: 'PATCH',
     headers: {
-      authorization: '31d8c365-d1c0-426e-b228-1cdaf2cce2be',
+      authorization: config.headers.authorization,
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
@@ -29,17 +29,16 @@ const configUpdateUser = (name, job) => {
 }
 
 export const updateUser = (name, job) => {
-  return fetch(configUpdateUser(name, job).baseUrl, configUpdateUser(name, job))
+  return fetch(`${config.baseUrl}/users/me`, configUpdateUser(name, job))
 }
 
 // update avatar
 
 const configUpdateAvatar = (link) => {
   return {
-    baseUrl: 'https://nomoreparties.co/v1/plus-cohort-5/users/me/avatar',
     method: 'PATCH',
     headers: {
-      authorization: '31d8c365-d1c0-426e-b228-1cdaf2cce2be',
+      authorization: config.headers.authorization,
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
@@ -49,30 +48,24 @@ const configUpdateAvatar = (link) => {
 }
 
 export const updateAvatar = (link) => {
-  return fetch(configUpdateAvatar(link).baseUrl, configUpdateUser(link))
+  return fetch(`${config.baseUrl}/users/me/avatar`, configUpdateAvatar(link))
 }
 
 // get cards
 
-const configGetCards = {
-  baseUrl: 'https://nomoreparties.co/v1/plus-cohort-5/cards',
-  headers: {
-    authorization: '31d8c365-d1c0-426e-b228-1cdaf2cce2be'
-  }
-}
-
 export const getCards = () => {
-  return fetch(configGetCards.baseUrl, configGetCards)
+  return fetch(`${config.baseUrl}/cards`, {
+    headers: config.headers
+  })
 }
 
 // post cards
 
 const configPostCard = (name, link) => {
   return {
-    baseUrl: 'https://nomoreparties.co/v1/plus-cohort-5/cards',
     method: 'POST',
     headers: {
-      authorization: '31d8c365-d1c0-426e-b228-1cdaf2cce2be',
+      authorization: config.headers.authorization,
       'Content-Type': 'application/json; charset=UTF-8'
     },
     body: JSON.stringify({
@@ -83,55 +76,40 @@ const configPostCard = (name, link) => {
 }
 
 export const postCard = (name, link) => {
-  return fetch(configPostCard(name, link).baseUrl, configPostCard(name, link))
+  return fetch(`${config.baseUrl}/cards`, configPostCard(name, link))
 }
 
 //delete card
 
-const configDeleteCard = (id) => {
-  return {
-    baseUrl: `https://nomoreparties.co/v1/plus-cohort-5/cards/${id}`,
+const configDeleteCard = {
     method: 'DELETE',
-    headers: {
-      authorization: '31d8c365-d1c0-426e-b228-1cdaf2cce2be',
-    },
-  }
+    headers: config.headers,
 }
 
 export const deleteCard = (id) => {
-  return fetch(configDeleteCard(id).baseUrl, configDeleteCard(id))
+  return fetch(`${config.baseUrl}/cards/${id}`, configDeleteCard)
 }
 
 //add like
 
-const configAddLike = (id) => {
-  return {
-    baseUrl: `https://nomoreparties.co/v1/plus-cohort-5/cards/likes/${id}`,
+const configAddLike = {
     method: 'PUT',
-    headers: {
-      authorization: '31d8c365-d1c0-426e-b228-1cdaf2cce2be',
-    },
-  }
+    headers: config.headers,
 }
 
 export const addLike = (id) => {
-  return fetch(configAddLike(id).baseUrl, configAddLike(id))
+  return fetch(`${config.baseUrl}/cards/likes/${id}`, configAddLike)
 }
 
 //delete like
 
-const configDeleteLike = (id) => {
-  return {
-    baseUrl: `https://nomoreparties.co/v1/plus-cohort-5/cards/likes/${id}`,
+const configDeleteLike = {
     method: 'DELETE',
-    headers: {
-      authorization: '31d8c365-d1c0-426e-b228-1cdaf2cce2be',
-    },
-  }
+    headers: config.headers,
 }
 
 export const deleteLike = (id) => {
-  return fetch(configDeleteLike(id).baseUrl, configDeleteLike(id))
+  return fetch(`${config.baseUrl}/cards/likes/${id}`, configDeleteLike)
 }
 
 

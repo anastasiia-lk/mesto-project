@@ -37,14 +37,22 @@ function newPlace(item, userId) {
   const eventTarget = evt.target;
   if (eventTarget.getAttribute('class') === "card__button-like") {
     addLike (item._id)
-      .then(res=>res.json())
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
+      })
       .then((result)=>{
         likesCounter.textContent = result.likes.length;
         eventTarget.classList.add('active')
       })
   } else {
     deleteLike (item._id)
-      .then(res=>res.json())
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
+      })
       .then((result)=>{
         likesCounter.textContent = result.likes.length;
         eventTarget.classList.remove('active')
