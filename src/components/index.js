@@ -67,12 +67,16 @@ function showUser () {
       if (res.ok) {
         return res.json();
       }
+      return Promise.reject(res.status)
     })
     .then((result)=>{
       profileAvatar.setAttribute('src', result.avatar);
       profileName.textContent = result.name;
       profileJob.textContent = result.about;
       currentUser = result._id;
+    })
+    .catch((err) => {
+      console.log(err);
     })
 }
 
@@ -84,13 +88,17 @@ function showCards () {
       if (res.ok) {
         return res.json();
       }
+      return Promise.reject(res.status)
     })
     .then((result)=>{
       result.forEach(function(item){
       const card = newPlace(item, currentUser);
       addPlace(card);
-    });
-  }); 
+      })
+    })
+    .catch((err) => {
+      console.log(err)
+    }); 
 }
 
 // обновить аватар
@@ -128,10 +136,14 @@ function handleProfileFormSubmit (evt) {
       if (res.ok) {
         return res.json();
       }
+      return Promise.reject(res.status)
     })
     .then((result)=>{
       profileName.textContent = result.name;
       profileJob.textContent = result.about;
+    })
+    .catch((err) => {
+      console.log(err)
     })
     .finally((res) => {
       profileSubmitButton.textContent = saveStatus;
@@ -150,10 +162,14 @@ function handlePlaceFormSubmit (evt) {
       if (res.ok) {
         return res.json();
       }
+      return Promise.reject(res.status)
     })
     .then((result)=>{
       const card = newPlace(result, currentUser);
       addPlace(card);
+    })
+    .catch((err) => {
+      console.log(err)
     })
     .finally((res) => {
       addCardForm.reset();
@@ -172,10 +188,14 @@ function handleAvatarFormSubmit (evt) {
       if (res.ok) {
         return res.json();
       }
+      return Promise.reject(res.status)
     })
     .then((result)=>{
       profileAvatar.setAttribute('src', avatarLink.value);
       avatarLink.value = "";
+    })
+    .catch((err) => {
+      console.log(err)
     })
     .finally((res) => {
       avatarSubmitButton.textContent = saveStatus;

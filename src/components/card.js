@@ -41,22 +41,30 @@ function newPlace(item, userId) {
         if (res.ok) {
           return res.json();
         }
+        return Promise.reject(res.status)
       })
       .then((result)=>{
         likesCounter.textContent = result.likes.length;
         eventTarget.classList.add('active')
       })
+      .catch((err) => {
+        console.log(err)
+      }); 
   } else {
     deleteLike (item._id)
       .then(res => {
         if (res.ok) {
           return res.json();
         }
+        return Promise.reject(res.status)
       })
       .then((result)=>{
         likesCounter.textContent = result.likes.length;
         eventTarget.classList.remove('active')
       })
+      .catch((err) => {
+        console.log(err)
+      }); 
   }
 });
 
