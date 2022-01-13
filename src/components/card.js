@@ -1,43 +1,12 @@
 import { openPopup, showPopupImage } from './modal.js'; 
+import { deleteCard, addLike, deleteLike } from './api.js';
 
 const elements = document.querySelector('.elements'); 
 const imagePopupContainer = document.querySelector('.popup__container_type_image'); 
 const imagePopup = imagePopupContainer.closest('.popup');
 
-// удалить карточку
-
-function deleteCard (id) {
-  fetch(`https://nomoreparties.co/v1/plus-cohort-5/cards/${id}`, {
-    method: 'DELETE',
-    headers: {
-      authorization: '31d8c365-d1c0-426e-b228-1cdaf2cce2be',
-    },
-  })
-}
-
-// поставить лайк
-
-function addLike (id) {
-  return fetch(`https://nomoreparties.co/v1/plus-cohort-5/cards/likes/${id}`, {
-    method: 'PUT',
-    headers: {
-      authorization: '31d8c365-d1c0-426e-b228-1cdaf2cce2be',
-    },
-  })
-}
-
-// удалить лайк
-
-function deleteLike (id) {
-  return fetch(`https://nomoreparties.co/v1/plus-cohort-5/cards/likes/${id}`, {
-    method: 'DELETE',
-    headers: {
-      authorization: '31d8c365-d1c0-426e-b228-1cdaf2cce2be',
-    },
-  })
-}
-
 //создать карточку
+
 function newPlace(item, userId) {
 
   const placeTemplate = document.querySelector('#place-template').content;
