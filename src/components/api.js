@@ -4,12 +4,25 @@ const config = {
     authorization: '31d8c365-d1c0-426e-b228-1cdaf2cce2be',
   }
 }
+
+// check response
+
+const checkResponse = (res) => {
+  if (res.ok) {
+    return res.json();
+  }
+  return Promise.reject(res.status)
+} 
+
 // get user
 
 export const getUser = () => {
   return fetch(`${config.baseUrl}/users/me`, {
     headers: config.headers
   })
+    .then(res => {
+      return checkResponse(res);
+    })
 }
 
 // update user
@@ -30,6 +43,9 @@ const configUpdateUser = (name, job) => {
 
 export const updateUser = (name, job) => {
   return fetch(`${config.baseUrl}/users/me`, configUpdateUser(name, job))
+    .then(res => {
+      return checkResponse(res);
+    })
 }
 
 // update avatar
@@ -49,6 +65,9 @@ const configUpdateAvatar = (link) => {
 
 export const updateAvatar = (link) => {
   return fetch(`${config.baseUrl}/users/me/avatar`, configUpdateAvatar(link))
+    .then(res => {
+      return checkResponse(res);
+    })
 }
 
 // get cards
@@ -57,6 +76,9 @@ export const getCards = () => {
   return fetch(`${config.baseUrl}/cards`, {
     headers: config.headers
   })
+    .then(res => {
+      return checkResponse(res);
+    })
 }
 
 // post cards
@@ -77,6 +99,9 @@ const configPostCard = (name, link) => {
 
 export const postCard = (name, link) => {
   return fetch(`${config.baseUrl}/cards`, configPostCard(name, link))
+    .then(res => {
+      return checkResponse(res);
+    })
 }
 
 //delete card
@@ -88,6 +113,9 @@ const configDeleteCard = {
 
 export const deleteCard = (id) => {
   return fetch(`${config.baseUrl}/cards/${id}`, configDeleteCard)
+    .then(res => {
+      return checkResponse(res);
+    })
 }
 
 //add like
@@ -99,6 +127,9 @@ const configAddLike = {
 
 export const addLike = (id) => {
   return fetch(`${config.baseUrl}/cards/likes/${id}`, configAddLike)
+    .then(res => {
+      return checkResponse(res);
+    })
 }
 
 //delete like
@@ -110,6 +141,9 @@ const configDeleteLike = {
 
 export const deleteLike = (id) => {
   return fetch(`${config.baseUrl}/cards/likes/${id}`, configDeleteLike)
+    .then(res => {
+      return checkResponse(res);
+    })
 }
 
 

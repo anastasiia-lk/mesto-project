@@ -1,12 +1,9 @@
 import '../pages/index.css';
-// import { initialCards } from "./constants.js";
+import { savingStatus, saveStatus } from "../utils/constants.js";
 import { addPopupListener, openPopup, closePopup } from './modal.js';
 import { enableFormValidation } from './validate.js';
 import { addPlace, newPlace } from './card.js';
 import { getUser, updateUser, getCards, postCard, updateAvatar } from './api.js';
-
-const savingStatus = "Сохранение...";
-const saveStatus = "Сохранить";
 
 // нажимаем кнопку редактировать профиль
 
@@ -63,12 +60,6 @@ let currentUser = '';
 
 function showUser () {
   getUser()
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(res.status)
-    })
     .then((result)=>{
       profileAvatar.setAttribute('src', result.avatar);
       profileName.textContent = result.name;
@@ -84,12 +75,6 @@ function showUser () {
 
 function showCards () {
   getCards()
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(res.status)
-    })
     .then((result)=>{
       result.forEach(function(item){
       const card = newPlace(item, currentUser);
@@ -132,12 +117,6 @@ function handleProfileFormSubmit (evt) {
   evt.preventDefault();
   profileSubmitButton.textContent = savingStatus;
   updateUser(nameInput.value, jobInput.value)
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(res.status)
-    })
     .then((result)=>{
       profileName.textContent = result.name;
       profileJob.textContent = result.about;
@@ -158,12 +137,6 @@ function handlePlaceFormSubmit (evt) {
   evt.preventDefault();
   placeSubmitButton.textContent = savingStatus;
   postCard (placeInput.value, imageLinkInput.value)
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(res.status)
-    })
     .then((result)=>{
       const card = newPlace(result, currentUser);
       addPlace(card);
@@ -184,12 +157,6 @@ function handleAvatarFormSubmit (evt) {
   evt.preventDefault();
   avatarSubmitButton.textContent = savingStatus;
   updateAvatar(avatarLink.value)
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(res.status)
-    })
     .then((result)=>{
       profileAvatar.setAttribute('src', avatarLink.value);
       avatarLink.value = "";

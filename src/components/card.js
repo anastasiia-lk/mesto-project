@@ -37,12 +37,6 @@ function newPlace(item, userId) {
   const eventTarget = evt.target;
   if (eventTarget.getAttribute('class') === "card__button-like") {
     addLike (item._id)
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(res.status)
-      })
       .then((result)=>{
         likesCounter.textContent = result.likes.length;
         eventTarget.classList.add('active')
@@ -52,12 +46,6 @@ function newPlace(item, userId) {
       }); 
   } else {
     deleteLike (item._id)
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(res.status)
-      })
       .then((result)=>{
         likesCounter.textContent = result.likes.length;
         eventTarget.classList.remove('active')
@@ -71,8 +59,10 @@ function newPlace(item, userId) {
 placeElement.querySelector('.card__button-trash').addEventListener('click', function (evt) {
   const eventTarget = evt.target;
   const targetCard = eventTarget.closest('.card');
-  targetCard.remove();
-  deleteCard(item._id);
+  deleteCard(item._id)
+    .then(res => {
+      targetCard.remove();
+    })
 });
 
 newViewImage.addEventListener('click', function (evt) {
