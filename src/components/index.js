@@ -54,36 +54,29 @@ const elements = document.querySelector('.elements');
 const imagePopupContainer = document.querySelector('.popup__container_type_image');
 const imagePopup = imagePopupContainer.closest('.popup');
 
-// данные о пользователе
+// данные для инициализации
+// страницы
 
 let currentUser = '';
 
-function showUser () {
-  getUser()
-    .then((result)=>{
-      profileAvatar.setAttribute('src', result.avatar);
-      profileName.textContent = result.name;
-      profileJob.textContent = result.about;
-      currentUser = result._id;
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-}
-
-// карточки
-
-function showCards () {
-  getCards()
-    .then((result)=>{
-      result.forEach(function(item){
-      const card = newPlace(item, currentUser);
-      addPlace(card);
-      })
-    })
-    .catch((err) => {
-      console.log(err)
-    }); 
+function initPage () {
+  Promise.all([getUser(), getCards()])
+  .then(([userData, cards]) => {
+      // тут установка данных пользователя
+      profileAvatar.setAttribute('src', userData.avatar);
+      profileName.textContent = userData.name;
+      profileJob.textContent = userData.about;
+      currentUser = userData._id;
+      // и тут отрисовка карточек
+      cards.forEach(function(item){
+        const card = newPlace(item, currentUser);
+        addPlace(card);
+        })
+  })
+  .catch(err => {
+    // тут ловим ошибку
+    console.log(err);
+  });
 }
 
 // обновить аватар
@@ -104,13 +97,6 @@ function hideHoverAvatar (evt) {
   profileAvatar.classList.remove('profile__img:hover')
 }
 
-// Инициализировать страницу
-
-function initPage() {
-  showUser();
-  showCards();
-}
-
 // Обработчик «отправки» формы
 
 function handleProfileFormSubmit (evt) {
@@ -121,12 +107,14 @@ function handleProfileFormSubmit (evt) {
       profileName.textContent = result.name;
       profileJob.textContent = result.about;
     })
+    .then((result)=>{
+      closePopup(editPopup);
+    })
     .catch((err) => {
       console.log(err)
     })
     .finally((res) => {
       profileSubmitButton.textContent = saveStatus;
-      closePopup(editPopup);
     })
 }
 
@@ -141,15 +129,17 @@ function handlePlaceFormSubmit (evt) {
       const card = newPlace(result, currentUser);
       addPlace(card);
     })
+    .then((result)=>{
+      addCardForm.reset();
+      placeSubmitButton.disabled = true;
+      placeSubmitButton.classList.add('form__button-submit_inactive');
+      closePopup(addPopup);
+    })
     .catch((err) => {
       console.log(err)
     })
     .finally((res) => {
-      addCardForm.reset();
-      placeSubmitButton.disabled = true;
-      placeSubmitButton.classList.add('form__button-submit_inactive');
       placeSubmitButton.textContent = saveStatus;
-      closePopup(addPopup);
     })
 }
 
@@ -161,12 +151,14 @@ function handleAvatarFormSubmit (evt) {
       profileAvatar.setAttribute('src', avatarLink.value);
       avatarLink.value = "";
     })
+    .then((result)=>{
+      closePopup(avatarPopup);
+    })
     .catch((err) => {
       console.log(err)
     })
     .finally((res) => {
       avatarSubmitButton.textContent = saveStatus;
-      closePopup(avatarPopup);
     })
 }
 
