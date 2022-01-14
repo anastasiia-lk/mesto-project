@@ -63,6 +63,9 @@ placeElement.querySelector('.card__button-trash').addEventListener('click', func
     .then(res => {
       targetCard.remove();
     })
+    .catch((err) => {
+      console.log(err)
+    }); 
 });
 
 newViewImage.addEventListener('click', function (evt) {

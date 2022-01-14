@@ -150,6 +150,8 @@ function handleAvatarFormSubmit (evt) {
     .then((result)=>{
       profileAvatar.setAttribute('src', avatarLink.value);
       avatarLink.value = "";
+      avatarSubmitButton.disabled = true;
+      avatarSubmitButton.classList.add('form__button-submit_inactive');
     })
     .then((result)=>{
       closePopup(avatarPopup);
