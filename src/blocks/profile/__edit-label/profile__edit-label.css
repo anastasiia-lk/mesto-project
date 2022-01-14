@@ -3,11 +3,11 @@
   width: 26px;
   height: 26px;
   z-index: 1;
-  visibility: hidden;
   top: 47px;
   left: 47px;
 }
 
 .profile__edit-label:hover {
+  z-index: 2;
   cursor: pointer;
 }

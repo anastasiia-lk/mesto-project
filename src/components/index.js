@@ -181,15 +181,15 @@ addPopupListener();
 
 // показать значок редактирования аватара
 
-profileAvatar.addEventListener('mouseover', showEdit);
-profileAvatar.addEventListener('mouseout', hideEdit);
+// profileAvatar.addEventListener('mouseover', showEdit);
+// profileAvatar.addEventListener('mouseout', hideEdit);
 
-profileAvatar.addEventListener('click', function(event){
+profileEdit.addEventListener('click', function(event){
   openPopup(avatarPopup);
 });
 
-profileEdit.addEventListener('mouseover', addHoverAvatar);
-profileEdit.addEventListener('mouseout', hideHoverAvatar);
+// profileEdit.addEventListener('mouseover', addHoverAvatar);
+// profileEdit.addEventListener('mouseout', hideHoverAvatar);
 
 //нажимаем кнопку редактировать профиль
 

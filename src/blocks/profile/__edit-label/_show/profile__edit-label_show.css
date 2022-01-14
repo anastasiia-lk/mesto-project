@@ -1,6 +1,5 @@
 .profile__edit-label_show {
   visibility: visible;
-  cursor: pointer;
 }
 
 .profile__edit-label_show:hover {

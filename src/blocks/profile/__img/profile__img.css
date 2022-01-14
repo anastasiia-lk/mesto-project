@@ -2,9 +2,10 @@
   border-radius: 50%;
   width: 120px;
   height: 120px;
+  z-index: 1;
 }
 
 .profile__img:hover {
+  z-index: 0;
   opacity: 0.3;
-  cursor: pointer;
 }
