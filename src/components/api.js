@@ -14,16 +14,58 @@ const checkResponse = (res) => {
   return Promise.reject(res.status)
 } 
 
+class Api {
+  constructor ({ baseUrl, headers }) {
+    this.baseUrl = baseUrl;
+    this.headers = headers;
+  }
+
+  _checkResponse (res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(res.status)
+  }
+
+  // get user
+
+  getUser () {
+    return fetch(`${this.baseUrl}/users/me`, {
+      headers: this.headers
+    })
+      .then(res => {
+        return this._checkResponse(res);
+      }) 
+  }
+
+  // get cards
+
+  getCards () {
+    return fetch(`${this.baseUrl}/cards`, {
+      headers: this.headers
+    })
+      .then(res => {
+        return this._checkResponse(res);
+      })
+  }
+
+}
+
+export const api = new Api ({
+  baseUrl: config.baseUrl,
+  headers: config.headers
+})
+
 // get user
 
-export const getUser = () => {
-  return fetch(`${config.baseUrl}/users/me`, {
-    headers: config.headers
-  })
-    .then(res => {
-      return checkResponse(res);
-    })
-}
+// export const getUser = () => {
+//   return fetch(`${config.baseUrl}/users/me`, {
+//     headers: config.headers
+//   })
+//     .then(res => {
+//       return checkResponse(res);
+//     })
+// }
 
 // update user
 
@@ -72,14 +114,14 @@ export const updateAvatar = (link) => {
 
 // get cards
 
-export const getCards = () => {
-  return fetch(`${config.baseUrl}/cards`, {
-    headers: config.headers
-  })
-    .then(res => {
-      return checkResponse(res);
-    })
-}
+// export const getCards = () => {
+//   return fetch(`${config.baseUrl}/cards`, {
+//     headers: config.headers
+//   })
+//     .then(res => {
+//       return checkResponse(res);
+//     })
+// }
 
 // post cards
 

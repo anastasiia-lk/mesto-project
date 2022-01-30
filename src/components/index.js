@@ -5,7 +5,8 @@ import { savingStatus, saveStatus } from "../utils/constants.js";
 import { addPopupListener, openPopup, closePopup } from './modal.js';
 import { enableFormValidation } from './validate.js';
 import { addPlace, newPlace } from './card.js';
-import { getUser, updateUser, getCards, postCard, updateAvatar } from './api.js';
+// import { getUser, updateUser, getCards, postCard, updateAvatar } from './api.js';
+import { api, updateUser, postCard, updateAvatar } from './api.js';
 
 // нажимаем кнопку редактировать профиль
 
@@ -62,7 +63,7 @@ const imagePopup = imagePopupContainer.closest('.popup');
 let currentUser = '';
 
 function initPage () {
-  Promise.all([getUser(), getCards()])
+  Promise.all([api.getUser(), api.getCards()])
   .then(([userData, cards]) => {
       // тут установка данных пользователя
       profileAvatar.setAttribute('src', userData.avatar);
