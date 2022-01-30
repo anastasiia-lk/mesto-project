@@ -27,18 +27,32 @@ class Api {
     return Promise.reject(res.status)
   }
 
+  // get user
+
   getUser () {
-    return fetch(this.baseUrl, {
+    return fetch(`${this.baseUrl}/users/me`, {
       headers: this.headers
     })
       .then(res => {
         return this._checkResponse(res);
       }) 
   }
+
+  // get cards
+
+  getCards () {
+    return fetch(`${this.baseUrl}/cards`, {
+      headers: this.headers
+    })
+      .then(res => {
+        return this._checkResponse(res);
+      })
+  }
+
 }
 
 export const api = new Api ({
-  baseUrl: `${config.baseUrl}/users/me`,
+  baseUrl: config.baseUrl,
   headers: config.headers
 })
 
@@ -100,14 +114,14 @@ export const updateAvatar = (link) => {
 
 // get cards
 
-export const getCards = () => {
-  return fetch(`${config.baseUrl}/cards`, {
-    headers: config.headers
-  })
-    .then(res => {
-      return checkResponse(res);
-    })
-}
+// export const getCards = () => {
+//   return fetch(`${config.baseUrl}/cards`, {
+//     headers: config.headers
+//   })
+//     .then(res => {
+//       return checkResponse(res);
+//     })
+// }
 
 // post cards
 
