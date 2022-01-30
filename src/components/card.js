@@ -5,6 +5,43 @@ const elements = document.querySelector('.elements');
 const imagePopupContainer = document.querySelector('.popup__container_type_image'); 
 const imagePopup = imagePopupContainer.closest('.popup');
 
+export default class Card {
+  constructor(data, selector) {
+    this.url = data.url;
+    this.name = data.name;
+    this._selector = selector;
+  }
+
+  _getElement() {
+    const cardElement = document
+    .querySelector(this._selector)
+    .content
+    .querySelector('.card')
+    .cloneNode(true);
+
+    return cardElement;
+  }
+  
+  generate() {
+    this._element = this._getElement();
+
+    this._element.querySelector('.card__image').setAttribute('src', this.url);
+    this._element.querySelector('.card__image').setAttribute('alt', this.name);
+    this._element.querySelector('.card__caption-name').textContent = this.name;
+
+    return this._element;
+
+  }
+
+}
+
+// для теста
+
+export const testCard = new Card ({
+  url: `https://i.pinimg.com/736x/3f/19/44/3f1944ad5549dfa919c878d26e854aa1.jpg`,
+  name: 'Милан'
+}, '#place-template')
+
 //создать карточку
 
 function newPlace(item, userId) {

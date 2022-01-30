@@ -4,7 +4,7 @@ import '../pages/index.css';
 import { savingStatus, saveStatus } from "../utils/constants.js";
 import { addPopupListener, openPopup, closePopup } from './modal.js';
 import { enableFormValidation } from './validate.js';
-import { addPlace, newPlace } from './card.js';
+import { addPlace, newPlace, testCard } from './card.js';
 // import { getUser, updateUser, getCards, postCard, updateAvatar } from './api.js';
 import { api, updateUser, postCard, updateAvatar } from './api.js';
 
@@ -223,3 +223,7 @@ avatarForm.addEventListener('submit', handleAvatarFormSubmit);
 //инициализация страницы
 
 initPage();
+
+// для теста
+
+addPlace(testCard.generate());

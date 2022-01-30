@@ -48,7 +48,6 @@ class Api {
         return this._checkResponse(res);
       })
   }
-
 }
 
 export const api = new Api ({
