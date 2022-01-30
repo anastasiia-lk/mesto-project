@@ -1,3 +1,5 @@
+// необходимые импорты
+
 import '../pages/index.css';
 import { savingStatus, saveStatus } from "../utils/constants.js";
 import { addPopupListener, openPopup, closePopup } from './modal.js';
