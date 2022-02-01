@@ -15,9 +15,10 @@ const checkResponse = (res) => {
 } 
 
 class Api {
-  constructor ({ baseUrl, headers }) {
+  constructor ({ baseUrl, headers, renderer }) {
     this.baseUrl = baseUrl;
     this.headers = headers;
+    this.renderer = renderer;
   }
 
   _checkResponse (res) {
@@ -46,6 +47,30 @@ class Api {
     })
       .then(res => {
         return this._checkResponse(res);
+      })
+  }
+
+  // add like
+
+  addLike (id) {
+    return fetch(`${this.baseUrl}/cards/likes/${id}`, {
+      method: 'PUT',
+      headers: this.headers 
+    })
+      .then(res => {
+        return this._checkResponse(res);
+      })
+  }
+
+  //delete like
+
+  deleteLike (id) {
+    return fetch(`${this.baseUrl}/cards/likes/${id}`, {
+      method: 'DELETE',
+      headers: this.headers,
+    })
+      .then(res => {
+        return checkResponse(res);
       })
   }
 }
@@ -161,31 +186,31 @@ export const deleteCard = (id) => {
 
 //add like
 
-const configAddLike = {
-    method: 'PUT',
-    headers: config.headers,
-}
+// const configAddLike = {
+//     method: 'PUT',
+//     headers: config.headers,
+// }
 
-export const addLike = (id) => {
-  return fetch(`${config.baseUrl}/cards/likes/${id}`, configAddLike)
-    .then(res => {
-      return checkResponse(res);
-    })
-}
+// export const addLike = (id) => {
+//   return fetch(`${config.baseUrl}/cards/likes/${id}`, configAddLike)
+//     .then(res => {
+//       return checkResponse(res);
+//     })
+// }
 
 //delete like
 
-const configDeleteLike = {
-    method: 'DELETE',
-    headers: config.headers,
-}
+// const configDeleteLike = {
+//     method: 'DELETE',
+//     headers: config.headers,
+// }
 
-export const deleteLike = (id) => {
-  return fetch(`${config.baseUrl}/cards/likes/${id}`, configDeleteLike)
-    .then(res => {
-      return checkResponse(res);
-    })
-}
+// export const deleteLike = (id) => {
+//   return fetch(`${config.baseUrl}/cards/likes/${id}`, configDeleteLike)
+//     .then(res => {
+//       return checkResponse(res);
+//     })
+// }
 
 
 

@@ -1,15 +1,52 @@
 import { openPopup, showPopupImage } from './modal.js'; 
-import { deleteCard, addLike, deleteLike } from './api.js';
+import { deleteCard, api } from './api.js';
 
 const elements = document.querySelector('.elements'); 
 const imagePopupContainer = document.querySelector('.popup__container_type_image'); 
 const imagePopup = imagePopupContainer.closest('.popup');
 
 export default class Card {
-  constructor(data, selector) {
-    this.url = data.url;
+  constructor(data, selector, { setLike, removeLike }, userId) {
+    this.likes = data.likes;
+    this.cardId = data._id;
     this.name = data.name;
+    this.link = data.link;
+    this.owner = data.owner;
     this._selector = selector;
+    
+    this.userId = userId;
+
+    this._setLike = setLike;
+    this._removeLike = removeLike;
+  }
+
+  _checkUserLike(likesArr) {
+    return likesArr.some(el => el._id === this.userId);
+  }
+
+  printLikes(count) {
+    this._likesCounter = this._element.querySelector('.like-block__caption');
+    this._likesCounter.textContent = count;  
+  }
+
+  calcLikes(likesArray) {
+    if (this._checkUserLike(likesArray)) {
+      this._likeBtn.classList.add('active');
+    } else {
+      this._likeBtn.classList.remove('active');
+    }
+
+    this._element.querySelector('.like-block__caption').textContent = likesArray.length;
+
+    this.likes = likesArray;
+  }
+
+  toggleLike() {
+    if (this._checkUserLike(this.likes)) {
+      this._removeLike(this.cardId)
+    } else {
+      this._setLike(this.cardId);
+    }
   }
 
   _getElement() {
@@ -24,23 +61,25 @@ export default class Card {
   
   generate() {
     this._element = this._getElement();
+    this._setEventListeners();
+    this.calcLikes(this.likes);
+    this.printLikes(this.likes.length);
 
-    this._element.querySelector('.card__image').setAttribute('src', this.url);
+    this._element.querySelector('.card__image').setAttribute('src', this.link);
     this._element.querySelector('.card__image').setAttribute('alt', this.name);
     this._element.querySelector('.card__caption-name').textContent = this.name;
-
+    
     return this._element;
-
   }
 
+  _setEventListeners() {
+    this._likeBtn = this._element.querySelector('.card__button-like');
+
+    this._likeBtn.addEventListener('click', () => {
+      this.toggleLike();
+    })
 }
-
-// для теста
-
-export const testCard = new Card ({
-  url: `https://i.pinimg.com/736x/3f/19/44/3f1944ad5549dfa919c878d26e854aa1.jpg`,
-  name: 'Милан'
-}, '#place-template')
+}
 
 //создать карточку
 

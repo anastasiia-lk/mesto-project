@@ -4,7 +4,9 @@ import '../pages/index.css';
 import { savingStatus, saveStatus } from "../utils/constants.js";
 import { addPopupListener, openPopup, closePopup } from './modal.js';
 import { enableFormValidation } from './validate.js';
-import { addPlace, newPlace, testCard } from './card.js';
+import { addPlace, newPlace } from './card.js';
+import Card from './card.js';
+import UserInfo from './userInfo.js';
 // import { getUser, updateUser, getCards, postCard, updateAvatar } from './api.js';
 import { api, updateUser, postCard, updateAvatar } from './api.js';
 
@@ -70,12 +72,40 @@ function initPage () {
       profileName.textContent = userData.name;
       profileJob.textContent = userData.about;
       currentUser = userData._id;
+      const userInfo = new UserInfo(userData);
+      userInfo.printUser();
       // и тут отрисовка карточек
+      // cards.forEach(function(item){
+      //   const card = newPlace(item, currentUser);
+      //   addPlace(card);
+      //   })
       cards.forEach(function(item){
-        const card = newPlace(item, currentUser);
-        addPlace(card);
-        })
-  })
+        const card = new Card(
+          item,
+          '#place-template', 
+          {
+            setLike: (cardId) => {
+              api.addLike(cardId)
+              .then((result) => {
+                console.log(result.likes);
+                card.calcLikes(result.likes)
+              })
+              .catch((err) => console.log(err))
+            },
+            removeLike: (cardId) => {
+              api.deleteLike(cardId)
+              .then((result) => {
+                console.log(result.likes);
+                card.calcLikes(result.likes)
+              })
+              .catch((err) => console.log(err))
+            }
+          },
+          userInfo.getUserId()
+        );
+        addPlace(card.generate());
+      })
+    })
   .catch(err => {
     // тут ловим ошибку
     console.log(err);
@@ -224,6 +254,3 @@ avatarForm.addEventListener('submit', handleAvatarFormSubmit);
 
 initPage();
 
-// для теста
-
-addPlace(testCard.generate());
