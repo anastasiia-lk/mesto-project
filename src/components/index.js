@@ -1,7 +1,7 @@
 // необходимые импорты
 
 import '../pages/index.css';
-import { savingStatus, saveStatus } from "../utils/constants.js";
+import { savingStatus, saveStatus, config } from "../utils/constants.js";
 // import { addPopupListener, openPopup, closePopup } from './modal.js';
 import { addPopupListener, openPopup, closePopup } from './modal.js';
 import { enableFormValidation } from './validate.js';
@@ -9,7 +9,8 @@ import { addPlace, newPlace } from './card.js';
 import Card from './card.js';
 import UserInfo from './userInfo.js';
 // import { getUser, updateUser, getCards, postCard, updateAvatar } from './api.js';
-import { api, updateUser, postCard, updateAvatar } from './api.js';
+import { updateUser, postCard, updateAvatar } from './api.js';
+import Api from './api.js';
 import Popup from './popup';
 import PopupWithImage from './popupWithImage';
 
@@ -67,19 +68,31 @@ const imagePopup = imagePopupContainer.closest('.popup');
 
 let currentUser = '';
 
-const testPopup = new Popup('.popup');
-console.log(testPopup);
+const api = new Api ({
+  baseUrl: config.baseUrl,
+  headers: config.headers
+})
+
+const userInfo = new UserInfo(
+  '.profile-edit__title', 
+  '.profile-edit__subtitle', 
+  {
+    getUserData: () => api.getUser()
+  }
+);
 
 function initPage () {
-  Promise.all([api.getUser(), api.getCards()])
+
+  Promise.all([userInfo.getUserInfo(), api.getCards()])
   .then(([userData, cards]) => {
       // тут установка данных пользователя
-      profileAvatar.setAttribute('src', userData.avatar);
-      profileName.textContent = userData.name;
-      profileJob.textContent = userData.about;
-      currentUser = userData._id;
-      const userInfo = new UserInfo(userData);
-      userInfo.printUser();
+      // profileAvatar.setAttribute('src', userData.avatar);
+      // profileName.textContent = userData.name;
+      // profileJob.textContent = userData.about;
+      // currentUser = userData._id;
+      
+      console.log(userData, cards);
+      userInfo.showUserInfo(userData.name, userData.about);
 
       const imagePopupElement = new PopupWithImage('.popup_type_image');
       imagePopupElement.setEventListeners();
@@ -118,7 +131,7 @@ function initPage () {
               imagePopupElement.open(item.link, item.name);
             }
           },
-          userInfo.getUserId()
+          userInfo.getUserInfo()
         );
         addPlace(card.generate());
       })

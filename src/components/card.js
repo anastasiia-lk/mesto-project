@@ -1,12 +1,11 @@
 import { openPopup, showPopupImage } from './modal.js'; 
-import { deleteCard, api } from './api.js';
 
 const elements = document.querySelector('.elements'); 
 const imagePopupContainer = document.querySelector('.popup__container_type_image'); 
 const imagePopup = imagePopupContainer.closest('.popup');
 
 export default class Card {
-  constructor(data, selector, { setLike, removeLike, removeCard, openImagePopup }, userId) {
+  constructor(data, selector, { setLike, removeLike, removeCard, openImagePopup }, userInfo) {
     this.likes = data.likes;
     this.cardId = data._id;
     this.name = data.name;
@@ -14,7 +13,7 @@ export default class Card {
     this.owner = data.owner;
     this._selector = selector;
     
-    this.userId = userId;
+    this.userId = userInfo._id;
 
     this._setLike = setLike;
     this._removeLike = removeLike;
@@ -139,45 +138,45 @@ function newPlace(item, userId) {
 
   likesCounter.textContent = item.likes.length;
 
-  placeElement.querySelector('.card__button-like').addEventListener('click', function (evt) {
-  const eventTarget = evt.target;
-  if (eventTarget.getAttribute('class') === "card__button-like") {
-    addLike (item._id)
-      .then((result)=>{
-        likesCounter.textContent = result.likes.length;
-        eventTarget.classList.add('active')
-      })
-      .catch((err) => {
-        console.log(err)
-      }); 
-  } else {
-    deleteLike (item._id)
-      .then((result)=>{
-        likesCounter.textContent = result.likes.length;
-        eventTarget.classList.remove('active')
-      })
-      .catch((err) => {
-        console.log(err)
-      }); 
-  }
-});
+//   placeElement.querySelector('.card__button-like').addEventListener('click', function (evt) {
+//   const eventTarget = evt.target;
+//   if (eventTarget.getAttribute('class') === "card__button-like") {
+//     addLike (item._id)
+//       .then((result)=>{
+//         likesCounter.textContent = result.likes.length;
+//         eventTarget.classList.add('active')
+//       })
+//       .catch((err) => {
+//         console.log(err)
+//       }); 
+//   } else {
+//     deleteLike (item._id)
+//       .then((result)=>{
+//         likesCounter.textContent = result.likes.length;
+//         eventTarget.classList.remove('active')
+//       })
+//       .catch((err) => {
+//         console.log(err)
+//       }); 
+//   }
+// });
 
-placeElement.querySelector('.card__button-trash').addEventListener('click', function (evt) {
-  const eventTarget = evt.target;
-  const targetCard = eventTarget.closest('.card');
-  deleteCard(item._id)
-    .then(res => {
-      targetCard.remove();
-    })
-    .catch((err) => {
-      console.log(err)
-    }); 
-});
+// placeElement.querySelector('.card__button-trash').addEventListener('click', function (evt) {
+//   const eventTarget = evt.target;
+//   const targetCard = eventTarget.closest('.card');
+//   deleteCard(item._id)
+//     .then(res => {
+//       targetCard.remove();
+//     })
+//     .catch((err) => {
+//       console.log(err)
+//     }); 
+// });
 
-newViewImage.addEventListener('click', function (evt) {
-  openPopup(imagePopup);
-  showPopupImage(item.link, item.name);
-});
+// newViewImage.addEventListener('click', function (evt) {
+//   openPopup(imagePopup);
+//   showPopupImage(item.link, item.name);
+// });
 
   // elements.prepend(placeElement); 
   return placeElement;

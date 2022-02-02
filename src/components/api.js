@@ -1,10 +1,3 @@
-const config = {
-  baseUrl: 'https://nomoreparties.co/v1/plus-cohort-5',
-  headers: {
-    authorization: '31d8c365-d1c0-426e-b228-1cdaf2cce2be',
-  }
-}
-
 // check response
 
 const checkResponse = (res) => {
@@ -14,11 +7,10 @@ const checkResponse = (res) => {
   return Promise.reject(res.status)
 } 
 
-class Api {
-  constructor ({ baseUrl, headers, renderer }) {
+export default class Api {
+  constructor ({ baseUrl, headers }) {
     this.baseUrl = baseUrl;
     this.headers = headers;
-    this.renderer = renderer;
   }
 
   _checkResponse (res) {
@@ -87,10 +79,10 @@ class Api {
   }
 }
 
-export const api = new Api ({
-  baseUrl: config.baseUrl,
-  headers: config.headers
-})
+// export const api = new Api ({
+//   baseUrl: config.baseUrl,
+//   headers: config.headers
+// })
 
 // get user
 
@@ -184,17 +176,17 @@ export const postCard = (name, link) => {
 
 //delete card
 
-const configDeleteCard = {
-    method: 'DELETE',
-    headers: config.headers,
-}
+// const configDeleteCard = {
+//     method: 'DELETE',
+//     headers: config.headers,
+// }
 
-export const deleteCard = (id) => {
-  return fetch(`${config.baseUrl}/cards/${id}`, configDeleteCard)
-    .then(res => {
-      return checkResponse(res);
-    })
-}
+// export const deleteCard = (id) => {
+//   return fetch(`${config.baseUrl}/cards/${id}`, configDeleteCard)
+//     .then(res => {
+//       return checkResponse(res);
+//     })
+// }
 
 //add like
 

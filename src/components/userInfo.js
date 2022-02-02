@@ -1,16 +1,22 @@
 export default class UserInfo {
-  constructor(data) {
-    this.name = data.name;
-    this.about = data.about;
-    this.avatar = data.avatar;
-    this.userId = data._id;
+  constructor(userNameSelector, userAboutSelector, {getUserData}) {
+    this._userNameElement = document.querySelector(userNameSelector);
+    this._userAboutElement = document.querySelector(userAboutSelector);
+
+    this._getUserData = getUserData;
   }
 
-  getUserId() {
-    return this.userId;
+  getUserInfo() {
+    return this._getUserData();
   }
 
-  printUser() {
-    console.log(this);
+  setUserInfo(name, about) {
+    this._userNameElement.textContent = name;
+    this._userAboutElement.textContent = about;
+  }
+
+  showUserInfo(name, about) {
+    this._userNameElement.textContent = name;
+    this._userAboutElement.textContent = about;
   }
 }
