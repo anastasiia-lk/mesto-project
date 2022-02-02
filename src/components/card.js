@@ -5,7 +5,7 @@ const imagePopupContainer = document.querySelector('.popup__container_type_image
 const imagePopup = imagePopupContainer.closest('.popup');
 
 export default class Card {
-  constructor(data, selector, { setLike, removeLike, removeCard, openImagePopup }, userInfo) {
+  constructor(data, selector, { setLike, removeLike, removeCard, openImagePopup }, userId) {
     this.likes = data.likes;
     this.cardId = data._id;
     this.name = data.name;
@@ -13,7 +13,7 @@ export default class Card {
     this.owner = data.owner;
     this._selector = selector;
     
-    this.userId = userInfo._id;
+    this.userId = userId;
 
     this._setLike = setLike;
     this._removeLike = removeLike;

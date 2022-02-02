@@ -81,6 +81,7 @@ const userInfo = new UserInfo(
   }
 );
 
+
 function initPage () {
 
   Promise.all([userInfo.getUserInfo(), api.getCards()])
@@ -93,6 +94,7 @@ function initPage () {
       
       console.log(userData, cards);
       userInfo.showUserInfo(userData.name, userData.about);
+      userInfo.updateUserInfo(userData);
 
       const imagePopupElement = new PopupWithImage('.popup_type_image');
       imagePopupElement.setEventListeners();
@@ -131,7 +133,7 @@ function initPage () {
               imagePopupElement.open(item.link, item.name);
             }
           },
-          userInfo.getUserInfo()
+          userInfo.getUserId()
         );
         addPlace(card.generate());
       })

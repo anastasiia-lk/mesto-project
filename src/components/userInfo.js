@@ -19,4 +19,13 @@ export default class UserInfo {
     this._userNameElement.textContent = name;
     this._userAboutElement.textContent = about;
   }
+
+  updateUserInfo(data) {
+    this.id = data._id;
+  }
+
+  getUserId() {
+    return this.id;
+  }
+
 }
