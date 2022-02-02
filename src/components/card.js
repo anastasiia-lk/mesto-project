@@ -6,7 +6,7 @@ const imagePopupContainer = document.querySelector('.popup__container_type_image
 const imagePopup = imagePopupContainer.closest('.popup');
 
 export default class Card {
-  constructor(data, selector, { setLike, removeLike, removeCard }, userId) {
+  constructor(data, selector, { setLike, removeLike, removeCard, openImagePopup }, userId) {
     this.likes = data.likes;
     this.cardId = data._id;
     this.name = data.name;
@@ -20,6 +20,8 @@ export default class Card {
     this._removeLike = removeLike;
 
     this._removeCard = removeCard;
+
+    this.openImagePopup = openImagePopup;
   }
 
   _checkUserLike(likesArr) {
@@ -93,6 +95,7 @@ export default class Card {
   _setEventListeners() {
     this._likeBtn = this._element.querySelector('.card__button-like');
     this._trashBtn = this._element.querySelector('.card__button-trash');
+    this._viewImage = this._element.querySelector('.card__image');
 
     this._likeBtn.addEventListener('click', () => {
       this.toggleLike();
@@ -100,6 +103,10 @@ export default class Card {
 
     this._trashBtn.addEventListener('click', () => {
       this.handleCard();
+    })
+
+    this._viewImage.addEventListener('click', () => {
+      this.openImagePopup();
     })
 }
 }

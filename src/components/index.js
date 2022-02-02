@@ -2,6 +2,7 @@
 
 import '../pages/index.css';
 import { savingStatus, saveStatus } from "../utils/constants.js";
+// import { addPopupListener, openPopup, closePopup } from './modal.js';
 import { addPopupListener, openPopup, closePopup } from './modal.js';
 import { enableFormValidation } from './validate.js';
 import { addPlace, newPlace } from './card.js';
@@ -9,6 +10,8 @@ import Card from './card.js';
 import UserInfo from './userInfo.js';
 // import { getUser, updateUser, getCards, postCard, updateAvatar } from './api.js';
 import { api, updateUser, postCard, updateAvatar } from './api.js';
+import Popup from './popup';
+import PopupWithImage from './popupWithImage';
 
 // нажимаем кнопку редактировать профиль
 
@@ -64,6 +67,9 @@ const imagePopup = imagePopupContainer.closest('.popup');
 
 let currentUser = '';
 
+const testPopup = new Popup('.popup');
+console.log(testPopup);
+
 function initPage () {
   Promise.all([api.getUser(), api.getCards()])
   .then(([userData, cards]) => {
@@ -74,6 +80,10 @@ function initPage () {
       currentUser = userData._id;
       const userInfo = new UserInfo(userData);
       userInfo.printUser();
+
+      const imagePopupElement = new PopupWithImage('.popup_type_image');
+      imagePopupElement.setEventListeners();
+
       // и тут отрисовка карточек
       // cards.forEach(function(item){
       //   const card = newPlace(item, currentUser);
@@ -103,6 +113,9 @@ function initPage () {
               .then((result) => {
                 card.eraseCard();  
               })
+            },
+            openImagePopup: () => {
+              imagePopupElement.open(item.link, item.name);
             }
           },
           userInfo.getUserId()
