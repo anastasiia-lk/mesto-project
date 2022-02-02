@@ -62,10 +62,22 @@ class Api {
       })
   }
 
-  //delete like
+  // delete like
 
   deleteLike (id) {
     return fetch(`${this.baseUrl}/cards/likes/${id}`, {
+      method: 'DELETE',
+      headers: this.headers,
+    })
+      .then(res => {
+        return checkResponse(res);
+      })
+  }
+
+  // delete card
+
+  deleteCard (id) {
+    return fetch(`${this.baseUrl}/cards/${id}`, {
       method: 'DELETE',
       headers: this.headers,
     })

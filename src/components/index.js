@@ -87,7 +87,6 @@ function initPage () {
             setLike: (cardId) => {
               api.addLike(cardId)
               .then((result) => {
-                console.log(result.likes);
                 card.calcLikes(result.likes)
               })
               .catch((err) => console.log(err))
@@ -95,10 +94,15 @@ function initPage () {
             removeLike: (cardId) => {
               api.deleteLike(cardId)
               .then((result) => {
-                console.log(result.likes);
                 card.calcLikes(result.likes)
               })
               .catch((err) => console.log(err))
+            },
+            removeCard: (cardId) => {
+              api.deleteCard(cardId)
+              .then((result) => {
+                card.eraseCard();  
+              })
             }
           },
           userInfo.getUserId()

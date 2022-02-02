@@ -6,7 +6,7 @@ const imagePopupContainer = document.querySelector('.popup__container_type_image
 const imagePopup = imagePopupContainer.closest('.popup');
 
 export default class Card {
-  constructor(data, selector, { setLike, removeLike }, userId) {
+  constructor(data, selector, { setLike, removeLike, removeCard }, userId) {
     this.likes = data.likes;
     this.cardId = data._id;
     this.name = data.name;
@@ -18,6 +18,8 @@ export default class Card {
 
     this._setLike = setLike;
     this._removeLike = removeLike;
+
+    this._removeCard = removeCard;
   }
 
   _checkUserLike(likesArr) {
@@ -49,6 +51,20 @@ export default class Card {
     }
   }
 
+  showTrashBtn() {
+    if (this.owner._id === this.userId) {
+      this._trashBtn.classList.add('card__button-trash_created');
+    }
+  }
+
+  handleCard() {
+    this._removeCard(this.cardId);
+  }
+
+  eraseCard() {
+    this._element.remove();
+  }
+
   _getElement() {
     const cardElement = document
     .querySelector(this._selector)
@@ -68,15 +84,22 @@ export default class Card {
     this._element.querySelector('.card__image').setAttribute('src', this.link);
     this._element.querySelector('.card__image').setAttribute('alt', this.name);
     this._element.querySelector('.card__caption-name').textContent = this.name;
+
+    this.showTrashBtn();
     
     return this._element;
   }
 
   _setEventListeners() {
     this._likeBtn = this._element.querySelector('.card__button-like');
+    this._trashBtn = this._element.querySelector('.card__button-trash');
 
     this._likeBtn.addEventListener('click', () => {
       this.toggleLike();
+    })
+
+    this._trashBtn.addEventListener('click', () => {
+      this.handleCard();
     })
 }
 }
