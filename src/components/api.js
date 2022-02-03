@@ -77,6 +77,25 @@ export default class Api {
         return checkResponse(res);
       })
   }
+
+  //update avatar
+
+  updateAvatar (link) {
+    return fetch(`${this.baseUrl}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: {
+        authorization: this.headers.authorization,
+        'Content-Type': 'application/json' 
+      },
+      body: JSON.stringify({
+        avatar: `${link}`,
+      })
+    })
+      .then(res => {
+        return checkResponse(res);
+      })
+  }
+  
 }
 
 // export const api = new Api ({
@@ -120,25 +139,25 @@ export const updateUser = (name, job) => {
 
 // update avatar
 
-const configUpdateAvatar = (link) => {
-  return {
-    method: 'PATCH',
-    headers: {
-      authorization: config.headers.authorization,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      avatar: `${link}`,
-    })
-  }
-}
+// const configUpdateAvatar = (link) => {
+//   return {
+//     method: 'PATCH',
+//     headers: {
+//       authorization: config.headers.authorization,
+//       'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify({
+//       avatar: `${link}`,
+//     })
+//   }
+// }
 
-export const updateAvatar = (link) => {
-  return fetch(`${config.baseUrl}/users/me/avatar`, configUpdateAvatar(link))
-    .then(res => {
-      return checkResponse(res);
-    })
-}
+// export const updateAvatar = (link) => {
+//   return fetch(`${config.baseUrl}/users/me/avatar`, configUpdateAvatar(link))
+//     .then(res => {
+//       return checkResponse(res);
+//     })
+// }
 
 // get cards
 

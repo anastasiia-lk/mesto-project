@@ -9,10 +9,12 @@ import { addPlace, newPlace } from './card.js';
 import Card from './card.js';
 import UserInfo from './userInfo.js';
 // import { getUser, updateUser, getCards, postCard, updateAvatar } from './api.js';
-import { updateUser, postCard, updateAvatar } from './api.js';
+import { updateUser, postCard } from './api.js';
 import Api from './api.js';
 import Popup from './popup';
 import PopupWithImage from './popupWithImage';
+import PopupWithForm from './popupWithForm';
+import FormValidator from './formValidator';
 
 // нажимаем кнопку редактировать профиль
 
@@ -75,12 +77,35 @@ const api = new Api ({
 
 const userInfo = new UserInfo(
   '.profile-edit__title', 
-  '.profile-edit__subtitle', 
+  '.profile-edit__subtitle',
+  '.profile__img', 
   {
-    getUserData: () => api.getUser()
+    getUserData: () => api.getUser(),
+    handleSetAvatar: (avatarLink) => api.updateAvatar(avatarLink)
   }
 );
 
+const avatarFormValidator = new FormValidator('.avatar-form')
+
+const imagePopupElement = new PopupWithImage('.popup_type_image');
+imagePopupElement.setEventListeners();
+
+const avatarPopupElement = new PopupWithForm('.popup_type_avatar', {
+  handleFormSubmit: (newAvatar) => {
+    userInfo.setUserAvatar(newAvatar)
+      .then((data) => {
+        userInfo.updateUserInfo(data)
+      })
+      .then(() => {
+        avatarPopupElement.close(); 
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+})
+
+avatarPopupElement.setEventListeners();
 
 function initPage () {
 
@@ -92,12 +117,8 @@ function initPage () {
       // profileJob.textContent = userData.about;
       // currentUser = userData._id;
       
-      console.log(userData, cards);
-      userInfo.showUserInfo(userData.name, userData.about);
+      userInfo.showUserInfo(userData.name, userData.about, userData.avatar);
       userInfo.updateUserInfo(userData);
-
-      const imagePopupElement = new PopupWithImage('.popup_type_image');
-      imagePopupElement.setEventListeners();
 
       // и тут отрисовка карточек
       // cards.forEach(function(item){
@@ -208,26 +229,26 @@ function handlePlaceFormSubmit (evt) {
     })
 }
 
-function handleAvatarFormSubmit (evt) {
-  evt.preventDefault();
-  avatarSubmitButton.textContent = savingStatus;
-  updateAvatar(avatarLink.value)
-    .then((result)=>{
-      profileAvatar.setAttribute('src', avatarLink.value);
-      avatarLink.value = "";
-      avatarSubmitButton.disabled = true;
-      avatarSubmitButton.classList.add('form__button-submit_inactive');
-    })
-    .then((result)=>{
-      closePopup(avatarPopup);
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-    .finally((res) => {
-      avatarSubmitButton.textContent = saveStatus;
-    })
-}
+// function handleAvatarFormSubmit (evt) {
+//   evt.preventDefault();
+//   avatarSubmitButton.textContent = savingStatus;
+//   updateAvatar(avatarLink.value)
+//     .then((result)=>{
+//       profileAvatar.setAttribute('src', avatarLink.value);
+//       avatarLink.value = "";
+//       avatarSubmitButton.disabled = true;
+//       avatarSubmitButton.classList.add('form__button-submit_inactive');
+//     })
+//     .then((result)=>{
+//       closePopup(avatarPopup);
+//     })
+//     .catch((err) => {
+//       console.log(err)
+//     })
+//     .finally((res) => {
+//       avatarSubmitButton.textContent = saveStatus;
+//     })
+// }
 
 // передача настроек
 
@@ -280,7 +301,7 @@ profileForm.addEventListener('submit', handleProfileFormSubmit);
 
 addCardForm.addEventListener('submit', handlePlaceFormSubmit);
 
-avatarForm.addEventListener('submit', handleAvatarFormSubmit);
+// avatarForm.addEventListener('submit', handleAvatarFormSubmit);
 
 //инициализация страницы
 
