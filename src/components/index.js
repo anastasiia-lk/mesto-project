@@ -9,7 +9,7 @@ import { addPlace, newPlace } from './card.js';
 import Card from './card.js';
 import UserInfo from './userInfo.js';
 // import { getUser, updateUser, getCards, postCard, updateAvatar } from './api.js';
-import { updateUser, postCard } from './api.js';
+import { postCard } from './api.js';
 import Api from './api.js';
 import Popup from './popup';
 import PopupWithImage from './popupWithImage';
@@ -76,6 +76,7 @@ const api = new Api ({
 })
 
 const avatarFormValidator = new FormValidator('.avatar-form');
+const userFormValidator = new FormValidator('.profile-form');
 
 const userInfo = new UserInfo(
   '.profile-edit__title', 
@@ -98,6 +99,22 @@ const userInfo = new UserInfo(
       .catch((err) => {
         console.log(err)
       })
+    },
+    handleSetUser: (name, about) => {
+      userFormValidator.setSavingStatus();
+      api.updateUser(name, about)
+      .then((data) => {
+        userInfo.updateUserInfo(data);
+        userPopupElement.clearInput();
+        userFormValidator.disableBtnElement();
+        userFormValidator.setSaveStatus();
+      })
+      .then(() => {
+        userPopupElement.close(); 
+      })
+      .catch((err) => {
+        console.log(err)
+      })
     }
   }
 );
@@ -106,12 +123,19 @@ const imagePopupElement = new PopupWithImage('.popup_type_image');
 imagePopupElement.setEventListeners();
 
 const avatarPopupElement = new PopupWithForm('.popup_type_avatar', {
-  handleFormSubmit: (newAvatar) => {
+  handleFormSubmit: ({'avatar-link': newAvatar}) => {
     userInfo.setUserAvatar(newAvatar);
    }
 })
 
+const userPopupElement = new PopupWithForm('.popup_type_profile', {
+  handleFormSubmit: ({'person': name, 'profession': about}) => {
+    userInfo.setUserData(name, about);
+   }
+})
+
 avatarPopupElement.setEventListeners();
+userPopupElement.setEventListeners();
 
 function initPage () {
 
@@ -191,24 +215,24 @@ function hideHoverAvatar (evt) {
 
 // Обработчик «отправки» формы
 
-function handleProfileFormSubmit (evt) {
-  evt.preventDefault();
-  profileSubmitButton.textContent = savingStatus;
-  updateUser(nameInput.value, jobInput.value)
-    .then((result)=>{
-      profileName.textContent = result.name;
-      profileJob.textContent = result.about;
-    })
-    .then((result)=>{
-      closePopup(editPopup);
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-    .finally((res) => {
-      profileSubmitButton.textContent = saveStatus;
-    })
-}
+// function handleProfileFormSubmit (evt) {
+//   evt.preventDefault();
+//   profileSubmitButton.textContent = savingStatus;
+//   updateUser(nameInput.value, jobInput.value)
+//     .then((result)=>{
+//       profileName.textContent = result.name;
+//       profileJob.textContent = result.about;
+//     })
+//     .then((result)=>{
+//       closePopup(editPopup);
+//     })
+//     .catch((err) => {
+//       console.log(err)
+//     })
+//     .finally((res) => {
+//       profileSubmitButton.textContent = saveStatus;
+//     })
+// }
 
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
@@ -300,7 +324,7 @@ addButton.addEventListener('click', function(event){
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
 
-profileForm.addEventListener('submit', handleProfileFormSubmit);
+// profileForm.addEventListener('submit', handleProfileFormSubmit);
 
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»

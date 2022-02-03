@@ -78,7 +78,7 @@ export default class Api {
       })
   }
 
-  //update avatar
+  // update avatar
 
   updateAvatar (link) {
     return fetch(`${this.baseUrl}/users/me/avatar`, {
@@ -89,6 +89,25 @@ export default class Api {
       },
       body: JSON.stringify({
         avatar: link,
+      })
+    })
+      .then(res => {
+        return checkResponse(res);
+      })
+  }
+
+  // update user
+
+  updateUser (name, job) {
+    return fetch(`${this.baseUrl}/users/me`, {
+      method: 'PATCH',
+      headers: {
+        authorization: this.headers.authorization,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: name,
+        about: job
       })
     })
       .then(res => {
@@ -116,26 +135,26 @@ export default class Api {
 
 // update user
 
-const configUpdateUser = (name, job) => {
-  return {
-    method: 'PATCH',
-    headers: {
-      authorization: config.headers.authorization,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      name: name,
-      about: job
-    })
-  }
-}
+// const configUpdateUser = (name, job) => {
+//   return {
+//     method: 'PATCH',
+//     headers: {
+//       authorization: config.headers.authorization,
+//       'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify({
+//       name: name,
+//       about: job
+//     })
+//   }
+// }
 
-export const updateUser = (name, job) => {
-  return fetch(`${config.baseUrl}/users/me`, configUpdateUser(name, job))
-    .then(res => {
-      return checkResponse(res);
-    })
-}
+// export const updateUser = (name, job) => {
+//   return fetch(`${config.baseUrl}/users/me`, configUpdateUser(name, job))
+//     .then(res => {
+//       return checkResponse(res);
+//     })
+// }
 
 // update avatar
 

@@ -4,25 +4,34 @@ export default class PopupWithForm extends Popup {
     super(selector);
     this.handleFormSubmit = handleFormSubmit;
     this.formElement = this._element.querySelector('.form');
+    this._inputArray = this.formElement.querySelectorAll('.form__item');
   }
 
   setEventListeners() {
-    // super.setEventListener();
-
     this.formElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
       this._getInputValues();
-      this.handleFormSubmit(this.inputValue)
+      this.handleFormSubmit(this._inputValues)
     });
+
+    // super.setEventListener();
   }
 
   clearInput() {
-    this.inputElement.value = ''; 
+    this._inputArray.forEach((input) => {
+      input.value='';
+    })
+    // this.inputElement.value = ''; 
   }
 
   _getInputValues() {
-    this.inputElement = this._element.querySelector('#avatar-link');
-    this.inputValue = this.inputElement.value;
+    this._inputValues = {};
+
+    this._inputArray.forEach((input) => {
+      this._inputValues[input.name] = input.value;
+    })
+    // this.inputElement = this._element.querySelector('#avatar-link');
+    // this.inputValue = this.inputElement.value;
   }
 
 }
