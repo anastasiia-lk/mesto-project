@@ -88,7 +88,7 @@ export default class Api {
         'Content-Type': 'application/json' 
       },
       body: JSON.stringify({
-        avatar: `${link}`,
+        avatar: link,
       })
     })
       .then(res => {

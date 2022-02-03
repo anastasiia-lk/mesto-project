@@ -75,26 +75,22 @@ const api = new Api ({
   headers: config.headers
 })
 
+const avatarFormValidator = new FormValidator('.avatar-form');
+
 const userInfo = new UserInfo(
   '.profile-edit__title', 
   '.profile-edit__subtitle',
   '.profile__img', 
   {
     getUserData: () => api.getUser(),
-    handleSetAvatar: (avatarLink) => api.updateAvatar(avatarLink)
-  }
-);
-
-const avatarFormValidator = new FormValidator('.avatar-form')
-
-const imagePopupElement = new PopupWithImage('.popup_type_image');
-imagePopupElement.setEventListeners();
-
-const avatarPopupElement = new PopupWithForm('.popup_type_avatar', {
-  handleFormSubmit: (newAvatar) => {
-    userInfo.setUserAvatar(newAvatar)
+    handleSetAvatar: (avatarLink) => {
+      avatarFormValidator.setSavingStatus();
+      api.updateAvatar(avatarLink)
       .then((data) => {
-        userInfo.updateUserInfo(data)
+        userInfo.updateUserInfo(data);
+        avatarPopupElement.clearInput();
+        avatarFormValidator.disableBtnElement();
+        avatarFormValidator.setSaveStatus();
       })
       .then(() => {
         avatarPopupElement.close(); 
@@ -102,7 +98,17 @@ const avatarPopupElement = new PopupWithForm('.popup_type_avatar', {
       .catch((err) => {
         console.log(err)
       })
+    }
   }
+);
+
+const imagePopupElement = new PopupWithImage('.popup_type_image');
+imagePopupElement.setEventListeners();
+
+const avatarPopupElement = new PopupWithForm('.popup_type_avatar', {
+  handleFormSubmit: (newAvatar) => {
+    userInfo.setUserAvatar(newAvatar);
+   }
 })
 
 avatarPopupElement.setEventListeners();
