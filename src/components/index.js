@@ -4,7 +4,7 @@ import '../pages/index.css';
 import { savingStatus, saveStatus, config } from "../utils/constants.js";
 // import { addPopupListener, openPopup, closePopup } from './modal.js';
 import { addPopupListener, openPopup, closePopup } from './modal.js';
-import { enableFormValidation } from './validate.js';
+// import { enableFormValidation } from './validate.js';
 import { addPlace, newPlace } from './card.js';
 import Card from './card.js';
 import UserInfo from './userInfo.js';
@@ -75,8 +75,25 @@ const api = new Api ({
   headers: config.headers
 })
 
-const avatarFormValidator = new FormValidator('.avatar-form');
-const userFormValidator = new FormValidator('.profile-form');
+const avatarFormValidator = new FormValidator({
+  formSelector: '.avatar-form',
+  inputSelector: '.form__item',
+  submitButtonSelector: '.form__button-submit',
+  inactiveButtonClass: 'form__button-submit_inactive',
+  inputErrorClass: 'form__item_type_error',
+  errorClass: 'form__item-error_active'
+});
+const userFormValidator = new FormValidator({
+  formSelector: '.profile-form',
+  inputSelector: '.form__item',
+  submitButtonSelector: '.form__button-submit',
+  inactiveButtonClass: 'form__button-submit_inactive',
+  inputErrorClass: 'form__item_type_error',
+  errorClass: 'form__item-error_active'
+});
+
+avatarFormValidator.enableFormValidation();
+userFormValidator.enableFormValidation();
 
 const userInfo = new UserInfo(
   '.profile-edit__title', 
@@ -282,14 +299,14 @@ function handlePlaceFormSubmit (evt) {
 
 // передача настроек
 
-enableFormValidation({
-  formSelector: '.form',
-  inputSelector: '.form__item',
-  submitButtonSelector: '.form__button-submit',
-  inactiveButtonClass: 'form__button-submit_inactive',
-  inputErrorClass: 'form__item_type_error',
-  errorClass: 'form__item-error_active'
-});
+// enableFormValidation({
+//   formSelector: '.form',
+//   inputSelector: '.form__item',
+//   submitButtonSelector: '.form__button-submit',
+//   inactiveButtonClass: 'form__button-submit_inactive',
+//   inputErrorClass: 'form__item_type_error',
+//   errorClass: 'form__item-error_active'
+// });
 
 // закрыть popup кликои на оверлей или на крестик
 
