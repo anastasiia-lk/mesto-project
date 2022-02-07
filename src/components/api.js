@@ -114,6 +114,25 @@ export default class Api {
         return checkResponse(res);
       })
   }
+
+  // post cards
+
+  postCard (name, link) {
+    return fetch(`${this.baseUrl}/cards`, {
+      method: 'POST',
+      headers: {
+        authorization: this.headers.authorization,
+        'Content-Type': 'application/json; charset=UTF-8'
+      },
+      body: JSON.stringify({
+      name: name,
+      link: link
+      })  
+    })
+      .then(res => {
+        return checkResponse(res);
+      })
+  }
   
 }
 
@@ -191,26 +210,26 @@ export default class Api {
 
 // post cards
 
-const configPostCard = (name, link) => {
-  return {
-    method: 'POST',
-    headers: {
-      authorization: config.headers.authorization,
-      'Content-Type': 'application/json; charset=UTF-8'
-    },
-    body: JSON.stringify({
-    name: name,
-    link: link
-    })
-  }
-}
+// const configPostCard = (name, link) => {
+//   return {
+//     method: 'POST',
+//     headers: {
+//       authorization: config.headers.authorization,
+//       'Content-Type': 'application/json; charset=UTF-8'
+//     },
+//     body: JSON.stringify({
+//     name: name,
+//     link: link
+//     })
+//   }
+// }
 
-export const postCard = (name, link) => {
-  return fetch(`${config.baseUrl}/cards`, configPostCard(name, link))
-    .then(res => {
-      return checkResponse(res);
-    })
-}
+// export const postCard = (name, link) => {
+//   return fetch(`${config.baseUrl}/cards`, configPostCard(name, link))
+//     .then(res => {
+//       return checkResponse(res);
+//     })
+// }
 
 //delete card
 

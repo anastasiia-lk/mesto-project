@@ -146,6 +146,19 @@ const avatarPopupElement = new PopupWithForm('.popup_type_avatar', {
    }
 })
 
+const cardPopupElement = new PopupWithForm('.popup_type_card', {
+  handleFormSubmit: ({'place': place, 'image-link': link}) => {
+    api.postCard(place, link)
+      .then((card) => section.addItem(card))
+      .then(() => {
+        cardPopupElement.close();
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+   }
+})
+
 const userPopupElement = new PopupWithForm('.popup_type_profile', {
   handleFormSubmit: ({'person': name, 'profession': about}) => {
     userInfo.setUserData(name, about);
@@ -154,6 +167,7 @@ const userPopupElement = new PopupWithForm('.popup_type_profile', {
 
 avatarPopupElement.setEventListeners();
 userPopupElement.setEventListeners();
+cardPopupElement.setEventListeners();
 
 const section = new Section ({
   renderer: (item) => {
@@ -296,27 +310,27 @@ function initPage () {
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
 
-function handlePlaceFormSubmit (evt) {
-  evt.preventDefault();
-  placeSubmitButton.textContent = savingStatus;
-  postCard (placeInput.value, imageLinkInput.value)
-    .then((result)=>{
-      const card = newPlace(result, currentUser);
-      addPlace(card);
-    })
-    .then((result)=>{
-      addCardForm.reset();
-      placeSubmitButton.disabled = true;
-      placeSubmitButton.classList.add('form__button-submit_inactive');
-      closePopup(addPopup);
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-    .finally((res) => {
-      placeSubmitButton.textContent = saveStatus;
-    })
-}
+// function handlePlaceFormSubmit (evt) {
+//   evt.preventDefault();
+//   placeSubmitButton.textContent = savingStatus;
+//   postCard (placeInput.value, imageLinkInput.value)
+//     .then((result)=>{
+//       const card = newPlace(result, currentUser);
+//       addPlace(card);
+//     })
+//     .then((result)=>{
+//       addCardForm.reset();
+//       placeSubmitButton.disabled = true;
+//       placeSubmitButton.classList.add('form__button-submit_inactive');
+//       closePopup(addPopup);
+//     })
+//     .catch((err) => {
+//       console.log(err)
+//     })
+//     .finally((res) => {
+//       placeSubmitButton.textContent = saveStatus;
+//     })
+// }
 
 // function handleAvatarFormSubmit (evt) {
 //   evt.preventDefault();
@@ -384,7 +398,7 @@ editButton.addEventListener('click', function(event){
 //нажимаем кнопку добавить карточку
 
 addButton.addEventListener('click', function(event){
-  openPopup(addPopup);
+  cardPopupElement.open();
 });
 
 // Прикрепляем обработчик к форме:
@@ -395,7 +409,7 @@ addButton.addEventListener('click', function(event){
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
 
-addCardForm.addEventListener('submit', handlePlaceFormSubmit);
+// addCardForm.addEventListener('submit', handlePlaceFormSubmit);
 
 // avatarForm.addEventListener('submit', handleAvatarFormSubmit);
 
