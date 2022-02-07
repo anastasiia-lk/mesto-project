@@ -366,21 +366,15 @@ function initPage () {
 
 // закрыть popup кликои на оверлей или на крестик
 
-addPopupListener();
+// addPopupListener();
 
-// показать значок редактирования аватара
-
-// profileAvatar.addEventListener('mouseover', showEdit);
-// profileAvatar.addEventListener('mouseout', hideEdit);
+// нажимаем кнопку редактировать аватар
 
 profileEdit.addEventListener('click', function(event){
   avatarPopupElement.open();
 });
 
-// profileEdit.addEventListener('mouseover', addHoverAvatar);
-// profileEdit.addEventListener('mouseout', hideHoverAvatar);
-
-//нажимаем кнопку редактировать профиль
+// нажимаем кнопку редактировать профиль
 
 editButton.addEventListener('click', function(event){
   userPopupElement.open();
@@ -389,31 +383,15 @@ editButton.addEventListener('click', function(event){
       userPopupElement.setInputValue('person', userData.name);
       userPopupElement.setInputValue('profession', userData.about); 
     })
-  // userPopupElement.setInputValue('person', userInfo.getUserInfo().name);
-  // userPopupElement.setInputValue('profession', 'world');
-  // nameInput.value = profileName.textContent;
-  // jobInput.value = profileJob.textContent;
 });
 
-//нажимаем кнопку добавить карточку
+// нажимаем кнопку добавить карточку
 
 addButton.addEventListener('click', function(event){
   cardPopupElement.open();
 });
 
-// Прикрепляем обработчик к форме:
-// он будет следить за событием “submit” - «отправка»
-
-// profileForm.addEventListener('submit', handleProfileFormSubmit);
-
-// Прикрепляем обработчик к форме:
-// он будет следить за событием “submit” - «отправка»
-
-// addCardForm.addEventListener('submit', handlePlaceFormSubmit);
-
-// avatarForm.addEventListener('submit', handleAvatarFormSubmit);
-
-//инициализация страницы
+// инициализация страницы
 
 initPage();
 
