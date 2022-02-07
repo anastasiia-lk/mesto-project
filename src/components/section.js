@@ -20,8 +20,4 @@ export default class Section {
   clear() {
     this.container.innerHTML = '';
   }
-
-  // clear() {
-  //   this.container.innerHTML = '';
-  // }
 }

@@ -201,9 +201,12 @@ function initPage () {
       // profileName.textContent = userData.name;
       // profileJob.textContent = userData.about;
       // currentUser = userData._id;
-      
+      console.log(userData);
       userInfo.showUserInfo(userData.name, userData.about, userData.avatar);
       userInfo.updateUserInfo(userData);
+
+      // userPopupElement.setInputValue('person', userData.name);
+      // userPopupElement.setInputValue('profession', userData.name); 
 
       section.addSection(cards);
       // и тут отрисовка карточек
@@ -253,21 +256,21 @@ function initPage () {
 
 // обновить аватар
 
-function showEdit (evt) {
-  profileEdit.classList.add('profile__edit-label_show');
-}
+// function showEdit (evt) {
+//   profileEdit.classList.add('profile__edit-label_show');
+// }
 
-function hideEdit (evt) {
-  profileEdit.classList.remove('profile__edit-label_show');
-}
+// function hideEdit (evt) {
+//   profileEdit.classList.remove('profile__edit-label_show');
+// }
 
-function addHoverAvatar (evt) {
-  profileAvatar.classList.add('profile__img:hover')
-}
+// function addHoverAvatar (evt) {
+//   profileAvatar.classList.add('profile__img:hover')
+// }
 
-function hideHoverAvatar (evt) {
-  profileAvatar.classList.remove('profile__img:hover')
-}
+// function hideHoverAvatar (evt) {
+//   profileAvatar.classList.remove('profile__img:hover')
+// }
 
 // Обработчик «отправки» формы
 
@@ -357,7 +360,7 @@ addPopupListener();
 // profileAvatar.addEventListener('mouseout', hideEdit);
 
 profileEdit.addEventListener('click', function(event){
-  openPopup(avatarPopup);
+  avatarPopupElement.open();
 });
 
 // profileEdit.addEventListener('mouseover', addHoverAvatar);
@@ -366,9 +369,11 @@ profileEdit.addEventListener('click', function(event){
 //нажимаем кнопку редактировать профиль
 
 editButton.addEventListener('click', function(event){
-  openPopup(editPopup);
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileJob.textContent;
+  userPopupElement.open();
+  // userPopupElement.setInputValue('person', userInfo.getUserInfo().name);
+  // userPopupElement.setInputValue('profession', 'world');
+  // nameInput.value = profileName.textContent;
+  // jobInput.value = profileJob.textContent;
 });
 
 //нажимаем кнопку добавить карточку
