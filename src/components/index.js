@@ -205,8 +205,8 @@ function initPage () {
       userInfo.showUserInfo(userData.name, userData.about, userData.avatar);
       userInfo.updateUserInfo(userData);
 
-      // userPopupElement.setInputValue('person', userData.name);
-      // userPopupElement.setInputValue('profession', userData.name); 
+      userPopupElement.setInputValue('person', userData.name);
+      userPopupElement.setInputValue('profession', userData.about); 
 
       section.addSection(cards);
       // и тут отрисовка карточек
@@ -370,6 +370,11 @@ profileEdit.addEventListener('click', function(event){
 
 editButton.addEventListener('click', function(event){
   userPopupElement.open();
+  userInfo.getUserInfo()
+    .then((userData) => {
+      userPopupElement.setInputValue('person', userData.name);
+      userPopupElement.setInputValue('profession', userData.about); 
+    })
   // userPopupElement.setInputValue('person', userInfo.getUserInfo().name);
   // userPopupElement.setInputValue('profession', 'world');
   // nameInput.value = profileName.textContent;
