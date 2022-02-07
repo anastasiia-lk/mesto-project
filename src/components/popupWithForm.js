@@ -21,7 +21,6 @@ export default class PopupWithForm extends Popup {
     this._inputArray.forEach((input) => {
       input.value='';
     })
-    // this.inputElement.value = ''; 
   }
 
   _getInputValues() {
@@ -30,12 +29,9 @@ export default class PopupWithForm extends Popup {
     this._inputArray.forEach((input) => {
       this._inputValues[input.name] = input.value;
     })
-    // this.inputElement = this._element.querySelector('#avatar-link');
-    // this.inputValue = this.inputElement.value;
   }
 
   setInputValue(inputName, inputValue) {
     this.formElement.elements[inputName].value = inputValue;
   }
-
 }
