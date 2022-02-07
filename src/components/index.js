@@ -2,13 +2,13 @@
 
 import '../pages/index.css';
 import { config } from "../utils/constants.js";
-import Card from './card.js';
-import UserInfo from './userInfo.js';
-import Api from './api.js';
-import PopupWithImage from './popupWithImage';
-import PopupWithForm from './popupWithForm';
-import FormValidator from './formValidator';
-import Section from './section';
+import Card from './Card.js';
+import UserInfo from './UserInfo.js';
+import Api from './Api.js';
+import PopupWithImage from './PopupWithImage';
+import PopupWithForm from './PopupWithForm';
+import FormValidator from './FormValidator';
+import Section from './Section';
 
 // кнопки
 
@@ -16,11 +16,14 @@ const editAvatarBtn = document.querySelector('.profile__edit-label');
 const editProfileBtn = document.querySelector('.profile__button-edit');
 const addCardBtn = document.querySelector('.profile__button-add');
 
+// инициализация Api
 
 const api = new Api ({
   baseUrl: config.baseUrl,
   headers: config.headers
 })
+
+// инициализация валидаторов форм
 
 const avatarFormValidator = new FormValidator({
   formSelector: '.avatar-form',
@@ -42,6 +45,8 @@ const userFormValidator = new FormValidator({
 
 avatarFormValidator.enableFormValidation();
 userFormValidator.enableFormValidation();
+
+// инициализация пользователя
 
 const userInfo = new UserInfo(
   '.profile-edit__title', 
@@ -84,8 +89,9 @@ const userInfo = new UserInfo(
   }
 );
 
+// инициализация попапов
+
 const imagePopupElement = new PopupWithImage('.popup_type_image');
-imagePopupElement.setEventListeners();
 
 const avatarPopupElement = new PopupWithForm('.popup_type_avatar', {
   handleFormSubmit: ({'avatar-link': newAvatar}) => {
@@ -112,9 +118,14 @@ const userPopupElement = new PopupWithForm('.popup_type_profile', {
    }
 })
 
+// инициализация слушателей попапов
+
+imagePopupElement.setEventListeners();
 avatarPopupElement.setEventListeners();
 userPopupElement.setEventListeners();
 cardPopupElement.setEventListeners();
+
+// инициализация секции с карточками
 
 const section = new Section ({
   renderer: (item) => {
@@ -153,6 +164,8 @@ const section = new Section ({
   '.elements'
 );
 
+// отрисовка страницы
+
 function initPage () {
 Promise.all([userInfo.getUserInfo(), api.getCards()])
   .then(([userData, cards]) => {
@@ -168,6 +181,8 @@ Promise.all([userInfo.getUserInfo(), api.getCards()])
     console.log(err);
   });
 }
+
+// инициализация слушателей кнопок
 
 // нажимаем кнопку редактировать аватар
 

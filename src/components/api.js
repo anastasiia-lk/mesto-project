@@ -53,7 +53,7 @@ export default class Api {
       headers: this.headers,
     })
       .then(res => {
-        return checkResponse(res);
+        return this._checkResponse(res);
       })
   }
 
@@ -65,7 +65,7 @@ export default class Api {
       headers: this.headers,
     })
       .then(res => {
-        return checkResponse(res);
+        return this._checkResponse(res);
       })
   }
 
@@ -83,7 +83,7 @@ export default class Api {
       })
     })
       .then(res => {
-        return checkResponse(res);
+        return this._checkResponse(res);
       })
   }
 
@@ -102,7 +102,7 @@ export default class Api {
       })
     })
       .then(res => {
-        return checkResponse(res);
+        return this._checkResponse(res);
       })
   }
 
@@ -121,7 +121,7 @@ export default class Api {
       })  
     })
       .then(res => {
-        return checkResponse(res);
+        return this._checkResponse(res);
       })
   }
 }
