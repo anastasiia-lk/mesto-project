@@ -1,4 +1,4 @@
-import { savingStatus, saveStatus } from '../utils/constants.js';
+import { SAVING_STATUS, SAVE_STATUS } from '../utils/constants.js';
 
 export default class FormValidator {
   constructor({ formSelector, inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass }) {
@@ -12,11 +12,11 @@ export default class FormValidator {
   }
 
   setSavingStatus() {
-    this.btnElement.textContent = savingStatus;
+    this.btnElement.textContent = SAVING_STATUS;
   }
 
   setSaveStatus() {
-    this.btnElement.textContent = saveStatus;
+    this.btnElement.textContent = SAVE_STATUS;
   }
   
   disableBtnElement() {

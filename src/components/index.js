@@ -1,7 +1,7 @@
 // необходимые импорты
 
 import '../pages/index.css';
-import { config } from "../utils/constants.js";
+import { CONFIG } from "../utils/constants.js";
 import Card from './Card.js';
 import UserInfo from './UserInfo.js';
 import Api from './Api.js';
@@ -19,8 +19,8 @@ const addCardBtn = document.querySelector('.profile__button-add');
 // инициализация Api
 
 const api = new Api ({
-  baseUrl: config.baseUrl,
-  headers: config.headers
+  baseUrl: CONFIG.baseUrl,
+  headers: CONFIG.headers
 })
 
 // инициализация валидаторов форм
