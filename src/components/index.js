@@ -15,6 +15,7 @@ import Popup from './popup';
 import PopupWithImage from './popupWithImage';
 import PopupWithForm from './popupWithForm';
 import FormValidator from './formValidator';
+import Section from './section';
 
 // нажимаем кнопку редактировать профиль
 
@@ -154,6 +155,43 @@ const userPopupElement = new PopupWithForm('.popup_type_profile', {
 avatarPopupElement.setEventListeners();
 userPopupElement.setEventListeners();
 
+const section = new Section ({
+  renderer: (item) => {
+    const card = new Card (
+      item,
+      '#place-template', {
+        setLike: (cardId) => {
+          api.addLike(cardId)
+          .then((result) => {
+            card.calcLikes(result.likes)
+          })
+          .catch((err) => console.log(err))
+        },
+        removeLike: (cardId) => {
+          api.deleteLike(cardId)
+          .then((result) => {
+            card.calcLikes(result.likes)
+          })
+          .catch((err) => console.log(err))
+        },
+        removeCard: (cardId) => {
+          api.deleteCard(cardId)
+          .then((result) => {
+            card.eraseCard();  
+          })
+        },
+        openImagePopup: () => {
+          imagePopupElement.open(item.link, item.name);
+        }
+      },
+      userInfo.getUserId()
+    );
+    return card.generate();
+  },
+  }, 
+  '.elements'
+);
+
 function initPage () {
 
   Promise.all([userInfo.getUserInfo(), api.getCards()])
@@ -167,44 +205,45 @@ function initPage () {
       userInfo.showUserInfo(userData.name, userData.about, userData.avatar);
       userInfo.updateUserInfo(userData);
 
+      section.addSection(cards);
       // и тут отрисовка карточек
       // cards.forEach(function(item){
       //   const card = newPlace(item, currentUser);
       //   addPlace(card);
       //   })
-      cards.forEach(function(item){
-        const card = new Card(
-          item,
-          '#place-template', 
-          {
-            setLike: (cardId) => {
-              api.addLike(cardId)
-              .then((result) => {
-                card.calcLikes(result.likes)
-              })
-              .catch((err) => console.log(err))
-            },
-            removeLike: (cardId) => {
-              api.deleteLike(cardId)
-              .then((result) => {
-                card.calcLikes(result.likes)
-              })
-              .catch((err) => console.log(err))
-            },
-            removeCard: (cardId) => {
-              api.deleteCard(cardId)
-              .then((result) => {
-                card.eraseCard();  
-              })
-            },
-            openImagePopup: () => {
-              imagePopupElement.open(item.link, item.name);
-            }
-          },
-          userInfo.getUserId()
-        );
-        addPlace(card.generate());
-      })
+      // cards.forEach(function(item){
+      //   const card = new Card(
+      //     item,
+      //     '#place-template', 
+      //     {
+      //       setLike: (cardId) => {
+      //         api.addLike(cardId)
+      //         .then((result) => {
+      //           card.calcLikes(result.likes)
+      //         })
+      //         .catch((err) => console.log(err))
+      //       },
+      //       removeLike: (cardId) => {
+      //         api.deleteLike(cardId)
+      //         .then((result) => {
+      //           card.calcLikes(result.likes)
+      //         })
+      //         .catch((err) => console.log(err))
+      //       },
+      //       removeCard: (cardId) => {
+      //         api.deleteCard(cardId)
+      //         .then((result) => {
+      //           card.eraseCard();  
+      //         })
+      //       },
+      //       openImagePopup: () => {
+      //         imagePopupElement.open(item.link, item.name);
+      //       }
+      //     },
+      //     userInfo.getUserId()
+      //   );
+      //   addPlace(card.generate());
+      // })
     })
   .catch(err => {
     // тут ловим ошибку

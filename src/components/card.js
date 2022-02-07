@@ -67,6 +67,7 @@ export default class Card {
   }
 
   _getElement() {
+
     const cardElement = document
     .querySelector(this._selector)
     .content
