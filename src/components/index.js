@@ -91,15 +91,33 @@ const userInfo = new UserInfo(
 
 // инициализация попапов
 
-const imagePopupElement = new PopupWithImage('.popup_type_image');
+const imagePopupElement = new PopupWithImage({ 
+  popupSelector: '.popup_type_image',
+  popupOpenedSelector: 'popup_opened',
+  btnCloseSelector: 'popup__button-close'}, {
+  imgSelector: '.view-image__item',
+  nameSelector: '.view-image__caption'
+  });
 
-const avatarPopupElement = new PopupWithForm('.popup_type_avatar', {
+const avatarPopupElement = new PopupWithForm({ 
+  popupSelector: '.popup_type_avatar', 
+  popupOpenedSelector: 'popup_opened',
+  btnCloseSelector: 'popup__button-close' }, {
+  formSelector: '.form',
+  formInputSelector: '.form__item'
+  }, {
   handleFormSubmit: ({'avatar-link': newAvatar}) => {
     userInfo.setUserAvatar(newAvatar);
    }
 })
 
-const cardPopupElement = new PopupWithForm('.popup_type_card', {
+const cardPopupElement = new PopupWithForm({ 
+  popupSelector: '.popup_type_card', 
+  popupOpenedSelector: 'popup_opened',
+  btnCloseSelector: 'popup__button-close' }, {
+  formSelector: '.form',
+  formInputSelector: '.form__item'
+  }, {
   handleFormSubmit: ({'place': place, 'image-link': link}) => {
     api.postCard(place, link)
       .then((card) => section.addItem(card))
@@ -113,7 +131,13 @@ const cardPopupElement = new PopupWithForm('.popup_type_card', {
    }
 })
 
-const userPopupElement = new PopupWithForm('.popup_type_profile', {
+const userPopupElement = new PopupWithForm({ 
+  popupSelector: '.popup_type_profile', 
+  popupOpenedSelector: 'popup_opened',
+  btnCloseSelector: 'popup__button-close' }, {
+  formSelector: '.form',
+  formInputSelector: '.form__item'
+  },{
   handleFormSubmit: ({'person': name, 'profession': about}) => {
     userInfo.setUserData(name, about);
    }

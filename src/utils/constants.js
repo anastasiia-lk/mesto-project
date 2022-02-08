@@ -7,3 +7,5 @@ export const CONFIG = {
     authorization: '31d8c365-d1c0-426e-b228-1cdaf2cce2be',
   }
 }
+
+export const ESC_KEY_CODE = 'Escape'
