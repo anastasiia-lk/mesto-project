@@ -105,6 +105,7 @@ const cardPopupElement = new PopupWithForm('.popup_type_card', {
       .then((card) => section.addItem(card))
       .then(() => {
         cardPopupElement.close();
+        cardPopupElement.clearInput();
       })
       .catch((err) => {
         console.log(err)
@@ -131,7 +132,15 @@ const section = new Section ({
   renderer: (item) => {
     const card = new Card (
       item,
-      '#place-template', {
+      { cardTemplateSelector: '#place-template', 
+        likeCaptionSelector: '.like-block__caption',
+        likeBtnSelector: '.card__button-like',
+        likeBtnActiveSelector: 'active',
+        trashBtnSelector: '.card__button-trash',
+        trashBtnCreatedSelector: 'card__button-trash_created',
+        imgSelector: '.card__image',
+        nameSelector: '.card__caption-name',
+        cardSelector: '.card'}, {
         setLike: (cardId) => {
           api.addLike(cardId)
           .then((result) => {
