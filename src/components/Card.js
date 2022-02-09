@@ -84,8 +84,8 @@ export default class Card {
     this.calcLikes(this._likes);
     this.printLikes(this._likes.length);
 
-    this._element.querySelector(this._imgSelector).setAttribute('src', this._link);
-    this._element.querySelector(this._imgSelector).setAttribute('alt', this._name);
+    this._viewImage.setAttribute('src', this._link);
+    this._viewImage.setAttribute('alt', this._name);
     this._element.querySelector(this._nameSelector).textContent = this._name;
 
     this._showTrashBtn();

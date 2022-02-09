@@ -6,17 +6,15 @@ export default class PopupWithImage extends Popup {
     super({ popupSelector, popupOpenedSelector, btnCloseSelector }, { imgSelector, nameSelector });
     this._imgSelector = imgSelector;
     this._nameSelector = nameSelector;
+    this._image = this._element.querySelector(this._imgSelector);
+    this._caption = this._element.querySelector(this._nameSelector);
   }
   
   open(imageLink, imageName) {
-    this._image = this._element.querySelector(this._imgSelector);
-    this._caption = this._element.querySelector(this._nameSelector);
-
     this._image.setAttribute('src', imageLink);
     this._image.setAttribute('alt', imageName);
     this._caption.textContent = imageName;
 
-    this._element.classList.add(this.popupOpenedSelector);
-    document.addEventListener('keydown', this._handleEscClose);
+    super.open();
   }
 }

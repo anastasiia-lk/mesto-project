@@ -9,7 +9,7 @@ export default class Popup {
   }
 
   setEventListeners() {
-    this._element.addEventListener('click', (evt) => {
+    this._element.addEventListener('mousedown', (evt) => {
       if (evt.target.classList.contains(this.popupOpenedSelector) || evt.target.classList.contains(this.btnCloseSelector)){
         this.close();
       }
