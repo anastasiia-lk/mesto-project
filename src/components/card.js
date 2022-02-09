@@ -30,7 +30,6 @@ export default class Card {
   }
 
   printLikes(count) {
-    this._likesCounter = this._element.querySelector(this._likeCaptionSelector);
     this._likesCounter.textContent = count;  
   }
 
@@ -96,6 +95,7 @@ export default class Card {
 
   _setEventListeners() {
     this._likeBtn = this._element.querySelector(this._likeBtnSelector);
+    this._likesCounter = this._element.querySelector(this._likeCaptionSelector);
     this._trashBtn = this._element.querySelector(this._trashBtnSelector);
     this._viewImage = this._element.querySelector(this._imgSelector);
 
