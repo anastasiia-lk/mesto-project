@@ -239,6 +239,7 @@ editAvatarBtn.addEventListener('click', function(event){
 // нажимаем кнопку редактировать профиль
 
 editProfileBtn.addEventListener('click', function(event){
+  userFormValidator.clearInputsError();
   userPopupElement.open();
   userInfo.getUserInfo()
     .then((userData) => {
@@ -250,6 +251,8 @@ editProfileBtn.addEventListener('click', function(event){
 // нажимаем кнопку добавить карточку
 
 addCardBtn.addEventListener('click', function(event){
+  cardPopupElement.clearInput();
+  cardFormValidator.clearInputsError();
   cardPopupElement.open();
 });
 
