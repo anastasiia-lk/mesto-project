@@ -13,11 +13,6 @@ export default class UserInfo {
     return this._getUserData();
   }
 
-  setUserInfo(name, about) {
-    this._userNameElement.textContent = this.data.name;
-    this._userAboutElement.textContent = this.data.about;
-  }
-
   showUserInfo(name, about, avatar) {
     this._userNameElement.textContent = name;
     this._userAboutElement.textContent = about;

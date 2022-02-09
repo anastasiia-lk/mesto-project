@@ -5,13 +5,13 @@ export default class PopupWithImage extends Popup {
   }) {
     super({ popupSelector, popupOpenedSelector, btnCloseSelector }, { imgSelector, nameSelector });
     this._element = document.querySelector(popupSelector);
-    this.imgSelector = imgSelector;
-    this.nameSelector = nameSelector;
+    this._imgSelector = imgSelector;
+    this._nameSelector = nameSelector;
   }
   
   open(imageLink, imageName) {
-    this._image = this._element.querySelector(this.imgSelector);
-    this._caption = this._element.querySelector(this.nameSelector);
+    this._image = this._element.querySelector(this._imgSelector);
+    this._caption = this._element.querySelector(this._nameSelector);
 
     this._image.setAttribute('src', imageLink);
     this._image.setAttribute('alt', imageName);

@@ -1,7 +1,7 @@
 export default class Section {
   constructor( { renderer }, containerSelector) {
-    this.renderer = renderer;
-    this.container = document.querySelector(containerSelector);
+    this._renderer = renderer;
+    this._container = document.querySelector(containerSelector);
   }
 
   addSection(cards) {
@@ -13,11 +13,11 @@ export default class Section {
   }
 
   addItem(item) {
-    const element = this.renderer(item);
-    this.container.prepend(element);
+    const element = this._renderer(item);
+    this._container.prepend(element);
   }
 
   clear() {
-    this.container.innerHTML = '';
+    this._container.innerHTML = '';
   }
 }

@@ -233,6 +233,8 @@ Promise.all([userInfo.getUserInfo(), api.getCards()])
 // нажимаем кнопку редактировать аватар
 
 editAvatarBtn.addEventListener('click', function(event){
+  avatarPopupElement.clearInput();
+  avatarFormValidator.clearInputsError();
   avatarPopupElement.open();
 });
 
