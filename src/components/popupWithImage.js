@@ -4,7 +4,6 @@ export default class PopupWithImage extends Popup {
     imgSelector, nameSelector
   }) {
     super({ popupSelector, popupOpenedSelector, btnCloseSelector }, { imgSelector, nameSelector });
-    this._element = document.querySelector(popupSelector);
     this._imgSelector = imgSelector;
     this._nameSelector = nameSelector;
   }
