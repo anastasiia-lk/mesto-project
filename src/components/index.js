@@ -134,6 +134,7 @@ const cardPopupElement = new PopupWithForm({
       .then(() => {
         cardPopupElement.close();
         cardPopupElement.clearInput();
+        cardFormValidator.disableBtnElement();
       })
       .catch((err) => {
         console.log(err)
