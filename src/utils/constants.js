@@ -9,3 +9,30 @@ export const CONFIG = {
 }
 
 export const ESC_KEY_CODE = 'Escape'
+
+export const PROFILE_FORM_CONFIG = {
+  formSelector: '.profile-form',
+  inputSelector: '.form__item',
+  submitButtonSelector: '.form__button-submit',
+  inactiveButtonClass: 'form__button-submit_inactive',
+  inputErrorClass: 'form__item_type_error',
+  errorClass: 'form__item-error_active'
+}
+
+export const CARD_FORM_CONFIG = {
+  formSelector: '.place-form',
+  inputSelector: '.form__item',
+  submitButtonSelector: '.form__button-submit',
+  inactiveButtonClass: 'form__button-submit_inactive',
+  inputErrorClass: 'form__item_type_error',
+  errorClass: 'form__item-error_active'
+}
+
+export const AVATAR_FORM_CONFIG = {
+  formSelector: '.avatar-form',
+  inputSelector: '.form__item',
+  submitButtonSelector: '.form__button-submit',
+  inactiveButtonClass: 'form__button-submit_inactive',
+  inputErrorClass: 'form__item_type_error',
+  errorClass: 'form__item-error_active'
+}

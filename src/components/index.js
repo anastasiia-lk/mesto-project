@@ -1,7 +1,7 @@
 // необходимые импорты
 
 import '../pages/index.css';
-import { CONFIG } from "../utils/constants.js";
+import { CONFIG, PROFILE_FORM_CONFIG, CARD_FORM_CONFIG, AVATAR_FORM_CONFIG } from "../utils/constants.js";
 import Card from './Card.js';
 import UserInfo from './UserInfo.js';
 import Api from './Api.js';
@@ -25,32 +25,11 @@ const api = new Api ({
 
 // инициализация валидаторов форм
 
-const avatarFormValidator = new FormValidator({
-  formSelector: '.avatar-form',
-  inputSelector: '.form__item',
-  submitButtonSelector: '.form__button-submit',
-  inactiveButtonClass: 'form__button-submit_inactive',
-  inputErrorClass: 'form__item_type_error',
-  errorClass: 'form__item-error_active'
-});
+const avatarFormValidator = new FormValidator(AVATAR_FORM_CONFIG);
 
-const userFormValidator = new FormValidator({
-  formSelector: '.profile-form',
-  inputSelector: '.form__item',
-  submitButtonSelector: '.form__button-submit',
-  inactiveButtonClass: 'form__button-submit_inactive',
-  inputErrorClass: 'form__item_type_error',
-  errorClass: 'form__item-error_active'
-});
+const userFormValidator = new FormValidator(PROFILE_FORM_CONFIG);
 
-const cardFormValidator = new FormValidator({
-  formSelector: '.place-form',
-  inputSelector: '.form__item',
-  submitButtonSelector: '.form__button-submit',
-  inactiveButtonClass: 'form__button-submit_inactive',
-  inputErrorClass: 'form__item_type_error',
-  errorClass: 'form__item-error_active'
-});
+const cardFormValidator = new FormValidator(CARD_FORM_CONFIG);
 
 avatarFormValidator.enableFormValidation();
 userFormValidator.enableFormValidation();
@@ -69,11 +48,13 @@ const userInfo = new UserInfo(
       api.updateAvatar(avatarLink)
       .then((data) => {
         userInfo.updateUserInfo(data);
-        avatarFormValidator.disableBtnElement();
-        avatarPopupElement.setSaveStatus();
       })
       .then(() => {
         avatarPopupElement.close(); 
+      })
+      .finally(() => {
+        avatarFormValidator.disableBtnElement();
+        avatarPopupElement.setSaveStatus();
       })
       .catch((err) => {
         console.log(err)
@@ -84,11 +65,13 @@ const userInfo = new UserInfo(
       api.updateUser(name, about)
       .then((data) => {
         userInfo.updateUserInfo(data);
-        userFormValidator.disableBtnElement();
-        userPopupElement.setSaveStatus();
       })
       .then(() => {
         userPopupElement.close(); 
+      })
+      .finally(() => {
+        userFormValidator.disableBtnElement();
+        userPopupElement.setSaveStatus();
       })
       .catch((err) => {
         console.log(err)
@@ -134,6 +117,8 @@ const cardPopupElement = new PopupWithForm({
       .then((card) => section.addItem(card))
       .then(() => {
         cardPopupElement.close();
+      })
+      .finally(() => {
         cardFormValidator.disableBtnElement();
         cardPopupElement.setSaveStatus();
       })
@@ -241,6 +226,7 @@ editAvatarBtn.addEventListener('click', function(event){
 
 editProfileBtn.addEventListener('click', function(event){
   userFormValidator.clearInputsError();
+  cardFormValidator.disableBtnElement();
   userPopupElement.open();
   userInfo.getUserInfo()
     .then((userData) => {
@@ -254,6 +240,7 @@ editProfileBtn.addEventListener('click', function(event){
 addCardBtn.addEventListener('click', function(event){
   cardPopupElement.clearInput();
   cardFormValidator.clearInputsError();
+  cardFormValidator.disableBtnElement();
   cardPopupElement.open();
 });
 

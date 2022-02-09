@@ -55,4 +55,9 @@ export default class PopupWithForm extends Popup {
     
     this.clearInput();
   }
+
+  // disableBtnElement() {
+  //   this._btnElement.disabled = true;
+  //   this._btnElement.classList.add(this._inactiveButtonClass);
+  // }
 }
