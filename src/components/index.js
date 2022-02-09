@@ -43,8 +43,18 @@ const userFormValidator = new FormValidator({
   errorClass: 'form__item-error_active'
 });
 
+const cardFormValidator = new FormValidator({
+  formSelector: '.place-form',
+  inputSelector: '.form__item',
+  submitButtonSelector: '.form__button-submit',
+  inactiveButtonClass: 'form__button-submit_inactive',
+  inputErrorClass: 'form__item_type_error',
+  errorClass: 'form__item-error_active'
+});
+
 avatarFormValidator.enableFormValidation();
 userFormValidator.enableFormValidation();
+cardFormValidator.enableFormValidation();
 
 // инициализация пользователя
 
