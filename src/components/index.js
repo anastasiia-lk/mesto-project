@@ -69,7 +69,6 @@ const userInfo = new UserInfo(
       api.updateAvatar(avatarLink)
       .then((data) => {
         userInfo.updateUserInfo(data);
-        avatarPopupElement.clearInput();
         avatarFormValidator.disableBtnElement();
         avatarPopupElement.setSaveStatus();
       })
@@ -85,7 +84,6 @@ const userInfo = new UserInfo(
       api.updateUser(name, about)
       .then((data) => {
         userInfo.updateUserInfo(data);
-        userPopupElement.clearInput();
         userFormValidator.disableBtnElement();
         userPopupElement.setSaveStatus();
       })
@@ -136,7 +134,6 @@ const cardPopupElement = new PopupWithForm({
       .then((card) => section.addItem(card))
       .then(() => {
         cardPopupElement.close();
-        cardPopupElement.clearInput();
         cardFormValidator.disableBtnElement();
         cardPopupElement.setSaveStatus();
       })

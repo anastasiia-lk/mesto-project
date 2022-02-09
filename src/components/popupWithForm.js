@@ -49,4 +49,10 @@ export default class PopupWithForm extends Popup {
   setSaveStatus() {
     this._btnElement.textContent = SAVE_STATUS;
   }
+
+  close() {
+    super.close();
+    
+    this.clearInput();
+  }
 }

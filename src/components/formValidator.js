@@ -1,5 +1,3 @@
-import { SAVING_STATUS, SAVE_STATUS } from '../utils/constants.js';
-
 export default class FormValidator {
   constructor({ formSelector, inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass }) {
     this._formElement = document.querySelector(formSelector);
