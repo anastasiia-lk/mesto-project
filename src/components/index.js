@@ -215,7 +215,6 @@ const section = new Section ({
 function initPage () {
 Promise.all([userInfo.getUserInfo(), api.getCards()])
   .then(([userData, cards]) => {
-      userInfo.showUserInfo(userData.name, userData.about, userData.avatar);
       userInfo.updateUserInfo(userData);
 
       userPopupElement.setInputValue('person', userData.name);
