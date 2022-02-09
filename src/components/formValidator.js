@@ -10,14 +10,6 @@ export default class FormValidator {
     this._errorClass = errorClass;
     this._btnElement = this._formElement.querySelector(this._submitButtonSelector);
   }
-
-  setSavingStatus() {
-    this._btnElement.textContent = SAVING_STATUS;
-  }
-
-  setSaveStatus() {
-    this._btnElement.textContent = SAVE_STATUS;
-  }
   
   disableBtnElement() {
     this._btnElement.disabled = true;

@@ -1,14 +1,18 @@
+import { SAVING_STATUS, SAVE_STATUS } from '../utils/constants.js';
+
 import Popup from './Popup.js';
 export default class PopupWithForm extends Popup {
   constructor({ popupSelector, popupOpenedSelector, btnCloseSelector }, {
-    formSelector, formInputSelector }, { handleFormSubmit })  {
+    formSelector, formInputSelector, formSubmitSelector }, { handleFormSubmit })  {
     super({ popupSelector, popupOpenedSelector, btnCloseSelector });
     this._element = document.querySelector(popupSelector);
     this._handleFormSubmit = handleFormSubmit;
     this._formSelector = formSelector;
     this._formInputSelector = formInputSelector;
+    this._formSubmitSelector = formSubmitSelector;
     this._formElement = this._element.querySelector(this._formSelector);
     this._inputArray = this._formElement.querySelectorAll(this._formInputSelector);
+    this._btnElement = this._formElement.querySelector(this._formSubmitSelector);
   }
 
   setEventListeners() {
@@ -37,5 +41,13 @@ export default class PopupWithForm extends Popup {
 
   setInputValue(inputName, inputValue) {
     this._formElement.elements[inputName].value = inputValue;
+  }
+
+  setSavingStatus() {
+    this._btnElement.textContent = SAVING_STATUS;
+  }
+
+  setSaveStatus() {
+    this._btnElement.textContent = SAVE_STATUS;
   }
 }

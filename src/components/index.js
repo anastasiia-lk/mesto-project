@@ -65,13 +65,13 @@ const userInfo = new UserInfo(
   {
     getUserData: () => api.getUser(),
     handleSetAvatar: (avatarLink) => {
-      avatarFormValidator.setSavingStatus();
+      avatarPopupElement.setSavingStatus();
       api.updateAvatar(avatarLink)
       .then((data) => {
         userInfo.updateUserInfo(data);
         avatarPopupElement.clearInput();
         avatarFormValidator.disableBtnElement();
-        avatarFormValidator.setSaveStatus();
+        avatarPopupElement.setSaveStatus();
       })
       .then(() => {
         avatarPopupElement.close(); 
@@ -81,13 +81,13 @@ const userInfo = new UserInfo(
       })
     },
     handleSetUser: (name, about) => {
-      userFormValidator.setSavingStatus();
+      userPopupElement.setSavingStatus();
       api.updateUser(name, about)
       .then((data) => {
         userInfo.updateUserInfo(data);
         userPopupElement.clearInput();
         userFormValidator.disableBtnElement();
-        userFormValidator.setSaveStatus();
+        userPopupElement.setSaveStatus();
       })
       .then(() => {
         userPopupElement.close(); 
@@ -114,7 +114,8 @@ const avatarPopupElement = new PopupWithForm({
   popupOpenedSelector: 'popup_opened',
   btnCloseSelector: 'popup__button-close' }, {
   formSelector: '.form',
-  formInputSelector: '.form__item'
+  formInputSelector: '.form__item',
+  formSubmitSelector: '.form__button-submit'
   }, {
   handleFormSubmit: ({'avatar-link': newAvatar}) => {
     userInfo.setUserAvatar(newAvatar);
@@ -126,17 +127,18 @@ const cardPopupElement = new PopupWithForm({
   popupOpenedSelector: 'popup_opened',
   btnCloseSelector: 'popup__button-close' }, {
   formSelector: '.form',
-  formInputSelector: '.form__item'
+  formInputSelector: '.form__item',
+  formSubmitSelector: '.form__button-submit'
   }, {
   handleFormSubmit: ({'place': place, 'image-link': link}) => {
-    cardFormValidator.setSavingStatus();
+    cardPopupElement.setSavingStatus();
     api.postCard(place, link)
       .then((card) => section.addItem(card))
       .then(() => {
         cardPopupElement.close();
         cardPopupElement.clearInput();
         cardFormValidator.disableBtnElement();
-        cardFormValidator.setSaveStatus();
+        cardPopupElement.setSaveStatus();
       })
       .catch((err) => {
         console.log(err)
@@ -149,7 +151,8 @@ const userPopupElement = new PopupWithForm({
   popupOpenedSelector: 'popup_opened',
   btnCloseSelector: 'popup__button-close' }, {
   formSelector: '.form',
-  formInputSelector: '.form__item'
+  formInputSelector: '.form__item',
+  formSubmitSelector: '.form__button-submit'
   },{
   handleFormSubmit: ({'person': name, 'profession': about}) => {
     userInfo.setUserData(name, about);
