@@ -129,12 +129,14 @@ const cardPopupElement = new PopupWithForm({
   formInputSelector: '.form__item'
   }, {
   handleFormSubmit: ({'place': place, 'image-link': link}) => {
+    cardFormValidator.setSavingStatus();
     api.postCard(place, link)
       .then((card) => section.addItem(card))
       .then(() => {
         cardPopupElement.close();
         cardPopupElement.clearInput();
         cardFormValidator.disableBtnElement();
+        cardFormValidator.setSaveStatus();
       })
       .catch((err) => {
         console.log(err)
