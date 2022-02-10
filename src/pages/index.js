@@ -2,13 +2,13 @@
 
 import '../pages/index.css';
 import { CONFIG, PROFILE_FORM_CONFIG, CARD_FORM_CONFIG, AVATAR_FORM_CONFIG } from "../utils/constants.js";
-import Card from './Card.js';
-import UserInfo from './UserInfo.js';
-import Api from './Api.js';
-import PopupWithImage from './PopupWithImage';
-import PopupWithForm from './PopupWithForm';
-import FormValidator from './FormValidator';
-import Section from './Section';
+import Card from '../components/Card.js';
+import UserInfo from '../components/UserInfo.js';
+import Api from '../components/Api.js';
+import PopupWithImage from '../components/PopupWithImage';
+import PopupWithForm from '../components/PopupWithForm';
+import FormValidator from '../components/FormValidator';
+import Section from '../components/Section';
 
 // кнопки
 
