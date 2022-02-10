@@ -37,10 +37,10 @@
   <footer class="footer page__footer">
     <p class="footer__copyright">© 2020 Mesto Russia</p>
   </footer>
-  <div class="popup">
+  <div class="popup popup_type_profile">
     <div class="popup__container popup__container_type_edit">
       <button class="popup__button-close" type="button"></button>
-      <form name="profile-form" class="form" novalidate>
+      <form name="profile-form" class="form profile-form" novalidate>
         <h2 class="form__heading">Редактировать профиль</h2>
         <fieldset class="form__input-container">
           <label for="person" class="form__label"></label>
@@ -56,10 +56,10 @@
       </form>
     </div>
   </div>
-  <div class="popup">
+  <div class="popup popup_type_card">
     <div class="popup__container popup__container_type_add">
       <button class="popup__button-close new-place" type="button"></button>
-      <form name="place-form" class="form" novalidate>
+      <form name="place-form" class="form place-form" novalidate>
         <h2 class="form__heading">Новое место</h2>
         <fieldset class="form__input-container">
           <label for="place" class="form__label"></label>
@@ -75,10 +75,10 @@
       </form>
     </div>
   </div>
-  <div class="popup">
+  <div class="popup popup_type_avatar">
     <div class="popup__container popup__container_type_avatar">
       <button class="popup__button-close new-place" type="button"></button>
-      <form name="avatar-form" class="form" novalidate>
+      <form name="avatar-form" class="form avatar-form" novalidate>
         <h2 class="form__heading">Обновить аватар</h2>
         <fieldset class="form__input-container">
           <label for="avatar-link" class="form__label"></label>
@@ -90,7 +90,7 @@
       </form>
     </div>
   </div>
-  <div class="popup">
+  <div class="popup popup_type_image">
     <div class="popup__container popup__container_type_image">
       <button class="popup__button-close" type="button"></button>
       <figure class="view-image">
