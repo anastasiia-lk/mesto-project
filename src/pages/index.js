@@ -53,7 +53,6 @@ const userInfo = new UserInfo(
         avatarPopupElement.close(); 
       })
       .finally(() => {
-        avatarFormValidator.disableBtnElement();
         avatarPopupElement.setSaveStatus();
       })
       .catch((err) => {
@@ -70,7 +69,6 @@ const userInfo = new UserInfo(
         userPopupElement.close(); 
       })
       .finally(() => {
-        userFormValidator.disableBtnElement();
         userPopupElement.setSaveStatus();
       })
       .catch((err) => {
@@ -119,7 +117,6 @@ const cardPopupElement = new PopupWithForm({
         cardPopupElement.close();
       })
       .finally(() => {
-        cardFormValidator.disableBtnElement();
         cardPopupElement.setSaveStatus();
       })
       .catch((err) => {
@@ -219,6 +216,7 @@ Promise.all([userInfo.getUserInfo(), api.getCards()])
 editAvatarBtn.addEventListener('click', function(event){
   avatarPopupElement.clearInput();
   avatarFormValidator.clearInputsError();
+  avatarFormValidator.disableBtnElement();
   avatarPopupElement.open();
 });
 
@@ -226,7 +224,7 @@ editAvatarBtn.addEventListener('click', function(event){
 
 editProfileBtn.addEventListener('click', function(event){
   userFormValidator.clearInputsError();
-  cardFormValidator.disableBtnElement();
+  userFormValidator.disableBtnElement();
   userPopupElement.open();
   userInfo.getUserInfo()
     .then((userData) => {
